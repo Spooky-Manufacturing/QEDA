@@ -21,6 +21,7 @@ The purpose of QEDA is to provide an open-source synthesizer for the [OpenQASM](
 ## Mid Term Goals
 * Board Editor (internal)
 * Schematic Editor (internal)
+* Circuit Simulation
 
 ## Long Term Goals
 * Support for custom gate design utilizing user-defined bloch-sphere rotations & non-linear operations.
