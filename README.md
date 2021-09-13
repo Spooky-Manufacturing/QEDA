@@ -26,7 +26,7 @@ The purpose of QEDA is to provide an open-source synthesizer for the [OpenQASM](
 
 ## Mid Term Goals
 * Schematic Viewer ~~(internal)~~ [Nearly fulfilled by kicad-vscode](https://github.com/NoahGWood/kicad-vscode)
-* PCB Viewer ~~(internal)~~ [Nearly fulfillment by kicad-vscode]() 
+* PCB Viewer ~~(internal)~~ [Nearly fulfilled by kicad-vscode](https://github.com/NoahGWood/kicad-vscode) 
 * Circuit Simulation 
 
 ## Long Term Goals
