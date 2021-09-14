@@ -22,15 +22,16 @@ The purpose of QEDA is to provide an open-source synthesizer for the [OpenQASM](
 * Automated PCB Layout (Internal)
 * Automated integration with SpookyMFG's [Q-Ctrl backends](https://github.com/Spooky-Manufacturing/QCtrl)
 * ~~GUI~~ [Fulfilled by SpookyIDE!](https://github.com/Spooky-Manufacturing/SpookyIDE)
-* QASM Language Syntax Highlighting [Fulfilled by OpenQASM-LanguageSupport](https://github.com/NoahGWood/OpenQASM-LanguageSupport)
+* ~~QASM Language Syntax Highlighting~~ [Fulfilled by OpenQASM-LanguageSupport](https://github.com/NoahGWood/OpenQASM-LanguageSupport)
 
 ## Mid Term Goals
-* Schematic Viewer ~~(internal)~~ [Nearly fulfilled by kicad-vscode](https://github.com/NoahGWood/kicad-vscode)
-* PCB Viewer ~~(internal)~~ [Nearly fulfilled by kicad-vscode](https://github.com/NoahGWood/kicad-vscode) 
-* Circuit Simulation 
+* ~~Schematic Viewer (internal)~~ [Nearly fulfilled by kicad-vscode](https://github.com/NoahGWood/kicad-vscode)
+* ~~PCB Viewer (internal)~~ [Nearly fulfilled by kicad-vscode](https://github.com/NoahGWood/kicad-vscode) 
+* Circuit Simulation (planned fulfillment via QisKit integration)
+* VHDL/Verilog Integration
 
 ## Long Term Goals
-* ~~Support for custom gate design utilizing user-defined bloch-sphere rotations & non-linear operations.~~ **To be fulfilled by gate decomposition.**
+* ~~Support for custom gate design utilizing user-defined bloch-sphere rotations & non-linear operations.~~ **Planned fulfillment by gate decomposition.**
 * Synthesis-to-Chip **ISO Chip foundaries with optical engineering capabilities!**
 * 3D Circuit View 
-* ~~Advanced simulations~~ Will likely integrate SpookyIDE with QisKit for this functionality.
+* ~~Advanced simulations~~ (planned fulfillment via custom simulator)
