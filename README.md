@@ -21,7 +21,7 @@ The purpose of QEDA is to provide an open-source synthesizer for the [OpenQASM](
 * Automated Schematic Synthesis (Internal)
 * Automated PCB Layout (Internal)
 * Automated integration with SpookyMFG's [Q-Ctrl backends](https://github.com/Spooky-Manufacturing/QCtrl)
-* ~~GUI~~ [Fulfilled by SpookyIDE!](https://github.com/Spooky-Manufacturing/SpookyIDE!)
+* ~~GUI~~ [Fulfilled by SpookyIDE!](https://github.com/Spooky-Manufacturing/SpookyIDE)
 * QASM Language Syntax Highlighting [Fulfilled by OpenQASM-LanguageSupport](https://github.com/NoahGWood/OpenQASM-LanguageSupport)
 
 ## Mid Term Goals
