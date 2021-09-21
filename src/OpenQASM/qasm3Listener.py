@@ -1,17 +1,15 @@
 # Generated from qasm3.g4 by ANTLR 4.7.2
 from antlr4 import *
+import os
 if __name__ is not None and "." in __name__:
     from .qasm3Parser import qasm3Parser
+    from .qasm3Lexer import qasm3Lexer as Lexer
 else:
     from qasm3Parser import qasm3Parser
+    from qasm3Lexer import qasm3Lexer as Lexer
 
 # This class defines a complete listener for a parse tree produced by qasm3Parser.
 class qasm3Listener(ParseTreeListener):
-    def __init__(self):
-        super()
-        self.QCODE = []
-        self.GATES = []
-
     # Enter a parse tree produced by qasm3Parser#program.
     def enterProgram(self, ctx:qasm3Parser.ProgramContext):
         pass
@@ -44,7 +42,8 @@ class qasm3Listener(ParseTreeListener):
     # Enter a parse tree produced by qasm3Parser#include.
     def enterInclude(self, ctx:qasm3Parser.IncludeContext):
         # we need to parse the included files and add them in place
-        listener = INCLUDE(ctx.StringLiteral())
+        print(ctx.StringLiteral().getText())
+        listener = self.INCLUDE(ctx.StringLiteral())
         self.QCODE += listener.QCODE
         self.GATES += listener.GATES
         pass
@@ -386,24 +385,9 @@ class qasm3Listener(ParseTreeListener):
     # Exit a parse tree produced by qasm3Parser#rangeDefinition.
     def exitRangeDefinition(self, ctx:qasm3Parser.RangeDefinitionContext):
         pass
-
-    def _hasQGate(self, gid):
-        for gate in self.GATES:
-            if(gate != None):
-                if(gid == gate.name):
-                    return True
-        return False
-
+    
     # Enter a parse tree produced by qasm3Parser#quantumGateDefinition.
     def enterQuantumGateDefinition(self, ctx:qasm3Parser.QuantumGateDefinitionContext):
-        # Check if name exists
-        gid = ctx.quantumGateSignature().quantumGateName().Identifier()
-        if(self._hasQGate(gid)):
-            raise QuantumGateRedefined(str(gid) + " already defined.")
-        else:
-            g = QGate()
-            g.setName(gid)
-            self.GATES.append(g)
         pass
 
     # Exit a parse tree produced by qasm3Parser#quantumGateDefinition.
