@@ -8,7 +8,7 @@ else:
     from qasm3Parser import qasm3Parser
     from qasm3Lexer import qasm3Lexer as Lexer
     from qasm3Listener import qasm3Listener as Listener
-from .QAST import Gate, U, CX
+from .QAST import *
 
 
 def INCLUDE(file):
@@ -50,6 +50,9 @@ class QEDAListener(Listener):
         self.currentModifier = None
         self.modExpression = None
         print(self.file)
+
+    def enterProgram(self, ctx: qasm3Parser.ProgramContext):
+        print(ctx.getText)
 
     def enterInclude(self, ctx: qasm3Parser.IncludeContext):
         return super().enterInclude(ctx)
@@ -129,3 +132,63 @@ class QEDAListener(Listener):
             raise NotImplementedError("Quantum Gate Modifier: {0} not implemented.".format(st))
         #print(self.currentModifier)
         return super().enterQuantumGateModifier(ctx)
+
+    # Enter a parse tree produced by qasm3Parser#multiplicativeExpression.
+    def enterMultiplicativeExpression(self, ctx:qasm3Parser.MultiplicativeExpressionContext):
+        print("Multiplicative expression" + ctx.getText())
+        pexp = ctx.powerExpression()
+        uexp = ctx.unaryExpression()
+        mulExp = ctx.multiplicativeExpression()
+        mul = ctx.MUL()
+        div = ctx.DIV()
+        mod = ctx.MOD()
+        hasAny = False
+        if(pexp):
+            print("Power expression")
+            hasAny=True
+        if(uexp):
+            print("Unary Expression")
+            hasAny=True
+        if(mulExp):
+            print("Multiplicative expression")
+            hasAny=True
+        if(mul):
+            print("MUL")
+            hasAny=True
+        if(div):
+            print("DIV")
+            hasAny=True
+        if(mod):
+            print("MOD")
+            hasAny=True
+        if(hasAny==False):
+            print("NONE")
+            return None
+        pass
+
+    def enterAdditiveExpression(self, ctx: qasm3Parser.AdditiveExpressionContext):
+        #s = Sum()
+        plus = ctx.PLUS()
+        minus = ctx.MINUS()
+        addExp = ctx.additiveExpression()
+        mulExp = ctx.multiplicativeExpression()
+        if(type(plus) != type(None)):
+            print("Add")
+            print(ctx.getText().split("+"))
+        if(type(minus) != type(None)):
+            print("Minus")
+        if(type(addExp) != type(None)):
+            print("Add Expression")
+        if(type(mulExp) != type(None)):
+            print("Mul Expression")
+        print('aexp', ctx.getText())
+        a = ctx.getText()
+        if('+' in a):
+            a = a.split("+")
+            left = a[0]
+            right = a[1]
+            s = Sum("+", left, right)
+           # print(s.eval())
+#        s.left
+        pass
+#        return super().enterAdditiveExpression(ctx)

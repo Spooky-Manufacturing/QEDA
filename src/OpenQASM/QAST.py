@@ -1,5 +1,71 @@
-from os import fpathconf
+class QCODE:
+    """Holds the entire QAST"""
+    def __init__(self):
+        self.GATES = []
+        self.STATEMENTS = []
+        self.VARS = []
+        self.GLOBALS = []
 
+class BinaryOp:
+    def __init__(self, op, left, right):
+        self.token = self.op = op
+        self.left = left
+        self.right = right
+
+class Sum(BinaryOp):
+    def eval(self):
+        i = self.left.eval() + self.right.eval()
+        return i
+
+class Sub(BinaryOp):
+    def eval(self):
+        i = self.left.eval() - self.right.eval()
+        return i
+
+class Mul(BinaryOp):
+    def eval(self):
+        i = self.left.eval() * self.right.eval()
+        return i
+
+class Div(BinaryOp):
+    def eval(self):
+        i = self.left.eval() / self.right.eval()
+        return i
+
+class QuantumDeclaration:
+    def __init__(self, ttype, identifier, designator):
+        self.ttype = ttype
+        self.id = identifier
+        self.designator = designator
+        pass
+
+class QuantumArgument(QuantumDeclaration):
+    def __init__(self, ttype, identifier, designator):
+        super().__init__(ttype, identifier, designator)
+
+class IdentifierList:
+    def __init__(self, ids):
+        self.identifiers = ids
+
+    def Eval(self):
+        return self.identifiers
+
+    def IterEval(self):
+        yield self.identifiers
+
+class QuantumArgumentList:
+    def __init__(self, *args):
+        self.arguments = args
+
+    def Eval(self):
+        return self.arguments
+
+    def IterEval(self):
+        yield self.arguments
+
+class Statement:
+    def __init__(self):
+        pass
 
 class Component:
     def __init__(self):

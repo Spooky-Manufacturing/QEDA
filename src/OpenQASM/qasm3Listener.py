@@ -593,6 +593,7 @@ class qasm3Listener(ParseTreeListener):
 
     # Enter a parse tree produced by qasm3Parser#logicalAndExpression.
     def enterLogicalAndExpression(self, ctx:qasm3Parser.LogicalAndExpressionContext):
+        print("logical and expression " + ctx.getText())
         pass
 
     # Exit a parse tree produced by qasm3Parser#logicalAndExpression.
@@ -602,6 +603,7 @@ class qasm3Listener(ParseTreeListener):
 
     # Enter a parse tree produced by qasm3Parser#bitOrExpression.
     def enterBitOrExpression(self, ctx:qasm3Parser.BitOrExpressionContext):
+        print("bit or expression " + ctx.getText())
         pass
 
     # Exit a parse tree produced by qasm3Parser#bitOrExpression.
@@ -611,6 +613,7 @@ class qasm3Listener(ParseTreeListener):
 
     # Enter a parse tree produced by qasm3Parser#xOrExpression.
     def enterXOrExpression(self, ctx:qasm3Parser.XOrExpressionContext):
+        print("xor expression " + ctx.getText())
         pass
 
     # Exit a parse tree produced by qasm3Parser#xOrExpression.
@@ -620,6 +623,7 @@ class qasm3Listener(ParseTreeListener):
 
     # Enter a parse tree produced by qasm3Parser#bitAndExpression.
     def enterBitAndExpression(self, ctx:qasm3Parser.BitAndExpressionContext):
+        print("bit and expression " + ctx.getText())
         pass
 
     # Exit a parse tree produced by qasm3Parser#bitAndExpression.
@@ -629,6 +633,7 @@ class qasm3Listener(ParseTreeListener):
 
     # Enter a parse tree produced by qasm3Parser#equalityExpression.
     def enterEqualityExpression(self, ctx:qasm3Parser.EqualityExpressionContext):
+        print("equality expression " + ctx.getText())
         pass
 
     # Exit a parse tree produced by qasm3Parser#equalityExpression.
@@ -638,6 +643,7 @@ class qasm3Listener(ParseTreeListener):
 
     # Enter a parse tree produced by qasm3Parser#comparisonExpression.
     def enterComparisonExpression(self, ctx:qasm3Parser.ComparisonExpressionContext):
+        print("comparision expression " + ctx.getText())
         pass
 
     # Exit a parse tree produced by qasm3Parser#comparisonExpression.
@@ -647,6 +653,7 @@ class qasm3Listener(ParseTreeListener):
 
     # Enter a parse tree produced by qasm3Parser#bitShiftExpression.
     def enterBitShiftExpression(self, ctx:qasm3Parser.BitShiftExpressionContext):
+        print("Bit shift expression " + ctx.getText())
         pass
 
     # Exit a parse tree produced by qasm3Parser#bitShiftExpression.
@@ -656,6 +663,7 @@ class qasm3Listener(ParseTreeListener):
 
     # Enter a parse tree produced by qasm3Parser#additiveExpression.
     def enterAdditiveExpression(self, ctx:qasm3Parser.AdditiveExpressionContext):
+        print("Additive expression " + ctx.getText())
         pass
 
     # Exit a parse tree produced by qasm3Parser#additiveExpression.
@@ -665,6 +673,7 @@ class qasm3Listener(ParseTreeListener):
 
     # Enter a parse tree produced by qasm3Parser#multiplicativeExpression.
     def enterMultiplicativeExpression(self, ctx:qasm3Parser.MultiplicativeExpressionContext):
+        print("Multiplicative expression" + ctx.getText())
         pass
 
     # Exit a parse tree produced by qasm3Parser#multiplicativeExpression.
@@ -710,6 +719,7 @@ class qasm3Listener(ParseTreeListener):
 
     # Enter a parse tree produced by qasm3Parser#builtInCall.
     def enterBuiltInCall(self, ctx:qasm3Parser.BuiltInCallContext):
+        print("builtin call " + ctx.getText())
         pass
 
     # Exit a parse tree produced by qasm3Parser#builtInCall.
@@ -719,6 +729,7 @@ class qasm3Listener(ParseTreeListener):
 
     # Enter a parse tree produced by qasm3Parser#builtInMath.
     def enterBuiltInMath(self, ctx:qasm3Parser.BuiltInMathContext):
+        print("builtin math " + ctx.getText())
         pass
 
     # Exit a parse tree produced by qasm3Parser#builtInMath.
