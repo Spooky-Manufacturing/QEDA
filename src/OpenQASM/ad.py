@@ -186,6 +186,10 @@ class IdentifierList:
     def __init__(self, idList):
         self.idList = idList
 
+    def eval(self):
+        return [x.eval() for x in self.idList]
+        pass
+
 """
 Quantum Types
 """
@@ -466,10 +470,14 @@ class QuantumGateSignature:
     | quantumGateName ( identifierList ) identifierList
     < quantumGateName (parameters) identifiers
     """
-    def __init__(self, gateName, identifiers, parameters=None):
+    def __init__(self, gateName, identifiers=None, parameters=None):
         self.name = gateName
         self.ids = identifiers
         self.params = parameters
+        
+    def eval(self):
+        print(self.name.eval(), self.ids, self.params)
+        return self.name
 
 class QuantumGateName:
     """
@@ -482,7 +490,7 @@ class QuantumGateName:
         self.id = identifier
 
     def eval(self):
-        if(type(self.id) != type("")):
+        if(type(self.id) != type("") and type(self.id) != type(None)):
             return self.id.eval()
         return self.id
 
@@ -493,8 +501,13 @@ class QuantumBlock(Statement):
     | { quantumLoop }
     | { quantumStatement* | quantumLoop*}
     """
-    def __init__(self, statements):
+    def __init__(self, statements=None, loops=None):
         self.statements = statements
+        self.loops = loops
+    
+    def eval(self):
+        print(self.statements, self.loops)
+        return self.statements
 
 class QuantumLoop:
     """
@@ -516,7 +529,7 @@ class QuantumLoopBlock:
 
 class QuantumStatement(Statement):
     """
-    quantuStatement =
+    quantumStatement =
     | quantumInstruction ;
     | timingStatement
     """
@@ -532,7 +545,12 @@ class QuantumInstruction:
     | quantumReset
     | quantumBarrier
     """
-    pass
+    def __init__(self, instruction):
+        self.instruction = instruction
+
+    def eval(self):
+        if(self.instruction != None):
+            return self.instruction.eval()
 
 class QuantumPhase(QuantumInstruction):
     """
@@ -543,6 +561,10 @@ class QuantumPhase(QuantumInstruction):
         self.exp = expression
         self.indexId = indexIdentifierList
         self.mods = modifiers
+
+    def eval(self):
+        print(self.exp.eval(), self.indexId.eval())
+        return self.exp.eval(), self.indexId.eval()
 
 class QuantumReset(QuantumInstruction):
     """
@@ -566,7 +588,7 @@ class QuantumMeasurementAssignment(QuantumInstruction):
     | quantumMeasurement -> indexIdentifier?
     | indexIdentifier = quantumMeasurement
     """
-    def __init__(self, indexId):
+    def __init__(self, qmeas, indexId):
         self.indexId = indexId
 
     def eval(self):
@@ -589,9 +611,11 @@ class QuantumGateModifier:
     | powModifier '@'
     | ctrlModifier '@'
     """
-    def __init__(self, expression):
-        self.mod = inv
-        self.expression = expression
+    def __init__(self, modifier):
+        self.mod = modifier
+
+    def eval(self):
+        return self.mod.eval()
 
 class PowModifier(QuantumGateModifier):
     """
@@ -968,7 +992,7 @@ class ExpressionList:
     def eval(self):
         return [x.eval() for x in self.expressions]
 
-class equalsExpression:
+class EqualsExpression:
     """
     equalsExpression = 
     | = expression
@@ -979,7 +1003,7 @@ class equalsExpression:
     def eval(self):
         return self.exp.eval()
 
-class assignmentOperator:
+class AssignmentOperator:
     """
     assignmentOperator
     | EQUALS | =
@@ -1030,7 +1054,7 @@ class ProgramBlock:
     def eval(self):
         self.statements.eval()
 
-class branchingStatement(Statement):
+class BranchingStatement(Statement):
     """
     branchingStatement = 
     | 'if' ( expression ) programBlock

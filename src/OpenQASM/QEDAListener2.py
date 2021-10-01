@@ -65,9 +65,159 @@ class QEDAListener(Listener):
         if(type(block.quantumStatement(0))!=type(None)):
             block = QuantumBlock(block.quantumStatement(0))
         else:
-            block = QuantumBlock(QuantumLoop(0))
+            pass
+#            block = QuantumBlock(QuantumLoop(0))
         gate = QuantumGateDefinition(signature, block)
         return super().enterQuantumGateDefinition(ctx)
+
+    # Enter a parse tree produced by qasm3Parser#quantumGateSignature.
+    def enterQuantumGateSignature(self, ctx:qasm3Parser.QuantumGateSignatureContext):
+        name = self.enterQuantumGateName(ctx.quantumGateName())
+        params = None
+        ids = None
+        if(ctx.identifierList(0)):
+            params = self.enterIdentifierList(ctx.identifierList(0))
+        if(ctx.identifierList(1)):
+            ids = self.enterIdentifierList(ctx.identifierList(1))
+        qgs = QuantumGateSignature(gateName=name, identifiers=ids, parameters=params)
+        if(qgs != None and qgs.eval() != None):
+            return qgs
+        return
+    
+    # Enter a parse tree produced by qasm3Parser#quantumGateName.
+    def enterQuantumGateName(self, ctx:qasm3Parser.QuantumGateNameContext):
+        return QuantumGateName(ctx.getText())
+
+    # Enter a parse tree produced by qasm3Parser#quantumBlock.
+    def enterQuantumBlock(self, ctx:qasm3Parser.QuantumBlockContext):
+        stmt = None
+        loop = None
+        if(ctx.quantumStatement() != None):
+            stmt = ctx.quantumStatement()
+        if(ctx.quantumLoop() != None):
+            loop = ctx.quantumLoop()
+        block = QuantumBlock(statements=stmt, loops=loop)
+        if(block != None and block.eval() != None):
+            return block
+        return
+        
+    # Enter a parse tree produced by qasm3Parser#quantumLoop.
+    def enterQuantumLoop(self, ctx:qasm3Parser.QuantumLoopContext):
+        sig = ctx.loopSignature()
+        block = ctx.quantumLoopBlock()
+        pass
+
+    # Enter a parse tree produced by qasm3Parser#quantumLoopBlock.
+    def enterQuantumLoopBlock(self, ctx:qasm3Parser.quantumLoopBlock):
+        stmt = []
+        i=0
+        while True:
+            if(ctx.quantumStatement[i] != None):
+                stmt.append(self.enterQuantumStatement(ctx.quantumStatement[i]))
+                i+=1
+            else:
+                break
+        return QuantumLoopBlock(statements=stmt)
+
+    # Enter a parse tree produced by qasm3Parser#quantumStatement.
+    def enterQuantumStatement(self, ctx:qasm3Parser.quantumStatement):
+        ins = ctx.quantumInstruction()
+        tim = ctx.timingStatement()
+        qs = None
+        if(ins != None):
+            qs = QuantumStatement(quantumInstruction=ins)
+        elif(tim != None):
+            qs = QuantumStatement(timingStatement=tim)
+        else:
+            return
+        return qs
+
+    # Enter a parse tree produced by qasm3Parser#quantumInstruction.
+    def enterQuantumInstruction(self, ctx:qasm3Parser.quantumInstruction):
+        ins = None
+        if(ctx.quantumGateCall() != None):
+            ins = self.enterQuantumGateCall(ctx.quantumGateCall())
+        elif(ctx.quantumPhase() != None):
+            ins = self.enterQuantumPhase(ctx.quantumPhase())
+        elif(ctx.quantumMeasurement() != None):
+            ins = self.enterQuantumMeasurement(ctx.quantumMeasurement())
+        elif(ctx.quantumReset() != None):
+            ins = self.enterQuantumReset(ctx.quantumReset())
+        elif(ctx.quantumBarrier() != None):
+            ins = self.enterQuantumBarrier(ctx.quantumBarrier())
+        else:
+            return
+        return QuantumInstruction(ins)
+   
+    # Enter a parse tree produced by qasm3Parser#quantumPhase.
+    def enterQuantumPhase(self, ctx:qasm3Parser.quantumPhase):
+        mods = []
+        exp = None
+        idList = None
+        if(ctx.quantumGateModifier() != None):
+            i = 0
+            while True:
+                if(ctx.quantumGateModifier(i)):
+                    mods.append(self.quantumGateModifier(ctx.quantumGateModifier(i)))
+                else:
+                    break
+        exp = self.enterExpression(ctx.expression())
+        idList = self.enterIndexIdentifierList(ctx.indexIdentifierList())
+        qp = QuantumPhase(exp, idList, modifiers=mods)
+        if(qp != None and qp.eval() != None):
+            return qp
+        return
+
+    # Enter a parse tree produced by qasm3Parser#quantumReset
+    def enterQuantumReset(self, ctx:qasm3Parser.quantumReset):
+        idList = self.enterIndexIdentifierList(ctx.indexIdentifierList())
+        return QuantumReset(idList)
+
+    # Enter a parse tree produced by qasm3Parser#quantumMeasurement
+    def enterQuantumMeasurement(self, ctx:qasm3Parser.quantumMeasurement):
+        id = self.enterIndexIdentifierList(ctx.indexIdentifierList())
+        return QuantumMeasurement(id)
+
+    # Enter a parse tree produced by qasm3Parser#quantumMeasurementAssignment
+    def enterQuantumMeasurementAssignment(self, ctx:qasm3Parser.quantumMeasurementAssignment):
+        qmeas = self.enterQuantumMeasurement(ctx.quantumMeasurement())
+        id = self.enterIndexIdentifierList(ctx.indexIdentifierList())
+        return QuantumMeasurementAssignment(qmeas, id)
+
+    # Enter a parse tree produced by qasm3Parser#quantumBarrier
+    def enterQuantumBarrier(self, ctx:qasm3Parser.quantumBarrier):
+        idl = self.enterIndexIdentifierList(ctx.indexIdentifierList())
+        return QuantumBarrier(idl)
+
+    # Enter a parse tree produced by qasm3Parser#quantumGateModifier
+    def enterQuantumGateModifier(self, ctx:qasm3Parser.quantumGateModifier):
+        print(ctx)
+
+    # Enter a parse tree produced by qasm3Parser#PowModifier
+    def enterPowModifier(self, ctx:qasm3Parser.PowModifierContext):
+        exp = self.enterExpression(ctx.expression())
+        return PowModifier(exp)
+    
+    # Enter a parse tree produced by qasm3Parser#CtrlModifier
+    def enterCtrlModifier(self, ctx:qasm3Parser.CtrlModifierContext):
+        txt = ctx.getText()
+        neg = False
+        if('neg' in txt):
+            neg=True
+        exp = self.enterExpression(ctx.expression())
+        return CtrlModifier(exp, neg)
+    
+    # Enter a parse tree produced by qasm3Parser#quantumGateCall
+    def enterQuantumGateCall(self, ctx:qasm3Parser.quantumGateCall):
+        name = self.enterQuantumGateName(ctx.quantumGateName())
+        ids = self.enterIndexIdentifierList(ctx.indexIdentifierList())
+        exp = None
+        mod = None
+        if(ctx.expressionList() != None):
+            exp = self.enterExpressionList(ctx.expressionList())
+        if(type(ctx.quantumGateModifier()) != type(None)):
+            mod = self.enterQuantumGateModifier(ctx.quantumGateModifier())
+        return QuantumGateCall(name, ids, expressionList=exp, quantumGateModifier=mod)
 
     # Enter a parse tree produced by qasm3Parser#expression.
     def enterExpression(self, ctx:qasm3Parser.ExpressionContext):
@@ -362,8 +512,116 @@ class QEDAListener(Listener):
     def enterCastOperator(self, ctx:qasm3Parser.CastOperatorContext):
         print("Cast Operator", ctx.getText())
         op = CastOperator(ctx.getText())
+
+    # Enter a parse tree produced by qasm3Parser#expressionList.
+    def enterExpressionList(self, ctx:qasm3Parser.ExpressionListContext):
+        exp = []
+        i=0
+        while True:
+            print(i)
+            if(ctx.expression(i) != None):
+                exp.append(self.enterExpression(ctx.expression(i)))
+                i+=1
+            else:
+                break
+        return ExpressionList(exp)
+
+    # Enter a parse tree produced by qasm3Parser#equalsExpression.
+    def enterEqualsExpression(self, ctx:qasm3Parser.EqualsExpressionContext):
+        exp = self.enterExpression(ctx.expression())
+        return EqualsExpression(exp)
+
+    # Enter a parse tree produced by qasm3Parser#assignmentOperator.
+    def enterAssignmentOperator(self, ctx:qasm3Parser.AssignmentOperatorContext):
+        op = ctx.getText()
+        if(op == None):
+            op = "=="
+        return AssignmentOperator(op)
+
+    # Enter a parse tree produced by qasm3Parser#setDeclaration.
+    def enterSetDeclaration(self, ctx:qasm3Parser.SetDeclarationContext):
+        id=None
+        exp=None
+        range=None
+        if(ctx.Identifier()!=None):
+            id = enterIdentifier(ctx.Identifier())
+        if(ctx.expressionList()!=None):
+            exp = enterExpressionList(ctx.expressionList())
+        if(ctx.rangeDefinition()):
+            range = enterRangeDefinition(ctx.rangeDefinition())
+        return SetDeclaration(id, exp, range)
+
+    # Enter a parse tree produced by qasm3Parser#programBlock.
+    def enterProgramBlock(self, ctx:qasm3Parser.ProgramBlockContext):
+        i=0
+        stmts = []
+        while True:
+            if(ctx.statement(i) != None):
+                stmts.append(self.enterStatement(ctx.statement(i)))
+            if(ctx.controlDirective(i) != None):
+                stmts.append(enterControlDirective(ctx.controlDirective(i)))
+            i+=1
+            if(ctx.statement(i) == None and ctx.controlDirective() == None):
+                break
+
+    # Enter a parse tree produced by qasm3Parser#branchingStatement.
+    def enterBranchingStatement(self, ctx:qasm3Parser.BranchingStatementContext):
+        exp = self.enterExpression(ctx.expression())
+        block1 = self.enterProgramBlock(ctx.programBlock(0))
+        block2 = None
+        if(ctx.programBlock(1) != None):
+            block2 = self.enterProgramBlock(ctx.programBlock(1))
+        return BranchingStatement(exp, block1, block2)
+
+    # Enter a parse tree produced by qasm3Parser#loopSignature.
+    def enterLoopSignature(self, ctx:qasm3Parser.LoopSignatureContext):
+        id = ctx.Identifier()
+        exp = None
+        decl = None
+        op = None
+        if(ctx.expression()):
+            # while loop
+            exp = self.enterExpression(ctx.expression())
+            op='while'
+        else:
+            # for loop
+            decl = self.enterSetDeclaration(ctx.setDeclaration())
+            op='for'
+        return LoopSignature(op, id, exp, decl)
+
+    # Enter a parse tree produced by qasm3Parser#loopStatement.
+    def enterLoopStatement(self, ctx:qasm3Parser.LoopStatementContext):
+        sig = self.enterLoopSignature(ctx.loopSignature())
+        block = self.enterProgramBlock(ctx.programBlock())
+        return LoopStatement(sig, block)
+
+    # Enter a parse tree produced by qasm3Parser#endStatement.
+    def enterEndStatement(self, ctx:qasm3Parser.EndStatementContext):
+        return EndStatement()
+
+    # Enter a parse tree produced by qasm3Parser#returnStatement.
+    def enterReturnStatement(self, ctx:qasm3Parser.ReturnStatementContext):
+        rval=None
+        if(ctx.expression() != None):
+            rval = self.enterExpression(ctx.expression())
+        elif(ctx.quantumMeasurement() != None):
+            rval = self.enterQuantumMeasurement(ctx.quantumMeasurement())
+        return ReturnStatement(rval)
+
+    # Enter a parse tree produced by qasm3Parser#controlDirective.
+    def enterControlDirective(self, ctx:qasm3Parser.ControlDirectiveContext):
+        txt = ctx.getText()
+        ctrl = None
+        if('break' in txt):
+            ctrl = 'break'
+        elif('continue' in txt):
+            ctrl = 'continue'
+        elif(ctx.endStatement() != None):
+            ctrl = self.enterEndStatement(ctx.endStatement())
+        elif(ctx.returnStatement() != None):
+            ctrl = self.enterReturnStatement(ctx.returnStatement())
+        return ControlDirective(ctrl)
         
-    
     # Enter a parse tree produced by qasm3Parser#bitType.
     def enterBitType(self, ctx:qasm3Parser.BitTypeContext):
         bt = BitType()
@@ -419,6 +677,19 @@ class QEDAListener(Listener):
         if(des != None and des.eval() != None):
             return des
         return
+
+    # Enter a parse tree produced by qasm3Parser#identifierList.
+    def enterIdentifierList(self, ctx:qasm3Parser.IdentifierListContext):
+        ids = []
+        x=0
+        while True:
+            if(ctx.Identifier(x) != None):
+                ids.append(self.enterIdentifier(ctx.Identifier(x)))
+                x+=1
+            else:
+                break
+        ilist = IdentifierList(idList=ids)
+        return ilist
 
     # Enter a parse tree produced by qasm3Parser#singleDesignatorDeclaration.
     def enterSingleDesignatorDeclaration(self, ctx:qasm3Parser.SingleDesignatorDeclarationContext):
