@@ -52,11 +52,113 @@ class QEDAListener(Listener):
         self.modExpression = None
 
     def enterProgram(self, ctx: qasm3Parser.ProgramContext):
+        self.HEADER=self.enterHeader(ctx.header())
+        self.GLOBALS=[] # Global Statements
+        self.LOCALS=[] # Localized Statements
+        i=0
+        while True:
+            if(ctx.statement(i) != None):
+                x = self.enterStatement(ctx.statement(i))
+                if(x!=None):
+#                    print(x)
+                    self.LOCALS.append(x.eval())
+            else:
+                break
+            i+=1
+        i=0
+        while True:
+            if(ctx.globalStatement(i) != None):
+                x = self.enterGlobalStatement(ctx.globalStatement(i))
+                if(x!=None):
+                    self.GLOBALS.append(x.eval())
+            else:
+                break
+            i+=1
+        
         pass
 
-    def enterInclude(self, ctx: qasm3Parser.IncludeContext):
+    # Enter a parse tree produced by qasm3Parser#header.
+    def enterHeader(self, ctx:qasm3Parser.HeaderContext):
         pass
-        #return super().enterInclude(ctx)
+
+    # Enter a parse tree produced by qasm3Parser#version.
+    def enterVersion(self, ctx:qasm3Parser.VersionContext):
+        pass
+
+    # Enter a parse tree produced by qasm3Parser#header.
+    def enterInclude(self, ctx: qasm3Parser.IncludeContext):
+        return super().enterInclude(ctx)
+
+        # Enter a parse tree produced by qasm3Parser#ioIdentifier.
+    def enterIoIdentifier(self, ctx:qasm3Parser.IoIdentifierContext):
+        pass
+
+    # Enter a parse tree produced by qasm3Parser#io.
+    def enterIo(self, ctx:qasm3Parser.IoContext):
+        pass
+
+    # Enter a parse tree produced by qasm3Parser#globalStatement.
+    def enterGlobalStatement(self, ctx:qasm3Parser.GlobalStatementContext):
+        if(ctx.subroutineDefinition()!=None):
+            return self.enterSubroutineDefinition(ctx.subroutineDefinition())
+        elif(ctx.externDeclaration()!=None):
+            return self.enterExternDeclaration(ctx.externDeclaration())
+        elif(ctx.quantumGateDefinition()!=None):
+            return self.enterQuantumGateDefinition(ctx.quantumGateDefinition())
+        elif(ctx.calibration()!=None):
+            return self.enterCalibration(ctx.calibration())
+        elif(ctx.quantumDeclarationStatement()!=None):
+            return self.enterQuantumDeclarationStatement(ctx.quantumDeclarationStatement())
+        elif(ctx.pragma()!=None):
+            return self.enterPragma(ctx.pragma())
+        else:
+            raise ValueError("Error in globalStatement with context\ntype: {}\nvalue: {}".format(type(ctx),ctx))
+
+    # Enter a parse tree produced by qasm3Parser#statement.
+    def enterStatement(self, ctx:qasm3Parser.StatementContext):
+        if(ctx.expressionStatement()!=None):
+            return self.enterExpressionStatement(ctx.expressionStatement())
+        elif(ctx.assignmentStatement()!=None):
+            return self.enterAssignmentStatement(ctx.assignmentStatement())
+        elif(ctx.classicalDeclarationStatement()!=None):
+            return self.enterClassicalDeclarationStatement(ctx.classicalDeclarationStatement())
+        elif(ctx.branchingStatement()!=None):
+            return self.enterBranchingStatement(ctx.branchingStatement())
+        elif(ctx.loopStatement()!=None):
+            return self.enterLoopStatement(ctx.loopStatement())
+        elif(ctx.endStatement()!=None):
+            return self.enterEndStatement(ctx.endStatement())
+        elif(ctx.aliasStatement()!=None):
+            return self.enterAliasStatement(ctx.aliasStatement())
+        elif(ctx.quantumStatement()!=None):
+            return self.enterQuantumStatement(ctx.quantumStatement())
+        else:
+            raise ValueError("Error in enterStatement with context\ntype: {}\nvalue: {}".format(type(ctx),ctx))
+
+    # Enter a parse tree produced by qasm3Parser#quantumDeclarationStatement.
+    def enterQuantumDeclarationStatement(self, ctx:qasm3Parser.QuantumDeclarationStatementContext):
+        pass
+
+    # Enter a parse tree produced by qasm3Parser#classicalDeclarationStatement.
+    def enterClassicalDeclarationStatement(self, ctx:qasm3Parser.ClassicalDeclarationStatementContext):
+        pass
+    # Enter a parse tree produced by qasm3Parser#classicalAssignment.
+    def enterClassicalAssignment(self, ctx:qasm3Parser.ClassicalAssignmentContext):
+        pass
+    # Enter a parse tree produced by qasm3Parser#assignmentStatement.
+    def enterAssignmentStatement(self, ctx:qasm3Parser.AssignmentStatementContext):
+        pass
+
+    # Enter a parse tree produced by qasm3Parser#returnSignature.
+    def enterReturnSignature(self, ctx:qasm3Parser.ReturnSignatureContext):
+        pass
+
+    def enterDesignator(self, ctx:qasm3Parser.DesignatorContext):
+        exp = self.enterExpression(ctx.expression())
+        des = Designator(exp)
+        if(des != None and des.eval() != None):
+            return des
+        return
 
     def enterQuantumGateDefinition(self, ctx: qasm3Parser.QuantumGateDefinitionContext):
         signature = ctx.quantumGateSignature()
@@ -90,30 +192,42 @@ class QEDAListener(Listener):
 
     # Enter a parse tree produced by qasm3Parser#quantumBlock.
     def enterQuantumBlock(self, ctx:qasm3Parser.QuantumBlockContext):
-        stmt = None
-        loop = None
-        if(ctx.quantumStatement() != None):
-            stmt = ctx.quantumStatement()
-        if(ctx.quantumLoop() != None):
-            loop = ctx.quantumLoop()
-        block = QuantumBlock(statements=stmt, loops=loop)
+        stmts = []
+        loops = []
+        if(len(ctx.quantumStatement()) > 0):
+            i=0
+            while True:
+                if(ctx.quantumStatement(i)!=None):
+                    stmts.append(self.enterQuantumStatement(ctx.quantumStatement(i)))
+                else:
+                    break
+                i+=1
+        if(len(ctx.quantumLoop()) > 0):
+            i=0
+            while True:
+                if(ctx.quantumLoop(i)!=None):
+                    loops.append(self.enterQuantumLoop(ctx.quantumLoop(i)))
+                else:
+                    break
+                i+=1
+        block = QuantumBlock(statements=stmts, loops=loops)
         if(block != None and block.eval() != None):
             return block
         return
         
     # Enter a parse tree produced by qasm3Parser#quantumLoop.
     def enterQuantumLoop(self, ctx:qasm3Parser.QuantumLoopContext):
-        sig = ctx.loopSignature()
-        block = ctx.quantumLoopBlock()
-        pass
+        sig = self.enterLoopSignature(ctx.loopSignature())
+        block = self.enterQuantumLoopBlock(ctx.quantumLoopBlock())
+        return QuantumLoop(sig, block)
 
     # Enter a parse tree produced by qasm3Parser#quantumLoopBlock.
     def enterQuantumLoopBlock(self, ctx:qasm3Parser.quantumLoopBlock):
         stmt = []
         i=0
         while True:
-            if(ctx.quantumStatement[i] != None):
-                stmt.append(self.enterQuantumStatement(ctx.quantumStatement[i]))
+            if(ctx.quantumStatement(i) != None):
+                stmt.append(self.enterQuantumStatement(ctx.quantumStatement(i)))
                 i+=1
             else:
                 break
@@ -121,8 +235,12 @@ class QEDAListener(Listener):
 
     # Enter a parse tree produced by qasm3Parser#quantumStatement.
     def enterQuantumStatement(self, ctx:qasm3Parser.quantumStatement):
-        ins = ctx.quantumInstruction()
-        tim = ctx.timingStatement()
+        ins = None
+        if(ctx.quantumInstruction() != None):
+            ins = self.enterQuantumInstruction(ctx.quantumInstruction())
+        tim = None
+        if(ctx.timingStatement() != None):
+            tim = self.enterTimingStatement(ctx.timingStatement())
         qs = None
         if(ins != None):
             qs = QuantumStatement(quantumInstruction=ins)
@@ -157,10 +275,11 @@ class QEDAListener(Listener):
         if(ctx.quantumGateModifier() != None):
             i = 0
             while True:
-                if(ctx.quantumGateModifier(i)):
-                    mods.append(self.quantumGateModifier(ctx.quantumGateModifier(i)))
+                if(ctx.quantumGateModifier(i) != None):
+                    mods.append(self.enterQuantumGateModifier(ctx.quantumGateModifier(i)))
                 else:
                     break
+                i+=1 
         exp = self.enterExpression(ctx.expression())
         idList = self.enterIndexIdentifierList(ctx.indexIdentifierList())
         qp = QuantumPhase(exp, idList, modifiers=mods)
@@ -191,7 +310,12 @@ class QEDAListener(Listener):
 
     # Enter a parse tree produced by qasm3Parser#quantumGateModifier
     def enterQuantumGateModifier(self, ctx:qasm3Parser.quantumGateModifier):
-        print(ctx)
+        mod = None
+        if(ctx.powModifier() != None):
+            mod = self.enterPowModifier(ctx.powModifier())
+        if(ctx.ctrlModifier() != None):
+            mod = self.enterCtrlModifier(ctx.ctrlModifier())
+        return QuantumGateModifier(mod)
 
     # Enter a parse tree produced by qasm3Parser#PowModifier
     def enterPowModifier(self, ctx:qasm3Parser.PowModifierContext):
@@ -202,9 +326,11 @@ class QEDAListener(Listener):
     def enterCtrlModifier(self, ctx:qasm3Parser.CtrlModifierContext):
         txt = ctx.getText()
         neg = False
+        exp = None
         if('neg' in txt):
             neg=True
-        exp = self.enterExpression(ctx.expression())
+        if(ctx.expression() != None):
+            exp = self.enterExpression(ctx.expression())
         return CtrlModifier(exp, neg)
     
     # Enter a parse tree produced by qasm3Parser#quantumGateCall
@@ -212,23 +338,33 @@ class QEDAListener(Listener):
         name = self.enterQuantumGateName(ctx.quantumGateName())
         ids = self.enterIndexIdentifierList(ctx.indexIdentifierList())
         exp = None
-        mod = None
+        mod = []
         if(ctx.expressionList() != None):
             exp = self.enterExpressionList(ctx.expressionList())
-        if(type(ctx.quantumGateModifier()) != type(None)):
-            mod = self.enterQuantumGateModifier(ctx.quantumGateModifier())
+        if(len(ctx.quantumGateModifier())>0):
+            i=0
+            while True:
+                if(ctx.quantumGateModifier(i) != None):
+                    mod.append(self.enterQuantumGateModifier(ctx.quantumGateModifier(i)))
+                else:
+                    break
+                i+=1
         return QuantumGateCall(name, ids, expressionList=exp, quantumGateModifier=mod)
 
     # Enter a parse tree produced by qasm3Parser#expression.
     def enterExpression(self, ctx:qasm3Parser.ExpressionContext):
-        exp = None
-        exp1 = None
-        exp2 = None
-        text = ctx.getText()
-        op = None
-        if(type(ctx.expressionTerminator()) != type(None)):
-            pass#rint(ctx.expressionTerminator(), text)
-
+        if(ctx.expressionTerminator()!=None):
+            return self.enterExpressionTerminator(ctx.expressionTerminator())
+        elif(ctx.unaryExpression()!=None):
+            return self.enterUnaryExpression(ctx.unaryExpression())
+        elif(ctx.expression()!=None):
+            exp1 = self.enterExpression(ctx.expression())
+            orxp = None
+            if(ctx.logicalAndExpression()!=None):
+                orxp = self.enterLogicalAndExpression(ctx.logicalAndExpression())
+            return Expression(exp1, orxp)
+        elif(ctx.logicalAndExpression()):
+            return self.enterLogicalAndExpression(ctx.logicalAndExpression())       
 
     # Enter a parse tree produced by qasm3Parser#logicalAndExpression.
     def enterLogicalAndExpression(self, ctx:qasm3Parser.LogicalAndExpressionContext):
@@ -464,19 +600,19 @@ class QEDAListener(Listener):
         elif(type(ctx.booleanLiteral()) != type(term)):
             term = ExpressionTerminator(ctx.booleanLiteral())
         elif(type(ctx.Identifier()) != type(term)):
-            term = ExpressionTerminator(ctx.Identifier())
+            term = ExpressionTerminator(self.enterIdentifier(ctx.Identifier()))
         elif(type(ctx.StringLiteral()) != type(term)):
             term = ExpressionTerminator(ctx.StringLiteral())
         elif(type(ctx.builtInCall()) != type(term)):
-            term = ExpressionTerminator(ctx.builtInCall())
+            term = ExpressionTerminator(self.enterBuiltInCall(ctx.builtInCall()))
         elif(type(ctx.externOrSubroutineCall()) != type(term)):
-            term = ExpressionTerminator(ctx.externOrSubroutineCall())
+            term = ExpressionTerminator(self.enterExternOrSubroutineCall(ctx.externOrSubroutineCall()))
         elif(type(ctx.timingIdentifier()) != type(term)):
-            term = ExpressionTerminator(ctx.timingIdentifier())
+            term = ExpressionTerminator(self.enterTimingIdentifier(ctx.timingIdentifier()))
         elif(type(ctx.expression()) != type(term)):
-            term = ExpressionTerminator(ctx.expression())
+            term = ExpressionTerminator(self.enterExpression(ctx.expression()))
         elif(type(ctx.expressionTerminator()) != type(term)):
-            term = ExpressionTerminator(ctx.expressionTerminator())
+            term = ExpressionTerminator(self.enterExpressionTerminator(ctx.expressionTerminator()))
         if(term.eval() == None):
             return None
         else:
@@ -510,7 +646,6 @@ class QEDAListener(Listener):
 
     # Enter a parse tree produced by qasm3Parser#castOperator.
     def enterCastOperator(self, ctx:qasm3Parser.CastOperatorContext):
-        print("Cast Operator", ctx.getText())
         op = CastOperator(ctx.getText())
 
     # Enter a parse tree produced by qasm3Parser#expressionList.
@@ -518,7 +653,6 @@ class QEDAListener(Listener):
         exp = []
         i=0
         while True:
-            print(i)
             if(ctx.expression(i) != None):
                 exp.append(self.enterExpression(ctx.expression(i)))
                 i+=1
@@ -528,8 +662,11 @@ class QEDAListener(Listener):
 
     # Enter a parse tree produced by qasm3Parser#equalsExpression.
     def enterEqualsExpression(self, ctx:qasm3Parser.EqualsExpressionContext):
-        exp = self.enterExpression(ctx.expression())
-        return EqualsExpression(exp)
+        if(ctx != None):
+            exp = self.enterExpression(ctx.expression())
+            return EqualsExpression(exp)
+        else:
+            return
 
     # Enter a parse tree produced by qasm3Parser#assignmentOperator.
     def enterAssignmentOperator(self, ctx:qasm3Parser.AssignmentOperatorContext):
@@ -629,7 +766,7 @@ class QEDAListener(Listener):
         return ControlDirective(ctrl)
 
     # Enter a parse tree produced by qasm3Parser#externDeclaration
-    def enterExternDeclaration(eslf, ctx:qasm3Parser.ExternDeclarationContext):
+    def enterExternDeclaration(self, ctx:qasm3Parser.ExternDeclarationContext):
         id = self.enterIdentifier(ctx.Identifier())
         clist = self.enterClassicalTypeList(ctx.classicalTypeList())
         rsig = self.enterReturnSignature(ctx.returnSignature())
@@ -638,8 +775,10 @@ class QEDAListener(Listener):
     # Enter a parse tree produced by qasm3Parser#ExternOrSubroutineCall
     def enterExternOrSubroutineCall(self, ctx:qasm3Parser.ExternOrSubroutineCallContext):
         id = self.enterIdentifier(ctx.Identifier())
-        expList = self.enterExpressionList(ctx.expressionList())
-        return ExternOrSubroutineCall(expList)
+        expList=None
+        if(ctx.expressionList() != None):
+            expList = self.enterExpressionList(ctx.expressionList())
+        return ExternOrSubroutineCall(id, expList)
 
     # Enter a parse tree produced by qasm3Parser#subroutineDefinition
     def enterSubroutineDefinition(self, ctx:qasm3Parser.SubroutineDefinitionContext):
@@ -660,8 +799,17 @@ class QEDAListener(Listener):
 
     # Enter a parse tree produced by qasm3Parser#subroutineBlock
     def enterSubroutineBlock(self, ctx:qasm3Parser.SubroutineBlockContext):
-        stmt = self.enterStatement(ctx.statement())
-        retState = self.enterReturnStatement(ctx.returnStatement())
+        stmt = []
+        retState = None
+        i=0
+        while True:
+            if(ctx.statement(i) != None):
+                stmt.append(self.enterStatement(ctx.statement(i)))
+            else:
+                break
+            i+=1
+        if(ctx.returnStatement() != None):
+            retState = self.enterReturnStatement(ctx.returnStatement())
         return SubroutineBlock(stmt, retState)
 
     # Enter a parse tree produced by qasm3Parser#pragma
@@ -672,11 +820,21 @@ class QEDAListener(Listener):
     # Enter a parse tree produced by qasm3Parser#timingType
     def enterTimingType(self, ctx:qasm3Parser.TimingTypeContext):
         ttype = ctx.getText()
-        return TimingType(ttype)
-
+        tt = TimingType()
+        tt.ttype=ttype
+        return tt
     # Enter a parse tree produced by qasm3Parser#timingBox
     def enterTimingBox(self, ctx:qasm3Parser.TimingBoxContext):
-        des = self.enterDesignator(ctx.designator())
+        des=[]
+        if(ctx.designator()):
+            i=0
+            while True:
+                if(ctx.designator(i) != None):
+                    des.append(self.enterDesignator(ctx.designator(i)))
+                else:
+                    break
+            i+=1
+
         qblock = self.enterQuantumBlock(ctx.quantumBlock())
 
         return TimingBox(des, qblock)
@@ -692,14 +850,15 @@ class QEDAListener(Listener):
             elif(ctx.quantumBlock() != None):
                 qblock = self.enterQuantumBlock(ctx.quantumBlock())
         else:
-            lit = self.enterTimingLiteral(ctx.TimingLiteral())
+            lit = TimingLiteral(ctx.TimingLiteral().getText())
     
         return TimingIdentifier(lit, id, qblock)
 
     # Enter a parse tree produced by qasm3Parser#TimingInstructionName
     def enterTimingInstructionName(self, ctx:qasm3Parser.TimingInstructionNameContext):
-        return TimingInstructionName(ctx.getText())
-    
+        ti = TimingInstructionName()
+        ti.ttype=ctx.getText()
+        return ti
     # Enter a parse tree produced by qasm3Parser#TimingInstruction
     def enterTimingInstruction(self, ctx:qasm3Parser.TimingInstructionContext):
         name = self.enterTimingInstructionName(ctx.timingInstructionName())
@@ -770,13 +929,6 @@ class QEDAListener(Listener):
         else:
             return
     
-    def enterDesignator(self, ctx:qasm3Parser.DesignatorContext):
-        exp = self.enterExpression(ctx.expression())
-        des = Designator(exp)
-        if(des != None and des.eval() != None):
-            return des
-        return
-
     # Enter a parse tree produced by qasm3Parser#identifierList.
     def enterIdentifierList(self, ctx:qasm3Parser.IdentifierListContext):
         ids = []
@@ -802,11 +954,10 @@ class QEDAListener(Listener):
         return
     
     
-        # Enter a parse tree produced by qasm3Parser#noDesignatorDeclaration.
+    # Enter a parse tree produced by qasm3Parser#noDesignatorDeclaration.
     def enterNoDesignatorDeclaration(self, ctx:qasm3Parser.NoDesignatorDeclarationContext):
         des = self.enterNoDesignatorType(ctx.noDesignatorType())
         id = self.enterIdentifier(ctx.Identifier())
-        print(ctx.equalsExpression())
         exp = self.enterEqualsExpression(ctx.equalsExpression())
         nd = NoDesignatorDeclaration(des, id, exp)
         if(nd!=None and nd.eval() != None):
@@ -816,7 +967,6 @@ class QEDAListener(Listener):
     # Enter a parse tree produced by qasm3Parser#bitDeclaration.
     def enterBitDeclaration(self, ctx:qasm3Parser.BitDeclarationContext):
         txt = ctx.getText()
-        print(txt)
         ttype = None
         equ = None
         des = None
@@ -860,7 +1010,7 @@ class QEDAListener(Listener):
     # Enter a parse tree produced by qasm3Parser#anyTypeArgument.
     def enterAnyTypeArgument(self, ctx:qasm3Parser.AnyTypeArgumentContext):
         pass
-
+            
     # Enter a parse tree produced by qasm3Parser#anyTypeArgumentList.
     def enterAnyTypeArgumentList(self, ctx:qasm3Parser.AnyTypeArgumentListContext):
         pass

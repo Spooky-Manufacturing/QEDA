@@ -124,6 +124,10 @@ class QuantumDeclarationStatement(GlobalStatement):
     def __init__(self, quantumDeclaration):
         self.decl = quantumDeclaration
 
+    def eval(self):
+        if(self.decl!=None):
+            self.decl.eval()
+
 class ClassicalDeclarationStatement(Statement):
     """
     classicalDeclarationStatement =
@@ -175,7 +179,6 @@ class Designator:
     def eval(self):
         if(self.expression != None):
             return self.expression.eval()
-        return
 
 class IdentifierList:
     """
@@ -205,6 +208,21 @@ class QuantumDeclaration:
         self.id = identifier
         self.designator = designator
 
+    def eval(self):
+        x={
+            'qtype':'',
+            'designators':[],
+            'id':''
+        }
+        if(self.qtype!=None):
+            x['qtype']=self.qtype
+        if(self.id!=None):
+            x['id']=self.id.eval()
+        if(self.designator!=None):
+            for each in self.designator:
+                if(each!=None):
+                    x['designator'].append(each.eval())
+
 class QuantumArgument(QuantumDeclaration):
     """
     quantumArgument = 
@@ -225,11 +243,11 @@ class QuantumArgumentList:
 """
 Classical Types
 """
-class TYPE:
+class Type:
     """
     Internal base class for simple types.
     """
-    def __init_subclass__(cls, ttype, t2=""):
+    def __init_subclass__(cls, ttype):
         cls.ttype = ttype
     
     def eval(cls):
@@ -237,14 +255,14 @@ class TYPE:
             return cls.ttype.eval()
         return cls.ttype
 
-class BitType(TYPE, ttype='bit'):
+class BitType(Type, ttype='bit'):
     """
     bitType = 
     | 'bit'
     | 'creg'
     """
     pass
-class SingleDesignatorType(TYPE, ttype="int"):
+class SingleDesignatorType(Type, ttype="int"):
     """
     singleDesignatorType = 
     | 'int'
@@ -254,7 +272,7 @@ class SingleDesignatorType(TYPE, ttype="int"):
     """
     pass
 
-class NoDesignatorType(TYPE, ttype='bool'):
+class NoDesignatorType(Type, ttype='bool'):
     """
     noDesignatorType = 
     | 'bool'
@@ -336,7 +354,7 @@ class NoDesignatorDeclaration(ClassicalDeclarationStatement):
     noDesignatorDeclaration = 
     | noDesignatorType Identifier equalsExpression?
     """
-    def __init__(self, dtype, identifier, expression):
+    def __init__(self, dtype, identifier, expression=None):
         self.dtype = dtype
         self.id = identifier
         self.exp = expression
@@ -362,7 +380,7 @@ class BitDeclaration(ClassicalDeclarationStatement):
         self.exp = equalsExpression
 
     def eval(self):
-        print(self.id.eval(), self.designator, self.ttype, self.exp)
+        return self.id.eval(), self.designator, self.ttype, self.exp
 
 class ComplexDeclaration(ClassicalDeclarationStatement):
     """
@@ -401,7 +419,7 @@ class AnyTypeArgument:
 """
 Aliasing
 """
-class AliasStatment:
+class AliasStatement:
     """
     aliasStatement = 
     | 'let' Identifier = indexIdentifier;
@@ -426,6 +444,26 @@ class IndexIdentifier:
         self.index1 = indexId1
         self.index2 = indexId2
 
+    def eval(self):
+        x={
+            'id':'',
+            'range':None,
+            'exps':[],
+            'index1':None,
+            'index2':None
+        }
+        if(self.id!=None):
+            x['id']=self.id.eval()
+        if(self.expList!=None):
+            for each in self.expList:
+                if(each!=None):
+                    x['exps'].append(each.eval())
+        if(self.index1!=None):
+            x['index1']=self.index1.eval()
+        if(self.index1!=None):
+            x['index2']=self.index2.eval()
+        return x
+
 class IndexIdentifierList:
     """
     indexIdentifierList =
@@ -436,7 +474,12 @@ class IndexIdentifierList:
         self.idList = indexIdList
 
     def eval(self):
-        return [x.eval() for x in self.idList]
+        idlist = []
+        if(self.idList!=None):
+            for each in self.idList:
+                if(each!=None):
+                    idlist.append(each.eval())
+        return idlist
 
 class RangeDefinition:
     """
@@ -448,6 +491,20 @@ class RangeDefinition:
         self.exp1 = expression1
         self.exp2 = expression2
         self.exp3 = expression3
+
+    def eval(self):
+        x = {
+            'x1':None,
+            'x2':None,
+            'x3':None
+        }
+        if(self.exp1!=None):
+            x['x1']=self.exp1.eval()
+        if(self.exp2!=None):
+            x['x2']=self.exp2.eval()
+        if(self.exp3!=None):
+            x['x3']=self.exp3.eval()
+        return x
 
 """
 Gates & Built-In Quantum Instructions
@@ -476,8 +533,18 @@ class QuantumGateSignature:
         self.params = parameters
         
     def eval(self):
-        print(self.name.eval(), self.ids, self.params)
-        return self.name
+        x = {
+            'name':'',
+            'ids':[],
+            'params':[]
+        }
+        if(self.name!=None):
+            x['name']=self.name.eval()
+        if(self.ids!=None):
+            x['ids']=self.ids.eval()
+        if(self.params!=None):
+            x['params']=self.params.eval()
+        return x
 
 class QuantumGateName:
     """
@@ -506,8 +573,18 @@ class QuantumBlock(Statement):
         self.loops = loops
     
     def eval(self):
-        print(self.statements, self.loops)
-        return self.statements
+        x={
+            'stmts':[]
+        }
+        if(self.statements!=None):
+            for each in self.statements:
+                if(each!=None):
+                    x['stmts'].append(each.eval())
+        if(self.loops!=None):
+            for each in self.loops:
+                if(each!=None):
+                    x['stmts'].append(each.eval())
+        return x
 
 class QuantumLoop:
     """
@@ -518,6 +595,18 @@ class QuantumLoop:
         self.signature = loopSignature
         self.block = quantumLoopBlock
 
+    def eval(self):
+        x={
+            'sig':None,
+            'block':None
+        }
+        if(self.signature!=None):
+            x['sig']=self.signature.eval()
+        if(self.block!=None):
+            x['block']=self.block.eval()
+        return x
+
+
 class QuantumLoopBlock:
     """
     quantumLoopBlock = 
@@ -526,6 +615,14 @@ class QuantumLoopBlock:
     """
     def __init__(self, statements):
         self.statements = statements
+
+    def eval(self):
+        x=[]
+        if(self.statements!=None):
+            for each in self.statements:
+                if(each!=None):
+                    x.append(each.eval())
+        return x
 
 class QuantumStatement(Statement):
     """
@@ -536,6 +633,12 @@ class QuantumStatement(Statement):
     def __init__(self, quantumInstruction=None, timingStatement=None):
         self.quantumInstruction = quantumInstruction
         self.timingStatement = timingStatement
+
+    def eval(self):
+        if(self.quantumInstruction != None):
+            return self.quantumInstruction.eval()
+        if(self.timingStatement != None):
+            return self.timingStatement.eval()
 
 class QuantumInstruction:
     """The base class for quantum instructions
@@ -563,8 +666,20 @@ class QuantumPhase(QuantumInstruction):
         self.mods = modifiers
 
     def eval(self):
-        print(self.exp.eval(), self.indexId.eval())
-        return self.exp.eval(), self.indexId.eval()
+        x={
+            'exp':None,
+            'id':None,
+            'mods':[]
+        }
+        if(self.exp != None):
+            x['exp']=self.exp.eval()
+        if(self.indexId != None):
+            x['id']=self.indexId.eval()
+        if(self.mods!=None):
+            for each in self.mods:
+                if(each!=None):
+                    x['mods'].append(each.eval())
+        return x
 
 class QuantumReset(QuantumInstruction):
     """
@@ -572,7 +687,16 @@ class QuantumReset(QuantumInstruction):
     | 'reset' indexIdentifierList
     """
     def __init__(self, indexIdentifierList):
+        self.instruction = "RESET"
         self.indexId = indexIdentifierList
+    def eval(self):
+        x = {
+            'instruction':"RESET",
+            'id':None
+        }
+        if(self.indexId != None):
+            x['id']=self.indexId.eval()
+        return x
 
 class QuantumMeasurement(QuantumInstruction):
     """
@@ -582,6 +706,16 @@ class QuantumMeasurement(QuantumInstruction):
     def __init__(self, indexIdentifier):
         self.indexId = indexIdentifier
 
+    def eval(self):
+        x = {
+            'instruction':"MEASURE",
+            'id':None
+        }
+        if(self.indexId != None):
+            x['id']=self.indexId.eval()
+        return x
+
+
 class QuantumMeasurementAssignment(QuantumInstruction):
     """
     quantumMeasurementAssignment = 
@@ -590,9 +724,19 @@ class QuantumMeasurementAssignment(QuantumInstruction):
     """
     def __init__(self, qmeas, indexId):
         self.indexId = indexId
+        self.qmeas = qmeas
 
     def eval(self):
-        return self.indexId
+        x = {
+            'instruction':"MEASURE_ASSIGN",
+            'id':None,
+            'qmeas':None
+        }
+        if(self.indexId != None):
+            x['id']=self.indexId.eval()
+        if(self.qmeas!=None):
+            x['qmeas']=self.qmeas.eval()
+        return x
 
 class QuantumBarrier(QuantumInstruction):
     """
@@ -602,7 +746,15 @@ class QuantumBarrier(QuantumInstruction):
     def __init__(self, indexIdentifierList):
         self.indexId = indexIdentifierList
     def eval(self):
-        return [x.eval() for x in self.indexId]
+        x = {
+            'instruction':"BARRIER",
+            'id':[]
+        }
+        if(self.indexId != None):
+            for each in self.indexId:
+                if(each!=None):
+                    x['id'].append(each.eval())
+        return x
 
 class QuantumGateModifier:
     """The base class for quantum gate modifiers.
@@ -613,9 +765,21 @@ class QuantumGateModifier:
     """
     def __init__(self, modifier):
         self.mod = modifier
+        self.expression = None
 
     def eval(self):
-        return self.mod.eval()
+        x = {
+            'mod': None,
+            'exp': None
+        }
+        if(self.mod!=None):
+            if(type(self.mod)!=type('')):
+                x['mod']=self.mod.eval()
+            else:
+                x['mod']=self.mod
+            if(self.expression!=None):
+                x['expression']=self.expression.eval()
+        return x
 
 class PowModifier(QuantumGateModifier):
     """
@@ -624,7 +788,7 @@ class PowModifier(QuantumGateModifier):
     """
     def __init__(self, expression):
         self.mod = 'pow'
-        self.exp = expression
+        self.expression = expression
 
 class CtrlModifier(QuantumGateModifier):
     """
@@ -637,7 +801,7 @@ class CtrlModifier(QuantumGateModifier):
             self.mod = 'negctrl'
         else:
             self.mod = 'ctrl'
-        self.exp = expression
+        self.expression = expression
 
 class QuantumGateCall(QuantumInstruction):
     """
@@ -653,6 +817,24 @@ class QuantumGateCall(QuantumInstruction):
         self.expList = expressionList
         self.indexId = indexIdentifierList
 
+    def eval(self):
+        x = {
+            'name':'',
+            'mods':[],
+            'exps':[],
+            'ids':[]
+        }
+        if(self.qgMod!=None): 
+            for each in self.qgMod:
+                x['mods'].append(each.eval())
+        if(self.name!=None):
+            x['name']=self.name.eval()
+        if(self.expList!=None):
+            x['exps']=self.expList.eval()
+        if(self.indexId!=None):
+            x['ids']=self.indexId.eval()
+        return x
+
 """
 Classical Instructions
 """
@@ -664,6 +846,9 @@ class ExpressionStatement:
     def __init__(self, expression):
         self.exp = expression
 
+    def eval(self):
+        return self.exp.eval()
+
 class BaseExpression:
     """The base expression class"""
 
@@ -671,8 +856,6 @@ class BaseExpression:
         self.exp1 = expression1
         self.exp2 = expression2
         self.op = operator
-        #print(self, self.exp1, self.exp2, self.op)
-
 
     def eval(self):
         return self
@@ -707,10 +890,11 @@ class LogicalAndExpression(BaseExpression):
     | logicalAndExpression '&&' bitOrExpression
     """
     def eval(self):
-        if(type(self.exp2) != type(None)):
-            return self.exp1.eval() and self.exp2.eval()
-        elif(type(self.exp1) != type(None)):
-            return self.exp1.eval()
+        if(self.exp1!=None):
+            if(self.exp2!=None):
+                return self.exp1.eval() and self.exp2.eval()
+            else:
+                return self.exp1.eval()
         return
 
 class BitOrExpression(BaseExpression):
@@ -720,10 +904,11 @@ class BitOrExpression(BaseExpression):
     | bitOrExpression '|' xOrExpression
     """
     def eval(self):
-        if(type(self.exp2) != type(None)):
-            return self.exp1.eval() | self.exp2.eval()
-        elif(type(self.exp1) != type(None)):
-            return self.exp1.eval()
+        if(self.exp1!=None):
+            if(self.exp2!=None):
+                return self.exp1.eval() | self.exp2.eval()
+            else:
+                return self.exp1.eval()
         return
 
 class XorExpression(BaseExpression):
@@ -733,12 +918,12 @@ class XorExpression(BaseExpression):
     | xOrExpressoin '^' bitAndExpression
     """
     def eval(self):
-        if(type(self.exp2) != type(None)):
-            return self.exp1.eval() ^ self.exp2.eval()
-        elif(type(self.exp1) != type(None)):
-            return self.exp1.eval()
-        else:
-            return
+        if(self.exp1!=None):
+            if(self.exp2!=None):
+                return self.exp1.eval() ^ self.exp2.eval()
+            else:
+                return self.exp1,eval()
+        return
 
 class BitAndExpression(BaseExpression):
     """
@@ -747,12 +932,11 @@ class BitAndExpression(BaseExpression):
     | bitAndExpression '&' equalityExpression
     """
     def eval(self):
-        if(type(self.exp2) != type(None)):
-            return self.exp1.eval() & self.exp2.eval()
-        elif(type(self.exp1) != type(None)):
-            return self.exp1.eval()
-        else:
-            return
+        if(self.exp1!=None):
+            if(self.exp2!=None):
+                return self.exp1.eval() & self.exp2.eval()
+            else:
+                return self.exp1.eval()
 
 class EqualityExpression(BaseExpression):
     """
@@ -762,15 +946,14 @@ class EqualityExpression(BaseExpression):
     | equalityExpression != comparisonExpression
     """
     def eval(self):
-        if(type(self.exp2) != type(None) and type(self.exp1) != type(None)):
-            if(self.op == "!="):
-                return self.exp1.eval() != self.exp2.eval()
+        if(self.exp1!=None):
+            if(self.exp2!=None):
+                if(self.op == "!="):
+                    return self.exp1.eval() != self.exp2.eval()
+                else:
+                    return self.exp1.eval() == self.exp2.eval()
             else:
-                return self.exp1.eval() == self.exp2.eval()
-        elif(type(self.exp1) != type(None)):
-            return self.exp1.eval()
-        else:
-            return
+                return self.exp1.eval()
 
 class ComparisonExpression(BaseExpression):
     """
@@ -779,19 +962,18 @@ class ComparisonExpression(BaseExpression):
     | comparisonExpression (<|>|>=|<=) bitShiftExpression
     """
     def eval(self):
-        if(type(self.exp2) != type(None)):
-            if(self.op == "<"):
-                return self.exp1.eval() < self.exp2.eval()
-            elif(self.op == ">"):
-                return self.exp1.eval() > self.exp2.eval()
-            elif(self.op == ">="):
-                return self.exp1.eval() >= self.exp2.eval()
-            elif(self.op == "<="):
-                return self.exp1.eval() <= self.exp2.eval()
-        elif(type(self.exp1) != type(None)):
-            return self.exp1.eval()
-        else:
-            return
+        if(self.exp1!=None):
+            if(self.exp2!=None):
+                if(self.op == "<"):
+                    return self.exp1.eval() < self.exp2.eval()
+                elif(self.op == ">"):
+                    return self.exp1.eval() > self.exp2.eval()
+                elif(self.op == ">="):
+                    return self.exp1.eval() >= self.exp2.eval()
+                elif(self.op == "<="):
+                    return self.exp1.eval() <= self.exp2.eval()
+            else:
+                return self.exp1.eval()
 
 class BitShiftExpression(BaseExpression):
     """
@@ -800,15 +982,14 @@ class BitShiftExpression(BaseExpression):
     | bitShiftExpression ( '<<' | '>>' ) additiveExpression
     """
     def eval(self):
-        if(type(self.exp2) != type(None)):
-            if(self.op == "<<"):
-                return self.exp1.eval() << self.exp2.eval()
+        if(self.exp1!=None):
+            if(self.exp2!=None):
+                if(self.op == "<<"):
+                    return self.exp1.eval() << self.exp2.eval()
+                else:
+                    return self.exp1.eval() >> self.exp2.eval()
             else:
-                return self.exp1.eval() >> self.exp2.eval()
-        elif(type(self.exp1) != type(None)):
-            return self.exp1.eval()
-        else:
-            return
+                return self.exp1.eval()
 
 class AdditiveExpression(BaseExpression):
     """
@@ -817,16 +998,14 @@ class AdditiveExpression(BaseExpression):
     | additiveExpression ( + | - ) multiplicativeExpression
     """
     def eval(self):
-        if(type(self.exp2) != type(None) and type(self.exp1) != type(None)):
-            if(self.op == '-'):
-                return self.exp1.eval() - self.exp2.eval()
-            elif(self.op == '+'):
-                return self.exp1.eval() + self.exp2.eval()
-        elif(type(self.exp1) != type(None)):
-            #print("TYPE", type(self.exp1))
-            return self.exp1.eval()
-        else:
-            return
+        if(self.exp1!=None):
+            if(self.exp2!=None):
+                if(self.op == '-'):
+                    return self.exp1.eval() - self.exp2.eval()
+                elif(self.op == '+'):
+                    return self.exp1.eval() + self.exp2.eval()
+            else:
+                return self.exp1.eval()
 
 class MultiplicativeExpression(BaseExpression):
     """
@@ -837,17 +1016,16 @@ class MultiplicativeExpression(BaseExpression):
     | multiplicativeExpression ( * | / | % ) unaryExpression
     """
     def eval(self):
-        if(type(self.exp2) != type(None)):
-            if (self.op == "*"):
-                return self.exp1.eval() * self.exp2.eval()
-            elif(self.op == "/"):
-                return self.exp1.eval() / self.exp2.eval()
-            elif(self.op == "%"):
-                return eslf.exp1.eval() % self.exp2.eval()
-        elif(type(self.exp1) != type(None)):
-            return self.exp1.eval()
-        else:
-            return None
+        if(self.exp1!=None):
+            if(self.exp2!=None):
+                if (self.op == "*"):
+                    return self.exp1.eval() * self.exp2.eval()
+                elif(self.op == "/"):
+                    return self.exp1.eval() / self.exp2.eval()
+                elif(self.op == "%"):
+                    return self.exp1.eval() % self.exp2.eval()
+            else:
+                self.exp1.eval()
 
 class UnaryExpression(BaseExpression):
     """
@@ -855,12 +1033,13 @@ class UnaryExpression(BaseExpression):
     | unaryOperator powerExpression
     """
     def eval(self):
-        if(self.op == '~'):
-            return self.exp1.eval() + 1
-        elif(self.op == '!'):
-            return not self.exp1.eval()
-        elif(self.op == '-'):
-            return self.exp1.eval() * -1
+        if(self.exp1!=None):
+            if(self.op == '~'):
+                return self.exp1.eval() + 1
+            elif(self.op == '!'):
+                return not self.exp1.eval()
+            elif(self.op == '-'):
+                return self.exp1.eval() * -1
 
 class PowerExpression(BaseExpression):
     """
@@ -869,14 +1048,11 @@ class PowerExpression(BaseExpression):
     | expressionTerminator '**' powerExpression
     """
     def eval(self):
-#        print(self.exp1, self.exp2)
-        if(type(self.exp2) != type(None)):
-            return self.exp1.eval() ** self.exp2.eval()
-        elif(type(self.exp1) != type(None)):
-            return self.exp1.eval()
-        else:
-            return
-
+        if(self.exp1!=None):
+            if(self.exp2!=None):
+                return self.exp1.eval() ** self.exp2.eval()
+            else:
+                return self.exp1.eval()
 
 class ExpressionTerminator:
     """
@@ -896,7 +1072,6 @@ class ExpressionTerminator:
     ;
     """
     def __init__(self, value):
-        #print(value)
         self.value = value
         self._valueDecoder()
 
@@ -947,7 +1122,6 @@ class BuiltInCall:
         self.expList = expressionList
 
     def eval(self):
-        print(self.op, self.expList)
         return self
 
 class BuiltInMath:
@@ -990,7 +1164,13 @@ class ExpressionList:
         self.expressions = expressions
 
     def eval(self):
-        return [x.eval() for x in self.expressions]
+        exp = []
+        if(self.expressions!=None):
+            for each in self.expressions:
+                if(each!=None):
+                    print(each.eval(), 'expression')
+                    exp.append(each.eval())
+        return exp
 
 class EqualsExpression:
     """
@@ -1052,8 +1232,12 @@ class ProgramBlock:
         self.statements = statements
 
     def eval(self):
-        self.statements.eval()
-
+        x=[]
+        if(self.statements!=None):
+            for each in self.statements:
+                if(each!=None):
+                    x.append(each.eval())
+        return x
 class BranchingStatement(Statement):
     """
     branchingStatement = 
@@ -1092,6 +1276,14 @@ class LoopStatement(Statement):
         self.block = block
 
     def eval(self):
+        x = {
+            'sig':'',
+            'block':''
+        }
+        if(self.signature!=None):
+            x['sig']=self.signature.eval()
+        if(self.block!=None):
+            x['block']=self.block.eval()
         pass
 
 class EndStatement(Statement):
@@ -1206,7 +1398,7 @@ class Pragma:
 Circuit Timing
 """
 
-class TimingType(TYPE, ttype='duration'):
+class TimingType(Type, ttype='duration'):
     """
     timingType = 
     | 'duration'
@@ -1217,11 +1409,19 @@ class TimingType(TYPE, ttype='duration'):
 class TimingBox:
     """
     timingBox =
-    | 'box' designator quantumBlock
+    | 'box' designator? quantumBlock
     """
     def __init__(self, designator, qblock):
         self.des = designator
         self.block = qblock
+
+    def eval(self):
+        if(self.des!=None):
+            if(len(self.des)>0):
+                for each in self.des:
+                    each.eval()
+        if(self.block!=None):
+            self.block.eval()
 
 class TimingIdentifier:
     """
@@ -1237,7 +1437,16 @@ class TimingIdentifier:
     def eval(self):
         pass
 
-class TimingInstructionName(TYPE, ttype='delay'):
+class TimingLiteral:
+    """
+    """
+    def __init__(self, val):
+        self.val = val
+
+    def eval(self):
+        return self.val
+        pass
+class TimingInstructionName(Type, ttype='delay'):
     """
     timingInstructionName =
     |'delay'
