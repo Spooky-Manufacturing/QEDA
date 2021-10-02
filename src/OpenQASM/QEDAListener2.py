@@ -544,11 +544,11 @@ class QEDAListener(Listener):
         exp=None
         range=None
         if(ctx.Identifier()!=None):
-            id = enterIdentifier(ctx.Identifier())
+            id = self.enterIdentifier(ctx.Identifier())
         if(ctx.expressionList()!=None):
-            exp = enterExpressionList(ctx.expressionList())
+            exp = self.enterExpressionList(ctx.expressionList())
         if(ctx.rangeDefinition()):
-            range = enterRangeDefinition(ctx.rangeDefinition())
+            range = self.enterRangeDefinition(ctx.rangeDefinition())
         return SetDeclaration(id, exp, range)
 
     # Enter a parse tree produced by qasm3Parser#programBlock.
@@ -558,11 +558,17 @@ class QEDAListener(Listener):
         while True:
             if(ctx.statement(i) != None):
                 stmts.append(self.enterStatement(ctx.statement(i)))
-            if(ctx.controlDirective(i) != None):
-                stmts.append(enterControlDirective(ctx.controlDirective(i)))
-            i+=1
-            if(ctx.statement(i) == None and ctx.controlDirective() == None):
+            else:
                 break
+            i+=1
+        i=0
+        while True:
+            if(ctx.controlDirective(i) != None):
+                stmts.append(self.enterControlDirective(ctx.controlDirective(i)))
+            else:
+                break
+            i+=1
+        return ProgramBlock(stmts)
 
     # Enter a parse tree produced by qasm3Parser#branchingStatement.
     def enterBranchingStatement(self, ctx:qasm3Parser.BranchingStatementContext):
@@ -621,7 +627,100 @@ class QEDAListener(Listener):
         elif(ctx.returnStatement() != None):
             ctrl = self.enterReturnStatement(ctx.returnStatement())
         return ControlDirective(ctrl)
-        
+
+    # Enter a parse tree produced by qasm3Parser#externDeclaration
+    def enterExternDeclaration(eslf, ctx:qasm3Parser.ExternDeclarationContext):
+        id = self.enterIdentifier(ctx.Identifier())
+        clist = self.enterClassicalTypeList(ctx.classicalTypeList())
+        rsig = self.enterReturnSignature(ctx.returnSignature())
+        return ExternDeclaration(id, clist, rsig)
+
+    # Enter a parse tree produced by qasm3Parser#ExternOrSubroutineCall
+    def enterExternOrSubroutineCall(self, ctx:qasm3Parser.ExternOrSubroutineCallContext):
+        id = self.enterIdentifier(ctx.Identifier())
+        expList = self.enterExpressionList(ctx.expressionList())
+        return ExternOrSubroutineCall(expList)
+
+    # Enter a parse tree produced by qasm3Parser#subroutineDefinition
+    def enterSubroutineDefinition(self, ctx:qasm3Parser.SubroutineDefinitionContext):
+        id = None
+        aList = None
+        retSig = None
+        sBlock = None
+        if(ctx.Identifier() != None):
+            id = self.enterIdentifier(ctx.Identifier())
+        if(ctx.anyTypeArgumentList() != None):
+            aList = self.enterAnyTypeArgumentList(ctx.anyTypeArgumentList())
+        if(ctx.returnSignature() != None):
+            retSig = self.enterReturnSignature(ctx.returnSignature())
+        if(ctx.subroutineBlock() != None):
+            sBlock = self.enterSubroutineBlock(ctx.subroutineBlock())
+
+        return SubroutineDefinition(id, aList, retSig, sBlock)
+
+    # Enter a parse tree produced by qasm3Parser#subroutineBlock
+    def enterSubroutineBlock(self, ctx:qasm3Parser.SubroutineBlockContext):
+        stmt = self.enterStatement(ctx.statement())
+        retState = self.enterReturnStatement(ctx.returnStatement())
+        return SubroutineBlock(stmt, retState)
+
+    # Enter a parse tree produced by qasm3Parser#pragma
+    def enterPragma(self, ctx:qasm3Parser.PragmaContext):
+        stmt = self.enterStatement(ctx.statement())
+        return Pragma(stmt)
+
+    # Enter a parse tree produced by qasm3Parser#timingType
+    def enterTimingType(self, ctx:qasm3Parser.TimingTypeContext):
+        ttype = ctx.getText()
+        return TimingType(ttype)
+
+    # Enter a parse tree produced by qasm3Parser#timingBox
+    def enterTimingBox(self, ctx:qasm3Parser.TimingBoxContext):
+        des = self.enterDesignator(ctx.designator())
+        qblock = self.enterQuantumBlock(ctx.quantumBlock())
+
+        return TimingBox(des, qblock)
+
+    # Enter a parse tree produced by qasm3Parser#timingIdentifier
+    def enterTimingIdentifier(self, ctx:qasm3Parser.timingIdentifier):
+        lit = None
+        id = None
+        qblock = None
+        if("durationof" in ctx.getText()):
+            if(ctx.Identifier() != None):
+                id = self.enterIdentifier(ctx.Identifier())
+            elif(ctx.quantumBlock() != None):
+                qblock = self.enterQuantumBlock(ctx.quantumBlock())
+        else:
+            lit = self.enterTimingLiteral(ctx.TimingLiteral())
+    
+        return TimingIdentifier(lit, id, qblock)
+
+    # Enter a parse tree produced by qasm3Parser#TimingInstructionName
+    def enterTimingInstructionName(self, ctx:qasm3Parser.TimingInstructionNameContext):
+        return TimingInstructionName(ctx.getText())
+    
+    # Enter a parse tree produced by qasm3Parser#TimingInstruction
+    def enterTimingInstruction(self, ctx:qasm3Parser.TimingInstructionContext):
+        name = self.enterTimingInstructionName(ctx.timingInstructionName())
+        des = self.enterDesignator(ctx.designator())
+        idList = self.enterIndexIdentifierList(ctx.indexIdentifierList())
+        expList = None
+        if(ctx.expressionList() != None):
+            expList = self.enterExpressionList(ctx.expressionList())
+        return TimingInstruction(name, des, idList, expList)
+
+    # Enter a parse tree produced by qasm3Parser#TimingStatement
+    def enterTimingStatement(self, ctx:qasm3Parser.TimingStatementContext):
+        stmt = None
+        if(ctx.timingInstruction() != None):
+            stmt = self.enterTimingInstruction(ctx.timingInstruction())
+        elif(ctx.timingBox() != None):
+            stmt = self.enterTimingBox(ctx.timingBox())
+        return TimingStatement(stmt)
+    
+
+
     # Enter a parse tree produced by qasm3Parser#bitType.
     def enterBitType(self, ctx:qasm3Parser.BitTypeContext):
         bt = BitType()

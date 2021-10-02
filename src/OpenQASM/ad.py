@@ -1251,7 +1251,8 @@ class TimingInstruction:
     | timingInstrucionName designator indexIdentifierList
     | timingInstructionName ( expressionList ) designator indexIdentifierList
     """
-    def __init__(self, designator, indexIdList, expressionlist=None):
+    def __init__(self, name, designator, indexIdList, expressionlist=None):
+        self.name = name
         self.designator = designator
         self.idxIdList = indexIdList
         self.expList = expressionlist
