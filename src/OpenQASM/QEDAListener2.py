@@ -45,16 +45,15 @@ class QEDAListener(Listener):
             self.file = os.getcwd()
         else:
             self.file = os.getcwd() + '/' + ''.join([x+'/' for x in file.split('/')[:-1]])
-        self.QCODE = []
-        self.GATES = []
+        self.HEADER = None
+        self.GLOBALS = []
+        self.LOCALS = []
         self.file = "/" + self.file.strip("/")
         self.currentModifier = None
         self.modExpression = None
 
     def enterProgram(self, ctx: qasm3Parser.ProgramContext):
         self.HEADER=self.enterHeader(ctx.header())
-        self.GLOBALS=[] # Global Statements
-        self.LOCALS=[] # Localized Statements
         i=0
         while True:
             if(ctx.statement(i) != None):
@@ -86,7 +85,10 @@ class QEDAListener(Listener):
 
     # Enter a parse tree produced by qasm3Parser#header.
     def enterInclude(self, ctx: qasm3Parser.IncludeContext):
-        return super().enterInclude(ctx)
+        listener = self.INCLUDE(ctx.StringLiteral())
+        self.GLOBALS += listener.GLOBALS
+        self.LOCALS += listener.LOCALS
+#        return super().enterInclude(ctx)
 
         # Enter a parse tree produced by qasm3Parser#ioIdentifier.
     def enterIoIdentifier(self, ctx:qasm3Parser.IoIdentifierContext):

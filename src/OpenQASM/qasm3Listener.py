@@ -16,7 +16,6 @@ class qasm3Listener(ParseTreeListener):
 
     # Exit a parse tree produced by qasm3Parser#program.
     def exitProgram(self, ctx:qasm3Parser.ProgramContext):
-        return self.QCODE
         pass
 
 
