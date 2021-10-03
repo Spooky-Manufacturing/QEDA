@@ -60,7 +60,6 @@ class QEDAListener(Listener):
             if(ctx.statement(i) != None):
                 x = self.enterStatement(ctx.statement(i))
                 if(x!=None):
-#                    print(x)
                     self.LOCALS.append(x.eval())
             else:
                 break
@@ -281,7 +280,9 @@ class QEDAListener(Listener):
                     break
                 i+=1 
         exp = self.enterExpression(ctx.expression())
-        idList = self.enterIndexIdentifierList(ctx.indexIdentifierList())
+        idList=None
+        if(ctx.indexIdentifierList()!=None):
+            idList = self.enterIndexIdentifierList(ctx.indexIdentifierList())
         qp = QuantumPhase(exp, idList, modifiers=mods)
         if(qp != None and qp.eval() != None):
             return qp
@@ -988,44 +989,150 @@ class QEDAListener(Listener):
 
     # Enter a parse tree produced by qasm3Parser#complexDeclaration.
     def enterComplexDeclaration(self, ctx:qasm3Parser.ComplexDeclarationContext):
+        id=None
+        exp=[]
+        nType=None
+        if(ctx.Identifier()!=None):
+            id=self.enterIdentifier(ctx.Identifier())
+        if(ctx.equalsExpression()!=None):
+            i=0
+            while True:
+                if(ctx.equalsExpression(i)!=None):
+                    exp.append(self.enterEqualsExpression(ctx.equalsExpression(i)))
+                else:
+                    break
+                i+=1
+        if(ctx.numericType()!=None):
+            nType=self.enterNumericType(ctx.numericType())
+        return ComplexDeclaration(id,nType,exp)
         pass
 
     # Enter a parse tree produced by qasm3Parser#classicalDeclaration.
     def enterClassicalDeclaration(self, ctx:qasm3Parser.ClassicalDeclarationContext):
-        pass
+        if(ctx.singleDesignatorDeclaration()!=None):
+            return self.enterSingleDesignatorDeclaration(ctx.singleDesignatorDeclaration())
+        if(ctx.noDesignatorDeclaration()!=None):
+            return self.enterNoDesignatorDeclaration(ctx.noDesignatorDeclaration())
+        if(ctx.bitDeclaration()!=None):
+            return self.enterBitDeclaration(ctx.bitDeclaration())
+        if(ctx.complexDeclaration()!=None):
+            return self.enterComplexDeclaration(ctx.complexDeclaration())
 
     # Enter a parse tree produced by qasm3Parser#classicalTypeList.
     def enterClassicalTypeList(self, ctx:qasm3Parser.ClassicalTypeListContext):
-        pass
+        x = []
+        if(ctx!=None and ctx.classicalType()!=None):
+            i=0
+            while True:
+                if(ctx.classicalType(i)!=None):
+                    x.append(self.enterClassicalType(ctx.classicalType(i)))
+                else:
+                    break
+                i+=1
+        return x
 
 
     # Enter a parse tree produced by qasm3Parser#classicalArgument.
     def enterClassicalArgument(self, ctx:qasm3Parser.ClassicalArgumentContext):
-        pass
+        txt = ctx.getText()
+        ctxType = None
+        dType=None
+        des=None
+        id=None
+        if('creg' in txt):
+            ctxType='creg'
+        elif('bit' in txt):
+            ctxType='bit'
+        elif('complex'in txt):
+            ctxType='complex'
+
+        if(ctx.singleDesignatorType()!=None):
+            dType=self.enterSingleDesignatorType(ctx.singleDesignatorType())
+        if(ctx.designator()!=None):
+            des=self.enterDesignator(ctx.designator())
+        if(ctx.Identifier()!=None):
+            id=self.enterIdentifier(ctx.Identifier())
+        return ClassicalArgument(dType, des, id, ctxType)
 
     # Enter a parse tree produced by qasm3Parser#classicalArgumentList.
     def enterClassicalArgumentList(self, ctx:qasm3Parser.ClassicalArgumentListContext):
-        pass
+        x = []
+        if(ctx.classicalArgument()!=None):
+            i=0
+            while True:
+                if(ctx.classicalArgument(i)!=None):
+                    x.append(self.enterClassicalArgument(ctx.classicalArgument(i)))
+                else:
+                    break
+                i+=1
+        return ClassicalArgumentList(x)
 
     # Enter a parse tree produced by qasm3Parser#anyTypeArgument.
     def enterAnyTypeArgument(self, ctx:qasm3Parser.AnyTypeArgumentContext):
-        pass
-            
+        arg = None
+        if(ctx.classicalArgument()!=None):
+            arg=self.enterClassicalArgument(ctx.classicalArgument())
+        elif(ctx.quantumArgument()!=None):
+            arg=self.enterQuantumArgument(ctx.quantumArgument())
+        return AnyTypeArgument(arg)
+
     # Enter a parse tree produced by qasm3Parser#anyTypeArgumentList.
     def enterAnyTypeArgumentList(self, ctx:qasm3Parser.AnyTypeArgumentListContext):
-        pass
+        x=[]
+        if(ctx.anyTypeArgument()!=None):
+            i=0
+            while True:
+                if(ctx.anyTypeArgument(i)!=None):
+                    x.append(self.enterAnyTypeArgument(ctx.anyTypeArgument(i)))
+                else:
+                    break
+                i+=1
+        return AnyTypeArgumentList(x)
     
     # Enter a parse tree produced by qasm3Parser#aliasStatement.
     def enterAliasStatement(self, ctx:qasm3Parser.AliasStatementContext):
-        pass
+        id=None
+        value=None
+        if(ctx.Identifier()!=None):
+            id=self.enterIdentifier(ctx.Identifier())
+        if(ctx.indexIdentifier()!=None):
+            value=self.enterIndexIdentifier(ctx.indexIdentifier())
+        return AliasStatement(id, value)
     
     # Enter a parse tree produced by qasm3Parser#indexIdentifier.
     def enterIndexIdentifier(self, ctx:qasm3Parser.IndexIdentifierContext):
-        pass
+        id=None
+        indexes=[]
+        exp=[]
+        rangeDef=None
+        if(ctx.Identifier()!=None):
+            id=self.enterIdentifier(ctx.Identifier())
+        if(ctx.indexIdentifier()!=None):
+            i=0
+            while True:
+                if(ctx.indexIdentifier(i)!=None):
+                    indexes.append(self.enterIndexIdentifier(ctx.indexIdentifier(i)))
+                else:
+                    break
+                i+=1
+        if(ctx.expressionList()!=None):
+            exp=self.enterExpressionList(ctx.expressionList())
+        if(ctx.rangeDefinition()!=None):
+            rangeDef=self.enterRangeDefinition(ctx.rangeDefinition())
+        return IndexIdentifier(id, exp, indexes, rangeDef)
     
     # Enter a parse tree produced by qasm3Parser#indexIdentifierList.
     def enterIndexIdentifierList(self, ctx:qasm3Parser.IndexIdentifierListContext):
-        pass
+        ids=[]
+        if(ctx.indexIdentifier()!=None):
+            i=0
+            while True:
+                if(ctx.indexIdentifier(i)):
+                    ids.append(self.enterIndexIdentifier(ctx.indexIdentifier(i)))
+                else:
+                    break
+                i+=1
+        return IndexIdentifierList(ids)
 
     # Enter a parse tree produced by qasm3Parser#rangeDefinition.
     def enterRangeDefinition(self, ctx:qasm3Parser.RangeDefinitionContext):

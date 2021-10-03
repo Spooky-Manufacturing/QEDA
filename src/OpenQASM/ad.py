@@ -18,7 +18,7 @@ class ClassicalDeclaration:
     | singleDesignatorDeclaration
     | noDesignatorDeclaration
     | bitDeclaration
-    | complex
+    | complexDeclaration
     """
     pass
 
@@ -392,6 +392,20 @@ class ComplexDeclaration(ClassicalDeclarationStatement):
         self.num = numericType
         self.exp = expression
 
+    def eval(self):
+        x = {
+            'id':'',
+            'ntype':'',
+            'exps':[]
+        }
+        if(self.id!=None):
+            x['id']=self.id.eval()
+        if(self.num!=None):
+            x['ntype']=self.num.eval()
+        if(self.exp!=None):
+            x['exps']=self.exp.eval()
+        return x
+
 class ClassicalTypeList:
     """
     classicalTypeList = 
@@ -402,7 +416,12 @@ class ClassicalTypeList:
         self.list = classicalTypes
     
     def eval(self):
-        return [x.eval for x in self.list]
+        x=[]
+        if(self.list!=None):
+            for each in self.list:
+                if(each!=None):
+                    x.append(each.eval())
+        return x
 
 class AnyTypeArgument:
     """
@@ -414,8 +433,60 @@ class AnyTypeArgument:
         self.arg = argument
 
     def eval(self):
-        return self.arg.eval()
+        if(self.arg!=None):
+            return self.arg.eval()
 
+class ClassicalArgument:
+    """
+    classicalArgument =
+    |( singleDesignatorType designator |
+       noDesignatorType
+     ) Identifier
+    | 'creg' Identifier designator?
+    | 'bit' designator? Identifier
+    | 'complex' LBRACKET numericType RBRACKET Identifier
+    """
+    def __init__(self, dtype=None, des=None, id=None, ctxType=None):
+        self.ttype=ctxType
+        self.dtype=dtype
+        self.des=des
+        self.id=id
+
+    def eval(self):
+        x={}
+        if(self.ttype!=None):
+            x['ttype']=self.ttype
+        if(self.dtype!=None):
+            x['dtype']=self.dtype.eval()
+        if(self.des!=None):
+            x['des']=self.des.eval()
+        if(self.id!=None):
+            x['id']=self.id.eval()
+        return x
+
+class ClassicalArgumentList:
+    def __init__(self, args):
+        self.args = args
+
+    def eval(self):
+        x=[]
+        if(self.args!=None):
+            for each in self.args:
+                if(each!=None):
+                    x.append(each.eval())
+        return x
+
+class AnyTypeArgumentList:
+    def __init__(self, args):
+        self.args=args
+    
+    def eval(self):
+        x=[]
+        if(self.args!=None):
+            for each in self.args:
+                if(each!=None):
+                    x.append(each.eval())
+        return x
 """
 Aliasing
 """
@@ -428,6 +499,17 @@ class AliasStatement:
         self.id = identifier
         self.value = indexIdentifier
 
+    def eval(self):
+        x={
+            'id':'',
+            'value':''
+        }
+        if(self.id!=None):
+            x['id']=self.id.eval()
+        if(self.value!=None):
+            x['value']=self.value.eval()
+        return x
+
 """
 Register Concatenation & Slicing
 """
@@ -438,30 +520,32 @@ class IndexIdentifier:
     | Identifier [ expressionList ]?
     | indexIdentifier '||' indexIdentifier
     """
-    def __init__(self, identifier, expressionList=None, indexId1=None, indexId2=None):
+    def __init__(self, identifier, expressionList=None, indexes=None, rangeDef=None):
         self.id = identifier
         self.expList = expressionList
-        self.index1 = indexId1
-        self.index2 = indexId2
+        self.ind = indexes
+        self.range = rangeDef
 
     def eval(self):
         x={
             'id':'',
             'range':None,
-            'exps':[],
-            'index1':None,
-            'index2':None
+            'exps':[]
         }
         if(self.id!=None):
             x['id']=self.id.eval()
+        if(self.range!=None):
+            x['range']=self.range.eval()
         if(self.expList!=None):
-            for each in self.expList:
-                if(each!=None):
-                    x['exps'].append(each.eval())
-        if(self.index1!=None):
-            x['index1']=self.index1.eval()
-        if(self.index1!=None):
-            x['index2']=self.index2.eval()
+            if(type(self.expList)!=type([])):
+                x['exps']=self.expList.eval()
+            else:
+                for each in self.expList:
+                    if(each!=None):
+                        x['exps'].append(each.eval())
+        if(self.ind!=None):
+            for i in range(len(self.ind)):
+                x['index'+str(i+1)]=self.ind(i).eval()
         return x
 
 class IndexIdentifierList:
@@ -751,9 +835,12 @@ class QuantumBarrier(QuantumInstruction):
             'id':[]
         }
         if(self.indexId != None):
-            for each in self.indexId:
-                if(each!=None):
-                    x['id'].append(each.eval())
+            if(type(self.indexId)!=type([])):
+                x['id'].append(self.indexId.eval())
+            else:
+                for each in self.indexId:
+                    if(each!=None):
+                        x['id'].append(each.eval())
         return x
 
 class QuantumGateModifier:
@@ -1168,7 +1255,6 @@ class ExpressionList:
         if(self.expressions!=None):
             for each in self.expressions:
                 if(each!=None):
-                    print(each.eval(), 'expression')
                     exp.append(each.eval())
         return exp
 
