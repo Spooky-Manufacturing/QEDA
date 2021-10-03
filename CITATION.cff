@@ -1,0 +1,12 @@
+cff-version: 1.1.0
+message: "If you use this software, please cite it as below."
+authors:
+  - devTest.py: Noah G. Wood
+    qeda.py: Noah G. Wood
+    QEDAListener.py: Noah G. Wood
+    QAST.py: Noah G. Wood
+    rng.qasm: Noah G. Wood
+    orcid: https://orcid.org/0000-0000-0000-0000
+title: Spooky-Manufacturing/QEDA: v0.0.1-devel
+version: development
+date-released: 2017-12-18

@@ -71,7 +71,8 @@ class QEDA:
             self._getListener()
             self._getWalker()
             self.Walk()
-        pass
+        except Exception as e:
+            pass
 
 if __name__ in '__main__':
     args = docopt(__doc__, version='0.0.1')

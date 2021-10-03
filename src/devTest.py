@@ -4,8 +4,7 @@ import os
 from antlr4 import *
 from OpenQASM.qasm3Lexer import qasm3Lexer
 from OpenQASM.qasm3Parser import qasm3Parser
-#from OpenQASM.QEDAListener import QEDAListener as Listener
-from OpenQASM.QEDAListener2 import QEDAListener as Listener
+from OpenQASM.QEDAListener import QEDAListener as Listener
 def main(argv):
     a = argv[1]
     if('-a' in a):
