@@ -9,7 +9,7 @@ else:
     from qasm3Lexer import qasm3Lexer as Lexer
     from qasm3Listener import qasm3Listener as Listener
 
-from .ad import *
+from .QAST import *
 
 
 def INCLUDE(file):
