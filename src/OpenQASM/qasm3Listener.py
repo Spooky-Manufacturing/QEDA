@@ -267,7 +267,6 @@ class qasm3Listener(ParseTreeListener):
     def exitDoubleDesignatorDeclaration(self, ctx:qasm3Parser.DoubleDesignatorDeclarationContext):
         pass
 
-
     # Enter a parse tree produced by qasm3Parser#noDesignatorDeclaration.
     def enterNoDesignatorDeclaration(self, ctx:qasm3Parser.NoDesignatorDeclarationContext):
         pass

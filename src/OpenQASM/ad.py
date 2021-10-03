@@ -29,17 +29,25 @@ class Program:
     | header globalStatement(s) | statement(s)
     """
     def __init__(self, header, globalStatements=None, Statements=None):
-        self.globalStatements = [] = globalStatements
-        self.statements = [] = Statements
+        self.globalStatements = globalStatements
+        self.statements =  Statements
         self.header = header
 
     def eval(self):
+        x = {
+            'globals':[],
+            'locals':[],
+            'header':None
+        }
+        if(self.header!=None):
+            x['header']=self.header.eval()
         for gs in self.globalStatements:
-            gs.eval()
+            if(gs!=None):
+                x['globals'].append(gs)#.eval())
         for s in self.statements:
-            s.eval()
-        pass
-
+            if(s!=None):
+                x['locals'].append(s)#.eval())
+        
 
 
 class Header:
@@ -88,6 +96,14 @@ class Io:
         self.ctype = classicalType
         self.id = Identifier
 
+    def eval(self):
+        x={
+            'io':self.portType.eval(),
+            'type':self.classicalType.eval(),
+            'id':self.id.eval()
+        }
+        return x
+
 class GlobalStatement:
     """The base class for global statements.
     
@@ -126,7 +142,7 @@ class QuantumDeclarationStatement(GlobalStatement):
 
     def eval(self):
         if(self.decl!=None):
-            self.decl.eval()
+            return self.decl.eval()
 
 class ClassicalDeclarationStatement(Statement):
     """
@@ -136,6 +152,10 @@ class ClassicalDeclarationStatement(Statement):
     """
     def __init__(self, declaration):
         self.declaration = declaration
+
+    def eval(self):
+        if(self.declaration!=None):
+            return self.declaration.eval()
 
 class ClassicalAssignment:
     """
@@ -148,6 +168,17 @@ class ClassicalAssignment:
         self.op = operator
         self.expr = expression
 
+    def eval(self):
+        x = {
+            'id': self.id.eval(),
+            'op': self.op.eval()
+        }
+        if(self.designator!=None):
+            x['des']=self.designator.eval()
+        if(self.expr!=None):
+            x['expr']=self.expr.eval()
+        return x
+
 class AssignmentStatement(Statement):
     """
     assignmentStatement =
@@ -157,6 +188,9 @@ class AssignmentStatement(Statement):
     def __init__(self, assignment):
         self.assignment = assignment
 
+    def eval(self):
+        return self.assignment.eval()
+
 class ReturnSignature:
     """
     returnSignature = 
@@ -164,6 +198,9 @@ class ReturnSignature:
     """
     def __init__(self, classicalType):
         self.type = classicalType
+
+    def eval(self):
+        return self.type.eval()
 
 """
 Types & Casting
@@ -219,9 +256,13 @@ class QuantumDeclaration:
         if(self.id!=None):
             x['id']=self.id.eval()
         if(self.designator!=None):
-            for each in self.designator:
-                if(each!=None):
-                    x['designator'].append(each.eval())
+            if(type(self.designator)!=type([])):
+                x['designators']=self.designator.eval()
+            else:
+                for each in self.designator:
+                    if(each!=None):
+                        x['designator'].append(each.eval())
+        return x
 
 class QuantumArgument(QuantumDeclaration):
     """
@@ -332,8 +373,13 @@ class ConstantDeclaration:
     def __init__(self, ident, exp):
         self.id = ident
         self.exp = exp
-        self.id.setValue = self.exp
 
+    def eval(self):
+        x = {
+            'id': self.id.eval(),
+            'exp': self.exp.eval()
+        }
+        return x
 class SingleDesignatorDeclaration(ClassicalDeclaration):
     """
     // if multiple variables declared at once, either none are assigned or all are assigned
@@ -601,6 +647,13 @@ class QuantumGateDefinition(GlobalStatement):
     def __init__(self, signature, block):
         self.signature = signature
         self.block = block
+
+    def eval(self):
+        x = {
+            'signature':self.signature.eval(),
+            'block':self.block.eval()
+        }
+        return x
 
 class QuantumGateSignature:
     """
@@ -934,7 +987,8 @@ class ExpressionStatement:
         self.exp = expression
 
     def eval(self):
-        return self.exp.eval()
+        if(self.exp!=None):
+            return self.exp.eval()
 
 class BaseExpression:
     """The base expression class"""
@@ -1267,7 +1321,8 @@ class EqualsExpression:
         self.exp = expression
 
     def eval(self):
-        return self.exp.eval()
+        if(self.exp!=None):
+            return self.exp.eval()
 
 class AssignmentOperator:
     """
