@@ -1056,7 +1056,7 @@ class XorExpression(BaseExpression):
     """
     xOrExpression = 
     | bitAndExpression
-    | xOrExpressoin '^' bitAndExpression
+    | xOrExpression '^' bitAndExpression
     """
     def eval(self):
         if(self.exp1!=None):
