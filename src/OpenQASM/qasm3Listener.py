@@ -39,10 +39,6 @@ class qasm3Listener(ParseTreeListener):
 
     # Enter a parse tree produced by qasm3Parser#include.
     def enterInclude(self, ctx:qasm3Parser.IncludeContext):
-        # we need to parse the included files and add them in place
-        listener = self.INCLUDE(ctx.StringLiteral())
-        self.QCODE += listener.QCODE
-        self.GATES += listener.GATES
         pass
 
     # Exit a parse tree produced by qasm3Parser#include.

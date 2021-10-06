@@ -75,7 +75,16 @@ QCode = {
 
 ```json
 {
-    'type': 'declaration',
+    'type': 'classicalDeclaration',
+    'decl': Declaration
+}
+```
+
+### Quantum Declaration Statement
+
+```json
+{
+    'type': 'quantumDeclaration',
     'decl': Declaration
 }
 ```
@@ -89,10 +98,7 @@ QCode = {
         'expr': Expression,
         'block': ProgramBlock
     },
-    'else': {
-        'expr': Expression,
-        'block': ProgramBlock 
-    }
+    'elseblock': ProgramBlock
 }
 ```
 
@@ -137,7 +143,7 @@ QCode = {
 
 ```json
 {
-    'type': 'returnStatement',
+    'type': 'return',
     'returns': Expression | quantumMeasurement
 }
 ```
@@ -146,7 +152,7 @@ QCode = {
 
 ```json
 {
-    'type': 'timingStatement',
+    'type': 'timing',
     'stmt': TimingInstruction | TimingBox
 }
 ```
@@ -620,7 +626,8 @@ QCode = {
 ```json
 {
     'type': 'quantumBlock',
-    'value': QuantumStatement(s) | QuantumLoop(s)
+    'stmts': QuantumStatement(s),
+    'loops': QuantumLoop(s)
 }
 ```
 
@@ -629,7 +636,7 @@ QCode = {
 ```json
 {
     'type': 'quantumLoopBlock',
-    'stmt': QuantumStatement(s)
+    'stmts': QuantumStatement(s)
 }
 ```
 
@@ -638,7 +645,7 @@ QCode = {
 ```json
 {
     'type': 'programBlock',
-    'stmt': Statement(s) | ControlDirective(s)
+    'stmts': Statement(s) | ControlDirective(s)
 }
 ```
 
@@ -647,7 +654,7 @@ QCode = {
 ```json
 {
     'type': 'subroutineBlock',
-    'stmt': Statement,
+    'stmts': Statement,
     'ret': ReturnStatement
 }
 ```
