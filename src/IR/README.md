@@ -8,14 +8,14 @@ QCode is a JSON formatted representation of the Abstract Syntax Tree produced by
 
 ```json
 QCode = {
-    'globals': [
+    "globals": [
         
     ],
-    'locals': [
+    "locals": [
         {
-            'type': 'localStatement',
-            'stmt': {
-                'type': 'quantum',
+            "type": "localStatement",
+            "stmt": {
+                "type": "quantum",
                 
             }
         }
@@ -31,7 +31,7 @@ QCode = {
 
 ```json
 {
-    'type': 'statementType'
+    "type": "statementType"
 }
 ```
 
@@ -39,8 +39,8 @@ QCode = {
 
 ```json
 {
-    'type': 'globalStatement',
-    'stmt': SubroutineDefinition | ExternDeclaration | QuantumGateDefinition | Calibration | QuantumDeclarationStatement | Pragma
+    "type": "globalStatement",
+    "stmt": SubroutineDefinition | ExternDeclaration | QuantumGateDefinition | Calibration | QuantumDeclarationStatement | Pragma
 }
 ```
 
@@ -48,8 +48,8 @@ QCode = {
 
 ```json
 {
-    'type': 'localStatement',
-    'stmt': ExpressionStatement | AssignmentStatement | ClassicalDeclarationStatement | BranchingStatement | LoopStatement | EndStatement | AliasStatement | QuantumStatement
+    "type": "localStatement",
+    "stmt": ExpressionStatement | AssignmentStatement | ClassicalDeclarationStatement | BranchingStatement | LoopStatement | EndStatement | AliasStatement | QuantumStatement
 }
 ```
 
@@ -57,8 +57,8 @@ QCode = {
 
 ```json
 {
-    'type': 'expression',
-    'expr': Expression
+    "type": "expression",
+    "expr": Expression
 }
 ```
 
@@ -66,8 +66,8 @@ QCode = {
 
 ```json
 {
-    'type': 'assignment',
-    'assign':Assignment
+    "type": "assignment",
+    "assign":Assignment
 }
 ```
 
@@ -75,8 +75,8 @@ QCode = {
 
 ```json
 {
-    'type': 'classicalDeclaration',
-    'decl': Declaration
+    "type": "classicalDeclaration",
+    "decl": Declaration
 }
 ```
 
@@ -84,8 +84,8 @@ QCode = {
 
 ```json
 {
-    'type': 'quantumDeclaration',
-    'decl': Declaration
+    "type": "quantumDeclaration",
+    "decl": Declaration
 }
 ```
 
@@ -93,12 +93,12 @@ QCode = {
 
 ```json
 {
-    'type': 'branching',
-    'if': {
-        'expr': Expression,
-        'block': ProgramBlock
+    "type": "branching",
+    "if": {
+        "expr": Expression,
+        "block": ProgramBlock
     },
-    'elseblock': ProgramBlock
+    "elseblock": ProgramBlock
 }
 ```
 
@@ -106,9 +106,9 @@ QCode = {
 
 ```json
 {
-    'type': 'loop',
-    'sig': LoopSignature,
-    'block': ProgramBlock
+    "type": "loop",
+    "sig": LoopSignature,
+    "block": ProgramBlock
 }
 ```
 
@@ -116,7 +116,7 @@ QCode = {
 
 ```json
 {
-    'type': 'end'
+    "type": "end"
 }
 ```
 
@@ -124,9 +124,9 @@ QCode = {
 
 ```json
 {
-    'type': 'alias',
-    'id': Identifier,
-    'indexId': IndexIdentifier
+    "type": "alias",
+    "id": Identifier,
+    "indexId": IndexIdentifier
 }
 ```
 
@@ -134,8 +134,8 @@ QCode = {
 
 ```json
 {
-    'type': 'quantum',
-    'instruction': quantumInstruction | timingStatement
+    "type": "quantum",
+    "instruction": quantumInstruction | timingStatement
 }
 ```
 
@@ -143,8 +143,8 @@ QCode = {
 
 ```json
 {
-    'type': 'return',
-    'returns': Expression | quantumMeasurement
+    "type": "return",
+    "returns": Expression | quantumMeasurement
 }
 ```
 
@@ -152,8 +152,8 @@ QCode = {
 
 ```json
 {
-    'type': 'timing',
-    'stmt': TimingInstruction | TimingBox
+    "type": "timing",
+    "stmt": TimingInstruction | TimingBox
 }
 ```
 
@@ -163,9 +163,9 @@ QCode = {
 
 ```json
 {
-    'type': 'typeOfExpression',
-    'leftExpr': Expression,
-    'rightExpr': Expression (optional)
+    "type": "typeOfExpression",
+    "leftExpr": Expression,
+    "rightExpr": Expression (optional)
 }
 ```
 
@@ -173,9 +173,9 @@ QCode = {
 
 ```json
 {
-    'type': 'logicAnd',
-    'leftExpr': Expression,
-    'rightExpr': Expression (optional)
+    "type": "logicAnd",
+    "leftExpr": Expression,
+    "rightExpr": Expression (optional)
 }
 ```
 
@@ -183,9 +183,9 @@ QCode = {
 
 ```json
 {
-    'type': 'bitOr',
-    'leftExpr': Expression,
-    'rightExpr': Expression (optional)
+    "type": "bitOr",
+    "leftExpr": Expression,
+    "rightExpr": Expression (optional)
 }
 ```
 
@@ -193,9 +193,9 @@ QCode = {
 
 ```json
 {
-    'type': 'xOr',
-    'leftExpr': Expression,
-    'rightExpr': Expression (optional)
+    "type": "xOr",
+    "leftExpr": Expression,
+    "rightExpr": Expression (optional)
 }
 ```
 
@@ -203,9 +203,9 @@ QCode = {
 
 ```json
 {
-    'type': 'bitAnd',
-    'leftExpr': Expression,
-    'rightExpr': Expression (optional)
+    "type": "bitAnd",
+    "leftExpr": Expression,
+    "rightExpr": Expression (optional)
 }
 ```
 
@@ -213,10 +213,10 @@ QCode = {
 
 ```json
 {
-    'type': 'equality',
-    'leftExpr': Expression,
-    'rightExpr': Expression (optional),
-    'op': '==' or '!='
+    "type": "equality",
+    "leftExpr": Expression,
+    "rightExpr": Expression (optional),
+    "op": "==" or "!="
 }
 ```
 
@@ -224,10 +224,10 @@ QCode = {
 
 ```json
 {
-    'type': 'comparison',
-    'leftExpr': Expression,
-    'rightExpr': Expression (optional),
-    'op': '<' or '>' or '<=' or '>='
+    "type": "comparison",
+    "leftExpr": Expression,
+    "rightExpr": Expression (optional),
+    "op": "<" or ">" or "<=" or ">="
 }
 ```
 
@@ -235,10 +235,10 @@ QCode = {
 
 ```json
 {
-    'type': 'bitShift',
-    'leftExpr': Expression,
-    'rightExpr': Expression (optional),
-    'op': '>>' or '<<'
+    "type": "bitShift",
+    "leftExpr": Expression,
+    "rightExpr": Expression (optional),
+    "op": ">>" or "<<"
 }
 ```
 
@@ -246,9 +246,9 @@ QCode = {
 
 ```json
 {
-    'type': 'add',
-    'leftExpr': Expression,
-    'rightExpr': Expression (optional)
+    "type": "add",
+    "leftExpr": Expression,
+    "rightExpr": Expression (optional)
 }
 ```
 
@@ -256,10 +256,10 @@ QCode = {
 
 ```json
 {
-    'type': 'mul',
-    'leftExpr': Expression,
-    'rightExpr': Expression (optional),
-    'op': '*' or '/' or '%'
+    "type": "mul",
+    "leftExpr": Expression,
+    "rightExpr": Expression (optional),
+    "op": "*" or "/" or "%"
 }
 ```
 
@@ -267,10 +267,10 @@ QCode = {
 
 ```json
 {
-    'type': 'unary',
-    'leftExpr': Expression,
-    'rightExpr': Expression (optional),
-    'op': '~' or '!' or '-'
+    "type": "unary",
+    "leftExpr": Expression,
+    "rightExpr": Expression (optional),
+    "op": "~" or "!" or "-"
 }
 ```
 
@@ -278,9 +278,9 @@ QCode = {
 
 ```json
 {
-    'type': 'power',
-    'leftExpr': Expression,
-    'rightExpr': Expression (optional)
+    "type": "power",
+    "leftExpr": Expression,
+    "rightExpr": Expression (optional)
 }
 ```
 
@@ -290,8 +290,8 @@ QCode = {
 
 ```json
 {
-    'type': 'declarationType',
-    'decl': Classical or Quantum
+    "type": "declarationType",
+    "decl": Classical or Quantum
 }
 ```
 
@@ -299,8 +299,8 @@ QCode = {
 
 ```json
 {
-    'type': 'classic',
-    'decl': (see below)
+    "type": "classic",
+    "decl": (see below)
 }
 ```
 
@@ -308,9 +308,9 @@ QCode = {
 
 ```json
 {
-	'type': 'classicalDeclarationType',
-    'id': 'Identifier',
-    'expr': Expression
+	"type": "classicalDeclarationType",
+    "id": "Identifier",
+    "expr": Expression
 }
 ```
 
@@ -318,10 +318,10 @@ QCode = {
 
 ```json
 {
-    'type': 'noDesignator',
-    'id': 'Identifier',
-    'dtype': noDesignatorType,
-    'expr': Expression
+    "type": "noDesignator",
+    "id": "Identifier",
+    "dtype": noDesignatorType,
+    "expr": Expression
 }
 ```
 
@@ -329,10 +329,10 @@ QCode = {
 
 ```json
 {
-	'type': 'single',
-	'id': 'Identifier',
-	'designator': Designator
-	'expr': Expression
+	"type": "single",
+	"id": "Identifier",
+	"designator": Designator
+	"expr": Expression
 }
 ```
 
@@ -340,10 +340,10 @@ QCode = {
 
 ```json
 {
-    'type': 'bit',
-    'id': 'Identifier',
-    'designator': Designator,
-    'expr': Expression
+    "type": "bit",
+    "id": "Identifier",
+    "designator": Designator,
+    "expr": Expression
 }
 ```
 
@@ -351,10 +351,10 @@ QCode = {
 
 ```json
 {
-    'type': 'register',
-    'id': 'Identifier',
-    'designator': Designator,
-    'expr': Expression
+    "type": "register",
+    "id": "Identifier",
+    "designator": Designator,
+    "expr": Expression
 }
 ```
 
@@ -362,10 +362,10 @@ QCode = {
 
 ```json
 {
-    'type': 'complex',
-    'id': 'Identifier',
-    'nType': NumericType,
-    'expr': Expression
+    "type": "complex",
+    "id": "Identifier",
+    "nType": NumericType,
+    "expr": Expression
 }
 ```
 
@@ -373,9 +373,9 @@ QCode = {
 
 ```json
 {
-    'type': 'constant',
-    'id': 'Identifier',
-    'expr': Expression
+    "type": "constant",
+    "id": "Identifier",
+    "expr": Expression
 }
 ```
 
@@ -383,10 +383,10 @@ QCode = {
 
 ```json
 {
-    'type': 'quantum',
-    'qtype': 'qubit' or 'qreg',
-    'id': 'Identifier',
-    'designator': Designator 
+    "type": "quantum",
+    "qtype": "qubit" or "qreg",
+    "id": "Identifier",
+    "designator": Designator 
 }
 ```
 
@@ -400,9 +400,9 @@ QCode = {
 
 ```json
 {
-    'type': 'classical',
-    'ctype': NoDesignatorType | SingleDesignatorType | BitType | NumericType
-    'designator': Designator (optional)    
+    "type": "classical",
+    "ctype": NoDesignatorType | SingleDesignatorType | BitType | NumericType
+    "designator": Designator (optional)    
 }
 ```
 
@@ -410,9 +410,9 @@ QCode = {
 
 ```json
 {
-    'type': 'classical',
-    'ctype': 'bit' | 'creg'
-    'designator': Designator    
+    "type": "classical",
+    "ctype": "bit" | "creg"
+    "designator": Designator    
 }
 ```
 
@@ -420,8 +420,8 @@ QCode = {
 
 ```json
 {
-    'type': 'classical',
-    'ctype': 'bool' | TimingType, 
+    "type": "classical",
+    "ctype": "bool" | TimingType, 
 }
 ```
 
@@ -429,9 +429,9 @@ QCode = {
 
 ```json
 {
-    'type': 'classical',
-    'ctype': 'int' | 'uint' | 'float' | 'angle',
-    'designator': Designator    
+    "type": "classical",
+    "ctype": "int" | "uint" | "float" | "angle",
+    "designator": Designator    
 }
 ```
 
@@ -439,8 +439,8 @@ QCode = {
 
 ```json
 {
-    'type': 'classical',
-    'ctype': 'duration' | 'stretch'
+    "type": "classical",
+    "ctype": "duration" | "stretch"
 }
 ```
 
@@ -448,9 +448,9 @@ QCode = {
 
 ```json
 {
-    'type': 'classical',
-    'ctype': 'int' | 'uint' | 'float' | 'angle',
-    'designator': Designator    
+    "type": "classical",
+    "ctype": "int" | "uint" | "float" | "angle",
+    "designator": Designator    
 }
 ```
 
@@ -458,8 +458,8 @@ QCode = {
 
 ```json
 {
-    'type': 'classical',
-    'ctypes': [ 
+    "type": "classical",
+    "ctypes": [ 
         classicalType1,
         classicalType2,
         ...
@@ -471,7 +471,7 @@ QCode = {
 
 ```json
 {
-    'type': 'quantum',
+    "type": "quantum",
 }
 ```
 
@@ -481,8 +481,8 @@ QCode = {
 
 ```json
 {
-    'type': 'anyarg',
-    'arg': ClassicalArgument | QuantumArgument
+    "type": "anyarg",
+    "arg": ClassicalArgument | QuantumArgument
 }
 ```
 
@@ -490,8 +490,8 @@ QCode = {
 
 ```json
 {
-    'type': 'anyarglist',
-    'args': [
+    "type": "anyarglist",
+    "args": [
         AnyTypeArgument1,
         AnyTypeArgument2,
         ...
@@ -503,8 +503,8 @@ QCode = {
 
 ```json
 {
-    'type': 'classicArg',
-    'ctype': ClassicalType
+    "type": "classicArg",
+    "ctype": ClassicalType
 }
 ```
 
@@ -512,8 +512,8 @@ QCode = {
 
 ```json
 {
-    'type': 'classicArgList',
-    'ctypes': [
+    "type": "classicArgList",
+    "ctypes": [
         ClassicalType1,
         ClassicalType2,
         ...
@@ -525,8 +525,8 @@ QCode = {
 
 ```json
 {
-    'type': 'quantumArg',
-    'qtype': QuantumType
+    "type": "quantumArg",
+    "qtype": QuantumType
 }
 ```
 
@@ -534,8 +534,8 @@ QCode = {
 
 ```json
 {
-    'type': 'quantumArg',
-    'qtype': [
+    "type": "quantumArg",
+    "qtype": [
         QuantumType1,
         QuantumType2,
         ...
@@ -549,12 +549,12 @@ QCode = {
 
 ```json
 {
-    'type': 'indexId',
-    'id': 'Identifier' (optional),
-    'range': RangeDefinition (optional),
-    'exprList': ExpressionList (optional),
-    'index1': IndexIdentifier (optional),
-    'index2': IndexIdentifier (optional)
+    "type": "indexId",
+    "id": "Identifier" (optional),
+    "range": RangeDefinition (optional),
+    "exprList": ExpressionList (optional),
+    "index1": IndexIdentifier (optional),
+    "index2": IndexIdentifier (optional)
 }
 ```
 
@@ -562,8 +562,8 @@ QCode = {
 
 ```json
 {
-    'type': 'indexIdList',
-    'indexes': [
+    "type": "indexIdList",
+    "indexes": [
         IndexIdentifier1,
         IndexIdentifier2,
         ...
@@ -577,10 +577,10 @@ QCode = {
 
 ```json
 {
-    'type': 'rangeDef',
-    'exp1': Expression,
-    'exp2': Expression,
-    'exp3': Expression (optional)
+    "type": "rangeDef",
+    "exp1": Expression,
+    "exp2": Expression,
+    "exp3": Expression (optional)
 }
 ```
 
@@ -588,9 +588,9 @@ QCode = {
 
 ```json
 {
-    'type': 'quantumGateDef',
-    'sig': QuantumGateSignature,
-    'block': QuantumBlock
+    "type": "quantumGateDef",
+    "sig": QuantumGateSignature,
+    "block": QuantumBlock
 }
 ```
 
@@ -598,11 +598,11 @@ QCode = {
 
 ```json
 {
-    'type': 'subroutineDef',
-    'id': 'Identifier',
-    'args': AnyTypeArgumentList,
-    'retsig': ReturnSignature,
-    'block': SubroutineBlock
+    "type": "subroutineDef",
+    "id": "Identifier",
+    "args": AnyTypeArgumentList,
+    "retsig": ReturnSignature,
+    "block": SubroutineBlock
 }
 ```
 
@@ -610,12 +610,12 @@ QCode = {
 
 ```json
 {
-    'type': 'calibrationDefinition',
-    'id': 'Identifier',
-    'cargs': CalibrationArgumentList,
-    'idList': IdentifierList,
-    'retSig': returnSignature,
-    'body': .* (optional, any values)
+    "type": "calibrationDefinition",
+    "id": "Identifier",
+    "cargs": CalibrationArgumentList,
+    "idList": IdentifierList,
+    "retSig": returnSignature,
+    "body": .* (optional, any values)
 }
 ```
 
@@ -625,9 +625,9 @@ QCode = {
 
 ```json
 {
-    'type': 'quantumBlock',
-    'stmts': QuantumStatement(s),
-    'loops': QuantumLoop(s)
+    "type": "quantumBlock",
+    "stmts": QuantumStatement(s),
+    "loops": QuantumLoop(s)
 }
 ```
 
@@ -635,8 +635,8 @@ QCode = {
 
 ```json
 {
-    'type': 'quantumLoopBlock',
-    'stmts': QuantumStatement(s)
+    "type": "quantumLoopBlock",
+    "stmts": QuantumStatement(s)
 }
 ```
 
@@ -644,8 +644,8 @@ QCode = {
 
 ```json
 {
-    'type': 'programBlock',
-    'stmts': Statement(s) | ControlDirective(s)
+    "type": "programBlock",
+    "stmts": Statement(s) | ControlDirective(s)
 }
 ```
 
@@ -653,9 +653,9 @@ QCode = {
 
 ```json
 {
-    'type': 'subroutineBlock',
-    'stmts': Statement,
-    'ret': ReturnStatement
+    "type": "subroutineBlock",
+    "stmts": Statement,
+    "ret": ReturnStatement
 }
 ```
 
@@ -667,8 +667,8 @@ QCode = {
 
 ```json
 {
-    'type': 'quantumInstruction',
-    'instruction': QuantumGateCall | QuantumPhase | QuantumMeasurement | QuantumReset | QuantumBarrier
+    "type": "quantumInstruction",
+    "instruction": QuantumGateCall | QuantumPhase | QuantumMeasurement | QuantumReset | QuantumBarrier
 }
 ```
 
@@ -676,11 +676,11 @@ QCode = {
 
 ```json
 {
-    'type': 'quantumGateCall',
-    'gateName': quantumGateName,
-    'exprList': ExpressionList,
-    'indexIdList': IndexIdentifierList,
-    'qgateMods': [
+    "type": "quantumGateCall",
+    "gateName": quantumGateName,
+    "exprList": ExpressionList,
+    "indexIdList": IndexIdentifierList,
+    "qgateMods": [
         QuantumGateModifier1,
         QuantumGateModifier2,
         ...
@@ -692,10 +692,10 @@ QCode = {
 
 ```json
 {
-    'type': 'quantumPhase',
-    'expr': Expression,
-    'indexIdList': IndexIdentifierList
-    'qGateMods': [
+    "type": "quantumPhase",
+    "expr": Expression,
+    "indexIdList": IndexIdentifierList
+    "qGateMods": [
         QuantumGateModifier1,
         QuantumGateModifier2,
         ...
@@ -707,8 +707,8 @@ QCode = {
 
 ```json
 {
-    'type': 'measure',
-    'indexId': IndexIdentifier
+    "type": "measure",
+    "indexId": IndexIdentifier
 }
 ```
 
@@ -716,8 +716,8 @@ QCode = {
 
 ```json
 {
-    'type': 'reset',
-    'indexIdList': IndexIdentifierList 
+    "type": "reset",
+    "indexIdList": IndexIdentifierList 
 }
 ```
 
@@ -725,8 +725,8 @@ QCode = {
 
 ```json
 {
-    'type': 'barrier',
-    'indexIdList': IndexIdentifierList
+    "type": "barrier",
+    "indexIdList": IndexIdentifierList
 }
 ```
 
