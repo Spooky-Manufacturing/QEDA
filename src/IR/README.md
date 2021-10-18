@@ -1,6 +1,6 @@
 # QCode
 
-Qcode is the Intermediate Representation (IR) used by the QEDA parser to decouple the parser from synthesis. This document is draft version 1.0 of the QCode Specification. 
+QCode is the Intermediate Representation (IR) used by the QEDA parser to decouple the parser from synthesizer. This document is draft version 1.0 of the QCode Specification. 
 
 ## Basics
 
@@ -727,6 +727,15 @@ QCode = {
 {
     "type": "barrier",
     "indexIdList": IndexIdentifierList
+}
+```
+
+## Quantum Gate Modifiers
+
+```json
+{
+    'mod': 'inv' | 'pow' | 'ctrl' | 'negctrl',
+    'exp': Expression (optional)
 }
 ```
 

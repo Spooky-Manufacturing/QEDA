@@ -101,6 +101,7 @@ class Io:
             'type':self.ctype.eval(),
             'id':self.id.eval()
         }
+        print(x)
         return x
 
 class GlobalStatement:
@@ -480,6 +481,7 @@ class ComplexDeclaration(ClassicalDeclarationStatement):
 
     def eval(self):
         x = {
+            'type':'complex',
             'id':'',
             'ntype':'',
             'exps':[]
@@ -539,7 +541,9 @@ class ClassicalArgument:
         self.id=id
 
     def eval(self):
-        x={}
+        x={
+            'type':'classicalArgument',
+        }
         if self.ttype!=None:
             x['ttype']=self.ttype
         if self.dtype!=None:
@@ -587,6 +591,7 @@ class AliasStatement:
 
     def eval(self):
         x={
+            'type':'alias',
             'id':'',
             'value':''
         }
@@ -812,13 +817,11 @@ class QuantumStatement(Statement):
         self.timingStatement = timingStatement
 
     def eval(self):
-        x = {
-            'type': 'quantum',
-        }
+        x = None
         if self.quantumInstruction != None:
-            x['instruction'] = self.quantumInstruction.eval()
+            x = self.quantumInstruction.eval()
         if self.timingStatement != None:
-            x['instruction'] = self.timingStatement.eval()
+            x = self.timingStatement.eval()
         return x
     
 class QuantumInstruction:
@@ -878,10 +881,10 @@ class QuantumReset(QuantumInstruction):
     def eval(self):
         x = {
             'instruction':"RESET",
-            'id':None
+            'ids':[]
         }
         if self.indexId != None:
-            x['id']=self.indexId.eval()
+            x['ids']=self.indexId.eval()
         return x
 
 class QuantumMeasurement(QuantumInstruction):
@@ -895,10 +898,10 @@ class QuantumMeasurement(QuantumInstruction):
     def eval(self):
         x = {
             'instruction':"MEASURE",
-            'id':None
+            'ids':[]
         }
         if self.indexId != None:
-            x['id']=self.indexId.eval()
+            x['ids']=self.indexId.eval()
         return x
 
 
@@ -915,11 +918,11 @@ class QuantumMeasurementAssignment(QuantumInstruction):
     def eval(self):
         x = {
             'instruction':"MEASURE_ASSIGN",
-            'id':None,
+            'ids':None,
             'qmeas':None
         }
         if self.indexId != None:
-            x['id']=self.indexId.eval()
+            x['ids']=self.indexId.eval()
         if self.qmeas!=None:
             x['qmeas']=self.qmeas.eval()
         return x
@@ -1359,8 +1362,9 @@ class ExpressionList:
         self.expressions = expressions
 
     def eval(self):
-        exp = []
+        exp = None
         if self.expressions!=None:
+            exp = []
             for each in self.expressions:
                 if each!=None:
                     exp.append(each.eval())

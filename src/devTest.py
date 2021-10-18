@@ -14,6 +14,9 @@ from antlr4 import FileStream, CommonTokenStream, ParseTreeWalker
 from OpenQASM.qasm3Lexer import qasm3Lexer
 from OpenQASM.qasm3Parser import qasm3Parser
 from OpenQASM.QEDAListener import QEDAListener as Listener
+from OpenQASM.synthesizer import Synthesizer
+
+testSynth = True
 
 def main(argv):
     """
@@ -22,6 +25,7 @@ def main(argv):
     Loads and parses the files then prints
     the intermediate representation output.
     """
+    global testSynth
     arg = argv[1]
     if '-a' in arg:
         return all_tests()
@@ -33,9 +37,13 @@ def main(argv):
     listener = Listener(argv[1])
     walker = ParseTreeWalker()
     walker.walk(listener, tree)
-    print("Header: {}".format(listener.HEADER))
-    print("Globals: {}".format(listener.GLOBALS))
-    print("Locals: {}".format(listener.LOCALS))
+    if testSynth == False:
+        print("Header: {}".format(listener.HEADER))
+        print("Globals: {}".format(listener.GLOBALS))
+        print("Locals: {}".format(listener.LOCALS))
+    else:
+        synth = Synthesizer(listener.HEADER, listener.GLOBALS, listener.LOCALS, debug=True)
+
 
 def all_tests():
     """Runs all the tests in ./examples folder
