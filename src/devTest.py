@@ -38,6 +38,7 @@ def main(argv):
     walker = ParseTreeWalker()
     walker.walk(listener, tree)
     if testSynth == False:
+        #return
         print("Header: {}".format(listener.HEADER))
         print("Globals: {}".format(listener.GLOBALS))
         print("Locals: {}".format(listener.LOCALS))

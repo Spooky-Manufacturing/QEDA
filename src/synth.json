@@ -1,0 +1,2493 @@
+Trying File ./examples/rus.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+8
+classical declaration
+classical declaration
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'input_qubit', 'exprList': []}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'input_qubit', 'exprList': []}]}
+loop
+quantum instruction
+{'name': 'rz', 'mods': [], 'exps': [3.142857142857143], 'ids': [{'id': 'input_qubit', 'exprList': []}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'input_qubit', 'exprList': []}]}
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b15e6048> quantumInstruction None ['input_qubit']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b15e6f28> quantumInstruction [] ['input_qubit']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b15e6cf8> quantumInstruction [3.142857142857143] ['input_qubit']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b15544e0> quantumInstruction [] ['input_qubit']
+Success!
+Trying File ./examples/t1.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+7
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+Success!
+Trying File ./examples/rb.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+14
+classical declaration
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'cz', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 's', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'name': 'cz', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 's', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'name': 'z', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d64a8> quantumInstruction None ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d6a90> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d63c8> quantumInstruction None []
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d65c0> quantumInstruction [] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d6b00> quantumInstruction None []
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d6ef0> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d6908> quantumInstruction [] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d15f8> quantumInstruction None []
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d1160> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d1b70> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d1f28> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d16d8> quantumInstruction None []
+Success!
+Trying File ./examples/qft.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+16
+classical declaration
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'x', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'name': 'x', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [2]}]}
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'name': 'cphase', 'mods': [], 'exps': [1.5714285714285714], 'ids': [{'id': 'q', 'exprList': [1]}, {'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [1]}]}
+quantum instruction
+{'name': 'cphase', 'mods': [], 'exps': [0.7857142857142857], 'ids': [{'id': 'q', 'exprList': [2]}, {'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'name': 'cphase', 'mods': [], 'exps': [1.5714285714285714], 'ids': [{'id': 'q', 'exprList': [2]}, {'id': 'q', 'exprList': [1]}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [2]}]}
+quantum instruction
+{'name': 'cphase', 'mods': [], 'exps': [0.39285714285714285], 'ids': [{'id': 'q', 'exprList': [3]}, {'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'name': 'cphase', 'mods': [], 'exps': [0.7857142857142857], 'ids': [{'id': 'q', 'exprList': [3]}, {'id': 'q', 'exprList': [1]}]}
+quantum instruction
+{'name': 'cphase', 'mods': [], 'exps': [1.5714285714285714], 'ids': [{'id': 'q', 'exprList': [3]}, {'id': 'q', 'exprList': [2]}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [3]}]}
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b15e60f0> quantumInstruction None ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b15e6160> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b15545f8> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b15545c0> quantumInstruction None []
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b153ec88> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b153e2b0> quantumInstruction [1.5714285714285714] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b153e978> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b153e160> quantumInstruction [0.7857142857142857] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b153e208> quantumInstruction [1.5714285714285714] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b153eb00> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b153ecf8> quantumInstruction [0.39285714285714285] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b153ef98> quantumInstruction [0.7857142857142857] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b153eeb8> quantumInstruction [1.5714285714285714] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b153ee48> quantumInstruction [] ['q']
+Success!
+Trying File ./examples/dd.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+5
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+Timing
+Success!
+Trying File ./examples/msd.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+14
+classical declaration
+classical declaration
+classical declaration
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'workspace', 'exprList': []}]}
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'buffer', 'exprList': []}]}
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'distill_and_buffer', 'mods': [], 'exps': [0], 'ids': [{'id': 'workspace', 'exprList': []}, {'id': 'buffer', 'exprList': []}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+quantum instruction
+{'name': 'Ty', 'mods': [], 'exps': [0], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'buffer', 'exprList': []}]}
+assignment
+quantum instruction
+{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+quantum instruction
+{'name': 'Ty', 'mods': [], 'exps': [0], 'ids': [{'id': 'q', 'exprList': [1]}, {'id': 'buffer', 'exprList': []}]}
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b12b0fd0> quantumInstruction None ['workspace']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b12b0a90> quantumInstruction None ['buffer']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b12b0358> quantumInstruction None ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b12b0b70> quantumInstruction [0] ['workspace', 'buffer']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b12b09b0> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b12b0438> quantumInstruction [] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b133f438> quantumInstruction [0] ['q', 'buffer']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b133fe80> quantumInstruction [] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b133f400> quantumInstruction [0] ['q', 'buffer']
+Success!
+Trying File ./examples/rng.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+4
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'a', 'exprList': []}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'a', 'exprList': []}]}
+quantum instruction
+{'name': 'x', 'mods': [], 'exps': [], 'ids': [{'id': 'a', 'exprList': []}]}
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b131ee10> quantumInstruction None ['a']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b131efd0> quantumInstruction [] ['a']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b131ee80> quantumInstruction [] ['a']
+Success!
+Trying File ./examples/adder.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Defining QGate majority
+Defining QGate unmaj
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+majority
+[]
+['a', 'b', 'c']
+unmaj
+[]
+['a', 'b', 'c']
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+15
+classical declaration
+classical declaration
+classical declaration
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'cin', 'exprList': []}]}
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'a', 'exprList': []}]}
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'b', 'exprList': []}]}
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'cout', 'exprList': []}]}
+loop
+quantum instruction
+{'name': 'majority', 'mods': [], 'exps': [], 'ids': [{'id': 'cin', 'exprList': [0]}, {'id': 'b', 'exprList': [0]}, {'id': 'a', 'exprList': [0]}]}
+loop
+quantum instruction
+{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'a', 'exprList': [3]}, {'id': 'cout', 'exprList': [0]}]}
+loop
+quantum instruction
+{'name': 'unmaj', 'mods': [], 'exps': [], 'ids': [{'id': 'cin', 'exprList': [0]}, {'id': 'b', 'exprList': [0]}, {'id': 'a', 'exprList': [0]}]}
+assignment
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d6470> quantumInstruction None ['cin']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d6128> quantumInstruction None ['a']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b130f550> quantumInstruction None ['b']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b130fa58> quantumInstruction None ['cout']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b130fda0> quantumInstruction [] ['cin', 'b', 'a']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b130f438> quantumInstruction [] ['a', 'cout']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b130fcf8> quantumInstruction [] ['cin', 'b', 'a']
+Success!
+Trying File ./examples/vqe.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Defining QGate entangler
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+entangler
+[]
+['q']
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+6
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+assignment
+Success!
+Trying File ./examples/varteleport.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+8
+classical declaration
+classical declaration
+Expression
+quantum instruction
+{'name': 'rz', 'mods': [], 'exps': [0.7857142857142857], 'ids': [{'id': 'input_qubit', 'exprList': []}]}
+Alias
+loop
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'io', 'exprList': []}]}
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14cad30> quantumInstruction [0.7857142857142857] ['input_qubit']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1547588> quantumInstruction [] ['io']
+Success!
+Trying File ./examples/alignment.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+7
+classical declaration
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+Timing
+quantum instruction
+{'name': 'U', 'mods': [], 'exps': [0.7857142857142857, 0, 1.5714285714285714], 'ids': [{'id': 'q', 'exprList': [2]}]}
+Timing
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1220208> quantumInstruction None []
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b12209e8> quantumInstruction [] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1220160> quantumInstruction [0.7857142857142857, 0, 1.5714285714285714] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1220e48> quantumInstruction None []
+Success!
+Trying File ./examples/pong.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+2
+Timing
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b108d438> quantumInstruction None []
+Success!
+Trying File ./examples/teleport.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Defining QGate post
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+post
+[]
+['q']
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+16
+classical declaration
+classical declaration
+classical declaration
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'U', 'mods': [], 'exps': [0, 0, 0], 'ids': [{'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [1]}]}
+quantum instruction
+{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [1]}, {'id': 'q', 'exprList': [2]}]}
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+assignment
+assignment
+quantum instruction
+{'name': 'post', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [2]}]}
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b126be10> quantumInstruction None ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b126b160> quantumInstruction [0, 0, 0] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b126bd30> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b126b278> quantumInstruction [] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b126b2b0> quantumInstruction None []
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b126b4e0> quantumInstruction [] ['q', 'q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b108d0f0> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b108d4e0> quantumInstruction [] ['q']
+Success!
+Trying File ./examples/qec.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+11
+classical declaration
+classical declaration
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'a', 'exprList': []}]}
+quantum instruction
+{'name': 'x', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+assignment
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b15470f0> quantumInstruction None ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b15476d8> quantumInstruction None ['a']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b13834e0> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1383198> quantumInstruction None []
+Success!
+Trying File ./examples/scqec.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+9
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+loop
+Success!
+Trying File ./examples/qpt.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Defining QGate pre
+Defining QGate post
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+pre
+[]
+['q']
+post
+[]
+['q']
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+8
+classical declaration
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'pre', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'post', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': []}]}
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1276a58> quantumInstruction None ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1276a20> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b12769b0> quantumInstruction None []
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b12766a0> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1276470> quantumInstruction None []
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1276f28> quantumInstruction [] ['q']
+Success!
+Trying File ./examples/gateteleport.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+6
+classical declaration
+classical declaration
+quantum instruction
+{'name': 'rz', 'mods': [], 'exps': [0.7857142857142857], 'ids': [{'id': 'a', 'exprList': []}]}
+quantum instruction
+{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': []}, {'id': 'a', 'exprList': []}]}
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b13e0128> quantumInstruction [0.7857142857142857] ['a']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b13e0748> quantumInstruction [] ['q', 'a']
+Success!
+Trying File ./examples/inverseqft2.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+21
+classical declaration
+classical declaration
+classical declaration
+classical declaration
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+assignment
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [1]}]}
+assignment
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [2]}]}
+assignment
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [3]}]}
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b15e06d8> quantumInstruction None ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b14db2e8> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1220160> quantumInstruction None []
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b11068d0> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1106588> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1106e48> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b1106400> quantumInstruction [] ['q']
+Success!
+Trying File ./examples/inverseqft1.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+23
+classical declaration
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+assignment
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [1]}]}
+assignment
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [2]}]}
+assignment
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [3]}]}
+assignment
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d86a0> quantumInstruction None ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d8710> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d8780> quantumInstruction None []
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d8588> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d8ac8> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d86d8> quantumInstruction [] ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d8dd8> quantumInstruction [] ['q']
+Success!
+Trying File ./examples/defcal.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+0
+Success!
+Trying File ./examples/ipe.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Using built-in gate p
+Using built-in gate x
+Using built-in gate y
+Using built-in gate z
+Using built-in gate h
+Defining QGate s
+Defining QGate sdg
+Defining QGate t
+Defining QGate tdg
+Defining QGate sx
+Defining QGate rx
+Defining QGate ry
+Defining QGate rz
+Using built-in gate cx
+Using built-in gate cy
+Using built-in gate cz
+Defining QGate cp
+Defining QGate crx
+Defining QGate cry
+Defining QGate crz
+Using built-in gate ch
+Defining QGate swap
+Defining QGate ccx
+Defining QGate cswap
+Defining QGate cu
+Defining QGate CX
+Defining QGate phase
+Defining QGate cphase
+Defining QGate id
+Defining QGate u1
+Defining QGate u2
+Defining QGate u3
+s
+[]
+['a']
+sdg
+[]
+['a']
+t
+[]
+['a']
+tdg
+[]
+['a']
+sx
+[]
+['a']
+rx
+['a']
+['θ']
+ry
+['a']
+['θ']
+rz
+['a']
+['λ']
+cp
+['a', 'b']
+['λ']
+crx
+['a', 'b']
+['θ']
+cry
+['a', 'b']
+['θ']
+crz
+['a', 'b']
+['θ']
+swap
+[]
+['a', 'b']
+ccx
+[]
+['a', 'b', 'c']
+cswap
+[]
+['a', 'b', 'c']
+cu
+['c', 't']
+['θ', 'φ', 'λ', 'γ']
+CX
+[]
+['c', 't']
+phase
+['q']
+['λ']
+cphase
+['a', 'b']
+['λ']
+id
+[]
+['a']
+u1
+['q']
+['λ']
+u2
+['q']
+['φ', 'λ']
+u3
+['q']
+['θ', 'φ', 'λ']
+8
+classical declaration
+classical declaration
+classical declaration
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+quantum instruction
+{'instruction': 'RESET', 'ids': [{'id': 'r', 'exprList': []}]}
+quantum instruction
+{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'r', 'exprList': []}]}
+classical declaration
+loop
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b13e0eb8> quantumInstruction None ['q']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b13e0940> quantumInstruction None ['r']
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b13e0f28> quantumInstruction [] ['r']
+Success!
+Trying File ./examples/cphase.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Starting synthesis
+Defining QGate cphase
+cphase
+['a', 'b']
+['θ']
+1
+quantum instruction
+{'name': 'cphase', 'mods': [], 'exps': [1.5714285714285714], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d8780> quantumInstruction [1.5714285714285714] ['q', 'q']
+Success!
+Success Rate: 100%
+Failed Files: None!

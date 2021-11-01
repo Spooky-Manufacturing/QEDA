@@ -75,10 +75,8 @@ class QEDAListener(Listener):
     def enterInclude(self, ctx: qasm3Parser.IncludeContext):
         listener = INCLUDE(ctx.StringLiteral(), self.file)
         for each in listener.GLOBALS:
-            #print(each)
             self.GLOBALS.append(each)
         for each in listener.LOCALS:
-           # print(each)
             self.LOCALS.append(each)
 
         # Enter a parse tree produced by qasm3Parser#ioIdentifier.
@@ -176,13 +174,19 @@ class QEDAListener(Listener):
         
     # Enter a parse tree produced by qasm3Parser#returnSignature.
     def enterReturnSignature(self, ctx:qasm3Parser.ReturnSignatureContext):
-        ctype = self.enterClassicalType(ctx.classicalType())
-        return ReturnSignature(ctype)
+        if  ctx != None:
+            ctype = self.enterClassicalType(ctx.classicalType())
+            return ReturnSignature(ctype)
+        else:
+            return None
 
     def enterDesignator(self, ctx:qasm3Parser.DesignatorContext):
-        exp = self.enterExpression(ctx.expression())
-        des = Designator(exp)
-        return des
+        if ctx.expression():
+            exp = self.enterExpression(ctx.expression())
+            des = Designator(exp)
+            return des
+        else:
+            raise Exception("designator expression null")
 
     # Enter a parse tree produced by qasm3Parser#identifierList.
     def enterIdentifierList(self, ctx:qasm3Parser.IdentifierListContext):
@@ -234,41 +238,38 @@ class QEDAListener(Listener):
 
     # Enter a parse tree produced by qasm3Parser#bitType.
     def enterBitType(self, ctx:qasm3Parser.BitTypeContext):
-        bt = BitType()
-        bt.ttype = ctx.getText()
-        return bt
+        ctype = ctx.getText()
+        return ctype
 
 
     # Enter a parse tree produced by qasm3Parser#singleDesignatorType.
     def enterSingleDesignatorType(self, ctx:qasm3Parser.SingleDesignatorTypeContext):
-        sdt = SingleDesignatorType()
-        sdt.ttype = ctx.getText()
-        return sdt
+        ctype = ctx.getText()
+        return ctype
 
     # Enter a parse tree produced by qasm3Parser#noDesignatorType.
     def enterNoDesignatorType(self, ctx:qasm3Parser.NoDesignatorTypeContext):
-        bit = None
         ctype = 'bool'
         if ctx.timingType():
             ctype = 'timingType'
-        bit = NoDesignatorType()
-        bit.ttype=ctype
-        return bit
+        return ctype
 
     # Enter a parse tree produced by qasm3Parser#classicalType.
     def enterClassicalType(self, ctx:qasm3Parser.ClassicalTypeContext):
-        bit = None
-        btype = None
-        single = None
-        numeric = None
-        if ctx.noDesignatorType():
-            bit = self.enterNoDesignatorType(ctx.noDesignatorType())
+        ctype = None
+        designator = None
+        if ctx.bitType():
+            ctype = self.enterBitType(ctx.bitType())
+        elif ctx.numericType():
+            ctype = self.enterNumericType(ctx.numericType())
+        elif ctx.noDesignatorType():
+            ctype = self.enterNoDesignatorType(ctx.noDesignatorType())
         elif ctx.singleDesignatorType():
-            single = self.enterSingleDesignatorType(ctx.singleDesignatorType())
+            ctype = self.enterSingleDesignatorType(ctx.singleDesignatorType())
+        if ctx.designator():
             designator = self.enterDesignator(ctx.designator())
-        elif ctx.bitType():
-            btype = self.enterBitType(ctx.bitType())
-        
+        a = ClassicalType(ctype, designator)
+        return a
 
     # Enter a parse tree produced by qasm3Parser#numericType.
     def enterNumericType(self, ctx:qasm3Parser.NumericTypeContext):
@@ -315,9 +316,9 @@ class QEDAListener(Listener):
             # create creg
             ttype='creg'
         id = self.enterIdentifier(ctx.Identifier())
-        if not isinstance(ctx.designator(), type(None)):
+        if ctx.designator():
             des = self.enterDesignator(ctx.designator())
-        if not isinstance(ctx.equalsExpression(), type(None)):
+        if ctx.equalsExpression():
             equ = self.enterEqualsExpression(ctx.equalsExpression())
         bitdecl = BitDeclaration(id, des, equ, ttype=ttype)
         bitdecl.eval()
@@ -688,18 +689,21 @@ class QEDAListener(Listener):
 
     # Enter a parse tree produced by qasm3Parser#expression.
     def enterExpression(self, ctx:qasm3Parser.ExpressionContext):
-        if ctx.expressionTerminator()!=None:
-            return self.enterExpressionTerminator(ctx.expressionTerminator())
-        elif ctx.unaryExpression()!=None:
+        exp1 = None
+        if ctx.unaryExpression():
             return self.enterUnaryExpression(ctx.unaryExpression())
-        elif ctx.expression()!=None:
+        elif ctx.expression():
             exp1 = self.enterExpression(ctx.expression())
-            orxp = None
-            if ctx.logicalAndExpression()!=None:
-                orxp = self.enterLogicalAndExpression(ctx.logicalAndExpression())
-            return Expression(exp1, orxp)
+            andxp = None
+            if ctx.logicalAndExpression():
+                andxp = self.enterLogicalAndExpression(ctx.logicalAndExpression())
+            x = Expression(exp1, andxp)
+            return x
         elif ctx.logicalAndExpression():
-            return self.enterLogicalAndExpression(ctx.logicalAndExpression())       
+            a = self.enterLogicalAndExpression(ctx.logicalAndExpression())
+            return a
+        elif ctx.expressionTerminator()!=None:
+            return self.enterExpressionTerminator(ctx.expressionTerminator())
 
     # Enter a parse tree produced by qasm3Parser#logicalAndExpression.
     def enterLogicalAndExpression(self, ctx:qasm3Parser.LogicalAndExpressionContext):
@@ -707,18 +711,17 @@ class QEDAListener(Listener):
         exp1 = None
         exp2 = None
         operator = '&&'
-        if not isinstance(ctx.logicalAndExpression(), type(log)):
-            exp1 = self.enterLogicalAndExpression(ctx.logicalAndExpression())
-            exp2 = self.enterBitOrExpression(ctx.bitOrExpression())
-        elif not isinstance(ctx.bitOrExpression(), type(log)):
-            exp1 = self.enterBitOrExpression(ctx.bitOrExpression())
-        else:
-            return
-        log = LogicalAndExpression(expression1=exp1, expression2=exp2, operator=operator)
-        if log is not None and log.eval() is not None:
+        if ctx != None:
+            if ctx.logicalAndExpression:
+                exp1 = self.enterLogicalAndExpression(ctx.logicalAndExpression())
+                exp2 = self.enterBitOrExpression(ctx.bitOrExpression())
+                if exp1 == None:
+                    exp1 = exp2
+                    exp2 = None
+            elif ctx.bitOrExpression():
+                exp1 = self.enterBitOrExpression(ctx.bitOrExpression())
+            log = LogicalAndExpression(expression1=exp1, expression2=exp2, operator=operator)
             return log
-        else:
-            return
 
     # Enter a parse tree produced by qasm3Parser#bitOrExpression.
     def enterBitOrExpression(self, ctx:qasm3Parser.BitOrExpressionContext):
@@ -726,19 +729,14 @@ class QEDAListener(Listener):
         exp1 = None
         exp2 = None
         operator = '|'
-        if not isinstance(ctx.bitOrExpression(), type(None)):
-            exp1 = self.enterBitOrExpression(ctx.bitOrExpression())
-            exp2 = self.enterXOrExpression(ctx.xOrExpression())
-        elif not isinstance(ctx.xOrExpression(), type(None)):
-            exp1 = self.enterXOrExpression(ctx.xOrExpression())
-        else:
-            return
-        bit = BitOrExpression(expression1=exp1, expression2=exp2, operator=operator)
-        if bit is not None and bit.eval() is not None:
+        if ctx != None:
+            if ctx.bitOrExpression():
+                exp1 = self.enterBitOrExpression(ctx.bitOrExpression())
+                exp2 = self.enterXOrExpression(ctx.xOrExpression())
+            elif ctx.xOrExpression():
+                exp1 = self.enterXOrExpression(ctx.xOrExpression())
+            bit = BitOrExpression(expression1=exp1, expression2=exp2, operator=operator)
             return bit
-        else:
-            return
-
 
     # Enter a parse tree produced by qasm3Parser#xOrExpression.
     def enterXOrExpression(self, ctx:qasm3Parser.XOrExpressionContext):
@@ -746,36 +744,30 @@ class QEDAListener(Listener):
         exp1 = None
         exp2 = None
         operator = '^'
-        if not isinstance(ctx.xOrExpression(), type(None)):
-            exp1 = self.enterXOrExpression(ctx.xOrExpression())
-            exp2 = self.enterBitAndExpression(ctx.bitAndExpression())
-        elif not isinstance(ctx.bitAndExpression(), type(None)):
-            exp1 = self.enterBitAndExpression(ctx.bitAndExpression())
-        else:
-            return
-        xor = XorExpression(expression1=exp1, expression2=exp2, operator=operator)
-        if xor is not None and xor.eval() is not None:
+        if ctx != None:
+            if ctx.xOrExpression():
+                exp1 = self.enterXOrExpression(ctx.xOrExpression())
+                exp2 = self.enterBitAndExpression(ctx.bitAndExpression())
+            elif ctx.bitAndExpression():
+                exp1 = self.enterBitAndExpression(ctx.bitAndExpression())
+            xor = XorExpression(expression1=exp1, expression2=exp2, operator=operator)
             return xor
-        else:
-            return 
+        
+
     # Enter a parse tree produced by qasm3Parser#bitAndExpression.
     def enterBitAndExpression(self, ctx:qasm3Parser.BitAndExpressionContext):
         bit = None
         exp1 = None
         exp2 = None
         operator = '&'
-        if not isinstance(ctx.bitAndExpression(), type(None)):
-            exp1 = self.enterBitAndExpression(ctx.bitAndExpression())
-            exp2 = self.enterEqualityExpression(ctx.equalityExpression())
-        elif not isinstance(ctx.equalityExpression(), type(None)):
-            exp1 = self.enterEqualityExpression(ctx.equalityExpression())
-        else:
-            return
-        bit = BitAndExpression(expression1=exp1, expression2=exp2, operator=operator)
-        if bit is not None and bit.eval() is not None:
+        if ctx != None:
+            if ctx.bitAndExpression():
+                exp1 = self.enterBitAndExpression(ctx.bitAndExpression())
+                exp2 = self.enterEqualityExpression(ctx.equalityExpression())
+            elif ctx.equalityExpression():
+                exp1 = self.enterEqualityExpression(ctx.equalityExpression())
+            bit = BitAndExpression(expression1=exp1, expression2=exp2, operator=operator)
             return bit
-        else:
-            return 
 
     # Enter a parse tree produced by qasm3Parser#equalityExpression.
     def enterEqualityExpression(self, ctx:qasm3Parser.EqualityExpressionContext):
@@ -783,23 +775,19 @@ class QEDAListener(Listener):
         exp1 = None
         exp2 = None
         operator = None
-        if not isinstance(ctx.equalityExpression(), type(None)):
-            exp1 = self.enterEqualityExpression(ctx.equalityExpression())
-            exp2 = self.enterComparisonExpression(ctx.comparisonExpression())
-            txt = ctx.getText()
-            if "!=" in txt:
-                operator = "!="
-            elif "==" in txt:
-                operator = "=="
-        elif not isinstance(ctx.comparisonExpression(), type(None)):
-            exp1 = self.enterComparisonExpression(ctx.comparisonExpression())
-        else:
-            return
-        equ = EqualityExpression(expression1=exp1, expression2=exp2, operator=operator)
-        if equ is not None and equ.eval() is not None:
+        if ctx != None:
+            if ctx.equalityExpression():
+                exp1 = self.enterEqualityExpression(ctx.equalityExpression())
+                exp2 = self.enterComparisonExpression(ctx.comparisonExpression())
+                txt = ctx.getText()
+                if "!=" in txt:
+                    operator = "!="
+                elif "==" in txt:
+                    operator = "=="
+            elif ctx.comparisonExpression():
+                exp1 = self.enterComparisonExpression(ctx.comparisonExpression())
+            equ = EqualityExpression(expression1=exp1, expression2=exp2, operator=operator)
             return equ
-        else:
-            return 
 
     # Enter a parse tree produced by qasm3Parser#comparisonExpression.
     def enterComparisonExpression(self, ctx:qasm3Parser.ComparisonExpressionContext):
@@ -807,29 +795,23 @@ class QEDAListener(Listener):
         exp1 = None
         exp2 = None
         operator = None
-        if not isinstance(ctx.comparisonExpression(), type(comp)):
-            exp1 = self.enterComparisonExpression(ctx.comparisonExpression())
-            exp2 = self.enterBitShiftExpression(ctx.bitShiftExpression())
-            txt = ctx.getText()
-            if '<=' in txt:
-                operator ='<='
-            elif '>=' in txt:
-                operator ='>='
-            elif '<' in txt:
-                operator ='<'
-            elif '>' in txt:
-                operator ='>'
-        elif not isinstance(ctx.bitShiftExpression(), type(None)):
-             exp1 = self.enterBitShiftExpression(ctx.bitShiftExpression())
-        else:
-            return
-
-        comp = ComparisonExpression(expression1=exp1, expression2=exp2, operator=operator)
-        if comp is not None and comp.eval() is not None:
+        if ctx != None:
+            if ctx.comparisonExpression():
+                exp1 = self.enterComparisonExpression(ctx.comparisonExpression())
+                exp2 = self.enterBitShiftExpression(ctx.bitShiftExpression())
+                txt = ctx.getText()
+                if '<=' in txt:
+                    operator ='<='
+                elif '>=' in txt:
+                    operator ='>='
+                elif '<' in txt:
+                    operator ='<'
+                elif '>' in txt:
+                    operator ='>'
+            elif ctx.bitShiftExpression():
+                exp1 = self.enterBitShiftExpression(ctx.bitShiftExpression())
+            comp = ComparisonExpression(expression1=exp1, expression2=exp2, operator=operator)
             return comp
-        else:
-            return
-
 
     # Enter a parse tree produced by qasm3Parser#bitShiftExpression.
     def enterBitShiftExpression(self, ctx:qasm3Parser.BitShiftExpressionContext):
@@ -837,121 +819,123 @@ class QEDAListener(Listener):
         exp1 = None
         exp2 = None
         operator = None
-        if not isinstance(ctx.bitShiftExpression(), type(bit)):
-            exp1 = self.enterBitShiftExpression(ctx.bitShiftExpression())
-            exp2 = self.enterAdditiveExpression(ctx.additiveExpression())
-        else:
-            exp1 = self.enterAdditiveExpression(ctx.additiveExpression())
+        if ctx != None:
+            if ctx.bitShiftExpression():
+                exp1 = self.enterBitShiftExpression(ctx.bitShiftExpression())
+                exp2 = self.enterAdditiveExpression(ctx.additiveExpression())
+            else:
+                exp1 = self.enterAdditiveExpression(ctx.additiveExpression())
 
-        if '<<' in ctx.getText():
-            operator = '<<'
-        else: 
-            operator = '>>'
-        bit = BitShiftExpression(expression1=exp1, expression2=exp2, operator=operator)
-        if bit is not None and bit.eval() is not None:
+            if '<<' in ctx.getText():
+                operator = '<<'
+            else: 
+                operator = '>>'
+            bit = BitShiftExpression(expression1=exp1, expression2=exp2, operator=operator)
             return bit
-        else:
-            return
+        
     # Enter a parse tree produced by qasm3Parser#additiveExpression.
     def enterAdditiveExpression(self, ctx:qasm3Parser.AdditiveExpressionContext):
         add = None
         exp1 = None
         exp2 = None
         operator = None
-        
-        if not isinstance(ctx.additiveExpression(), type(None)):
-            exp1 = self.enterAdditiveExpression(ctx.additiveExpression())
-            exp2 = self.enterMultiplicativeExpression(ctx.multiplicativeExpression())
-            if '+' in ctx.getText():
-                operator = "+"
+        if ctx != None:
+            if ctx.additiveExpression():
+                exp1 = self.enterAdditiveExpression(ctx.additiveExpression())
+                exp2 = self.enterMultiplicativeExpression(ctx.multiplicativeExpression())
+                if '+' in ctx.getText():
+                    operator = "+"
+                else:
+                    operator = "-"
             else:
-                operator = "-"
-        else:
-            exp1 = self.enterMultiplicativeExpression(ctx.multiplicativeExpression())
-        add = AdditiveExpression(expression1=exp1, expression2=exp2, operator=operator)
-        if add is not None and add.eval() is not None:
+                exp1 = self.enterMultiplicativeExpression(ctx.multiplicativeExpression())
+            add = AdditiveExpression(expression1=exp1, expression2=exp2, operator=operator)
             return add
-        else:
-            return
+
     # Enter a parse tree produced by qasm3Parser#multiplicativeExpression.
     def enterMultiplicativeExpression(self, ctx:qasm3Parser.MultiplicativeExpressionContext):
         mul = None
         exp1 = None
         exp2 = None
         operator =None
-        if not isinstance(ctx.powerExpression(), type(mul)):
-            exp1 = self.enterPowerExpression(ctx.powerExpression())
-        elif not isinstance(ctx.unaryExpression(), type(mul)):
-            exp1 = self.enterUnaryExpression(ctx.unaryExpression())
+        if ctx != None:
+            if ctx.powerExpression():
+                exp1 = self.enterPowerExpression(ctx.powerExpression())
+            elif ctx.unaryExpression():
+                exp1 = self.enterUnaryExpression(ctx.unaryExpression())
 
-        if not isinstance(ctx.multiplicativeExpression(), type(mul)):
-            exp2 = exp1
-            exp1 = self.enterMultiplicativeExpression(ctx.multiplicativeExpression())
+            if ctx.multiplicativeExpression():
+                exp2 = exp1
+                exp1 = self.enterMultiplicativeExpression(ctx.multiplicativeExpression())
 
-        if not isinstance(ctx.MUL(), type(mul)):
-            operator ="*"
-        elif not isinstance(ctx.DIV(), type(mul)):
-            operator = "/"
-        elif not isinstance(ctx.MOD(), type(mul)):
-            operator ="%"
-        mul = MultiplicativeExpression(
-            expression1=exp1, expression2=exp2,
-            operator=operator)
-        if mul is not None and  mul.eval() is not None:
+            if ctx.MUL():
+                operator ="*"
+            elif ctx.DIV():
+                operator = "/"
+            elif ctx.MOD:
+                operator ="%"
+            mul = MultiplicativeExpression(expression1=exp1, expression2=exp2, operator=operator)
             return mul
-        else:
-            return
 
     # Enter a parse tree produced by qasm3Parser#unaryExpression.
     def enterUnaryExpression(self, ctx:qasm3Parser.UnaryExpressionContext):
-        unary = UnaryExpression(expression1=ctx.powerExpression(), operator=ctx.unaryOperator())
+        exp1 = self.enterPowerExpression(ctx.powerExpression())
+        unary = UnaryExpression(exp1, operator=ctx.unaryOperator().getText())
         return unary
 
     # Enter a parse tree produced by qasm3Parser#powerExpression.
     def enterPowerExpression(self, ctx:qasm3Parser.PowerExpressionContext):
         pwr = None
-        term = self.enterExpressionTerminator(ctx.expressionTerminator())
-        if not isinstance(ctx.powerExpression(), type(pwr)):
-            pwr = PowerExpression(term, expression2=ctx.powerExpression(), operator="**")
-        else:
-            pwr = PowerExpression(term, operator="**")
-
-        if pwr.eval() == None:
-            return None
-        else:
+        exp1 = self.enterExpressionTerminator(ctx.expressionTerminator())
+        exp2 = None
+        if ctx != None:
+            if ctx.powerExpression():
+                exp2 = self.enterPowerExpression(ctx.powerExpression())
+            pwr = PowerExpression(exp1, exp2)
             return pwr
 
     # Enter a parse tree produced by qasm3Parser#expressionTerminator.
     def enterExpressionTerminator(self, ctx:qasm3Parser.ExpressionTerminatorContext):
         term = None
-        if not isinstance(ctx.Constant(), type(term)):
-            term = ExpressionTerminator(ctx.Constant())
-        elif not isinstance(ctx.Integer, type(term)):
-            term = ExpressionTerminator(ctx.Integer())
-        elif not isinstance(ctx.RealNumber(), type(term)):
-            term = ExpressionTerminator(ctx.RealNumber())
-        elif not isinstance(ctx.ImagNumber(), type(term)):
-            term = ExpressionTerminator(ctx.ImagNumber())
-        elif not isinstance(ctx.booleanLiteral(), type(term)):
-            term = ExpressionTerminator(ctx.booleanLiteral())
-        elif not isinstance(ctx.Identifier(), type(term)):
-            term = ExpressionTerminator(self.enterIdentifier(ctx.Identifier()))
-        elif not isinstance(ctx.StringLiteral(), type(term)):
-            term = ExpressionTerminator(ctx.StringLiteral())
-        elif not isinstance(ctx.builtInCall(), type(term)):
-            term = ExpressionTerminator(self.enterBuiltInCall(ctx.builtInCall()))
-        elif not isinstance(ctx.externOrSubroutineCall(), type(term)):
-            term = ExpressionTerminator(self.enterExternOrSubroutineCall(ctx.externOrSubroutineCall()))
-        elif not isinstance(ctx.timingIdentifier(), type(term)):
-            term = ExpressionTerminator(self.enterTimingIdentifier(ctx.timingIdentifier()))
-        elif not isinstance(ctx.expression(), type(term)):
-            term = ExpressionTerminator(self.enterExpression(ctx.expression()))
-        elif not isinstance(ctx.expressionTerminator(), type(term)):
-            term = ExpressionTerminator(self.enterExpressionTerminator(ctx.expressionTerminator()))
-        if term.eval() == None:
-            return None
-        else:
-            return term
+        constant = None
+        integer = None
+        realn = None
+        imagn = None
+        boolLit = None
+        ident = None
+        stringLit = None
+        builtIn = None
+        extern = None
+        timingId = None
+        expression = None
+        terminator = None
+        if ctx.Constant():
+            constant = Constant(ctx.Constant())
+        if ctx.Integer:
+            integer = Integer(ctx.Integer())
+        if ctx.RealNumber():
+            realn = RealNumber(ctx.RealNumber())
+        if ctx.ImagNumber():
+            imagn = ImagNumber(ctx.ImagNumber())
+        if ctx.booleanLiteral():
+            boolLit = BooleanLiteral(ctx.booleanLiteral())
+        if ctx.Identifier():
+            ident = self.enterIdentifier(ctx.Identifier())
+        if ctx.StringLiteral():
+            stringLit = ctx.StringLiteral()
+        if ctx.builtInCall():
+            builtIn = self.enterBuiltInCall(ctx.builtInCall())
+        if ctx.externOrSubroutineCall():
+            extern = self.enterExternOrSubroutineCall(ctx.externOrSubroutineCall())
+        if ctx.timingIdentifier():
+            timingId = self.enterTimingIdentifier(ctx.timingIdentifier())
+        if ctx.expression():
+            expression = self.enterExpression(ctx.expression())
+        if ctx.expressionTerminator():
+            terminator = self.enterExpressionTerminator(ctx.expressionTerminator())
+        term = ExpressionTerminator(constant, integer, realn, imagn, boolLit, ident, stringLit,
+        builtIn, extern, timingId, expression, terminator)
+        return term
 
     # Enter a parse tree produced by qasm3Parser#booleanLiteral.
     def enterBooleanLiteral(self, ctx:qasm3Parser.BooleanLiteralContext):
@@ -962,9 +946,9 @@ class QEDAListener(Listener):
         call = None
         operator = None
         exp_list = []
-        if not isinstance(ctx.builtInMath(), type(None)):
+        if ctx.builtInMath():
             operator = self.enterBuiltInMath(ctx.builtInMath())
-        elif not isinstance(ctx.castOperator(), type(None)):
+        elif ctx.castOperator():
             operator = self.enterCastOperator(ctx.castOperator())
         else:
             return
@@ -988,7 +972,7 @@ class QEDAListener(Listener):
         exp = []
         i=0
         while True:
-            if ctx.expression(i) is not None:
+            if ctx.expression(i):
                 exp.append(self.enterExpression(ctx.expression(i)))
                 i+=1
             else:
@@ -1103,9 +1087,11 @@ class QEDAListener(Listener):
     # Enter a parse tree produced by qasm3Parser#externDeclaration
     def enterExternDeclaration(self, ctx:qasm3Parser.ExternDeclarationContext):
         id = self.enterIdentifier(ctx.Identifier())
-        clist = self.enterClassicalTypeList(ctx.classicalTypeList())
+        clist = None
         rsig = None
-        if ctx.returnSignature()!=None:
+        if ctx.classicalTypeList() != None:
+            clist = self.enterClassicalTypeList(ctx.classicalTypeList())
+        if ctx.returnSignature() != None:
             rsig = self.enterReturnSignature(ctx.returnSignature())
         return ExternDeclaration(id, clist, rsig)
 
@@ -1121,14 +1107,12 @@ class QEDAListener(Listener):
     def enterSubroutineDefinition(self, ctx:qasm3Parser.SubroutineDefinitionContext):
         id = None
         a_list = None
-        return_signature = None
+        return_signature = self.enterReturnSignature(ctx.returnSignature())
         s_block = None
         if ctx.Identifier() is not None:
             id = self.enterIdentifier(ctx.Identifier())
         if ctx.anyTypeArgumentList() is not None:
             a_list = self.enterAnyTypeArgumentList(ctx.anyTypeArgumentList())
-        if ctx.returnSignature() is not None:
-            return_signature = self.enterReturnSignature(ctx.returnSignature())
         if ctx.subroutineBlock() is not None:
             s_block = self.enterSubroutineBlock(ctx.subroutineBlock())
 

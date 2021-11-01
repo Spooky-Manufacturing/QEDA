@@ -5,6 +5,7 @@ from OpenQASM.QAST import Header
 from OpenQASM.synth.builtins import GATES
 from OpenQASM.synth.qgate import QGate
 from OpenQASM.synth.instruction import Instruction
+from OpenQASM.synth.builtins import Function, Loop, Variable
 from .kicad.schematic import Schematic
 from .kicad.pcb import PCB
 from .kicad.footprint import Footprint
@@ -19,7 +20,7 @@ class Synthesizer:
         self.header = header
         self.globals = globs
         self.locals = locs
-        self.gates = []
+        self.gatedefs = []
         self.vars = []
         self.instructions = []
         self.pcb = PCB()
@@ -33,7 +34,7 @@ class Synthesizer:
         print("Starting synthesis")
         #print(self.header, self.globals, self.locals)
         # Parse the globals
-#        self.global_parse()
+        self.global_parse()
         # Parse the locals
         self.local_parse()
 
@@ -48,8 +49,8 @@ class Synthesizer:
 
                 else:
                     print("Defining QGate {}".format(each['sig']['name']))
-                    self.gates.append(QGate(each['sig'], each['block']))
-        for each in self.gates:
+                    self.gatedefs.append(QGate(each['sig'], each['block']))
+        for each in self.gatedefs:
             print(each.name)
             print(each.ids)
             print(each.params)
@@ -69,6 +70,7 @@ class Synthesizer:
                 elif each['type'] == 'assignment':
                     print("assignment")
                 elif each['type'] == 'loop':
+                    Loop
                     print("loop")
                 elif each['type'] == 'timing':
                     print("Timing")

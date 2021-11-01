@@ -101,7 +101,6 @@ class Io:
             'type':self.ctype.eval(),
             'id':self.id.eval()
         }
-        print(x)
         return x
 
 class GlobalStatement:
@@ -440,10 +439,7 @@ class NoDesignatorDeclaration(ClassicalDeclarationStatement):
         if self.exp!=None:
             x['expr'] = self.exp.eval()
         if self.dtype!=None:
-            if type(self.dtype) != type(""):
-                x['dtype']=self.dtype.eval()
-            else:
-                x['dtype']=self.dtype
+            x['dtype']=self.dtype
         return x
 class BitDeclaration(ClassicalDeclarationStatement):
     """
@@ -547,7 +543,7 @@ class ClassicalArgument:
         if self.ttype!=None:
             x['ttype']=self.ttype
         if self.dtype!=None:
-            x['dtype']=self.dtype.eval()
+            x['dtype']=self.dtype
         if self.des!=None:
             x['des']=self.des.eval()
         if self.id!=None:
@@ -753,13 +749,16 @@ class QuantumBlock(Statement):
     
     def eval(self):
         x={
-            'type': 'quantumBlock'
+            'type': 'quantumBlock',
+            'stmts': []
         }
         if self.statements!=None:
             if type(self.statements)!=type([]):
                 x['stmts']=self.statements.eval()
             else:
-                x['stmts']=[x.eval() for x in self.statements]
+                for each in self.statements:
+                    if each:
+                        x['stmts'].append(each.eval())
         if self.loops!=None:
             if type(self.loops)!=type([]):
                 x['loops']=self.loops.eval()
@@ -1048,7 +1047,17 @@ class BaseExpression:
         self.op = operator
 
     def eval(self):
-        return self
+        x = {
+            'type': str(self.__class__.__name__),
+        }
+        if self.exp1:
+            x['exp1'] = self.exp1.eval()
+            if self.exp2:
+                x['exp2'] = self.exp2.eval()
+        elif self.exp2:
+            return self.exp2.eval()
+        x['op'] = self.op
+        return x
 
 class Expression(BaseExpression):
     """
@@ -1058,28 +1067,18 @@ class Expression(BaseExpression):
     | logicalAndExpression
     | expression '||' logicalAndExpression
     """
-    def __init__(self, expression, orExpression):
-        self.expr = expression
-        self.orxpr = orExpression
 
     def eval(self):
         x = {
-            'type': 'expression',
-            'leftExpr': None
+            'type': "expression",
         }
-        if type(self.orxpr) == type(None):
-            x['leftExpr'] = self.expr.eval()
+        if self.exp2:
+            x['exp2'] = self.exp2.eval()
+            if self.exp1:
+                x['exp1'] = self.exp1.eval()
             return x
         else:
-            x['leftExpr'] = self.expr.eval() or self.orxpr.eval()
-        
-        return x
-#            try:
-#                a = self.expr.eval()
-#                b = self.orxpr.eval()
-#                return a or b
-#            except Exception as e:
-#                return 0
+            return self.exp1.eval()
 
 class LogicalAndExpression(BaseExpression):
     """
@@ -1088,13 +1087,12 @@ class LogicalAndExpression(BaseExpression):
     | logicalAndExpression '&&' bitOrExpression
     """
     def eval(self):
-        if self.exp1!=None:
-            if self.exp2!=None:
-                return self.exp1.eval() and self.exp2.eval()
-            else:
-                return self.exp1.eval()
-        return
-
+        if self.exp1:
+            if self.exp2:
+               return self.exp1.eval() and self.exp2.eval()
+            return self.exp1.eval()
+        return self.exp2.eval()
+        
 class BitOrExpression(BaseExpression):
     """
     bitOrExpression =
@@ -1102,12 +1100,11 @@ class BitOrExpression(BaseExpression):
     | bitOrExpression '|' xOrExpression
     """
     def eval(self):
-        if self.exp1!=None:
-            if self.exp2!=None:
-                return self.exp1.eval() | self.exp2.eval()
-            else:
-                return self.exp1.eval()
-        return
+        if self.exp1:
+            if self.exp2:
+                return self.exp1.eval() or self.exp2.eval()
+            return self.exp1.eval()
+        return self.exp2.eval()
 
 class XorExpression(BaseExpression):
     """
@@ -1116,12 +1113,9 @@ class XorExpression(BaseExpression):
     | xOrExpression '^' bitAndExpression
     """
     def eval(self):
-        if self.exp1!=None:
-            if self.exp2!=None:
-                return self.exp1.eval() ^ self.exp2.eval()
-            else:
-                return self.exp1.eval()
-        return
+        if self.exp2:
+            return int(round(self.exp1.eval())) ^ int(round(self.exp2.eval()))
+        return self.exp1.eval()
 
 class BitAndExpression(BaseExpression):
     """
@@ -1130,11 +1124,11 @@ class BitAndExpression(BaseExpression):
     | bitAndExpression '&' equalityExpression
     """
     def eval(self):
-        if self.exp1!=None:
-            if self.exp2!=None:
+        if self.exp1:
+            if self.exp2:
                 return self.exp1.eval() & self.exp2.eval()
-            else:
-                return self.exp1.eval()
+            return self.exp1.eval()
+        return self.exp2.eval()
 
 class EqualityExpression(BaseExpression):
     """
@@ -1144,14 +1138,14 @@ class EqualityExpression(BaseExpression):
     | equalityExpression != comparisonExpression
     """
     def eval(self):
-        if self.exp1!=None:
-            if self.exp2!=None:
-                if self.op == "!=":
-                    return self.exp1.eval() != self.exp2.eval()
-                else:
+        if self.exp1:
+            if self.exp2:
+                if self.op == '==':
                     return self.exp1.eval() == self.exp2.eval()
-            else:
-                return self.exp1.eval()
+                elif self.op == '!=':
+                    return self.exp1.eval() != self.exp2.eval()
+            return self.exp1.eval()
+        return self.exp2.eval()
 
 class ComparisonExpression(BaseExpression):
     """
@@ -1160,18 +1154,18 @@ class ComparisonExpression(BaseExpression):
     | comparisonExpression (<|>|>=|<=) bitShiftExpression
     """
     def eval(self):
-        if self.exp1!=None:
-            if self.exp2!=None:
-                if self.op == "<":
+        if self.exp1:
+            if self.exp2:
+                if self.op == '<':
                     return self.exp1.eval() < self.exp2.eval()
-                elif self.op == ">":
+                elif self.op == '>':
                     return self.exp1.eval() > self.exp2.eval()
-                elif self.op == ">=":
-                    return self.exp1.eval() >= self.exp2.eval()
-                elif self.op == "<=":
+                elif self.op == '<=':
                     return self.exp1.eval() <= self.exp2.eval()
-            else:
-                return self.exp1.eval()
+                elif self.op == '>=':
+                    return self.exp1.eval() >= self.exp2.eval()
+            return self.exp1.eval()
+        return self.exp2.eval()
 
 class BitShiftExpression(BaseExpression):
     """
@@ -1180,14 +1174,14 @@ class BitShiftExpression(BaseExpression):
     | bitShiftExpression ( '<<' | '>>' ) additiveExpression
     """
     def eval(self):
-        if self.exp1!=None:
-            if self.exp2!=None:
-                if self.op == "<<":
-                    return self.exp1.eval() << self.exp2.eval()
-                else:
+        if self.exp1:
+            if self.exp2:
+                if self.op == '>>':
                     return self.exp1.eval() >> self.exp2.eval()
-            else:
-                return self.exp1.eval()
+                elif self.op == '<<':
+                    return self.exp1.eval() << self.exp2.eval()
+            return self.exp1.eval()
+        return self.exp2.eval()
 
 class AdditiveExpression(BaseExpression):
     """
@@ -1196,14 +1190,14 @@ class AdditiveExpression(BaseExpression):
     | additiveExpression ( + | - ) multiplicativeExpression
     """
     def eval(self):
-        if self.exp1!=None:
-            if self.exp2!=None:
-                if self.op == '-':
-                    return self.exp1.eval() - self.exp2.eval()
-                elif self.op == '+':
+        if self.exp1:
+            if self.exp2:
+                if self.op == '+':
                     return self.exp1.eval() + self.exp2.eval()
-            else:
-                return self.exp1.eval()
+                elif self.op == '-':
+                    return self.exp1.eval() - self.exp2.eval()
+            return self.exp1.eval()
+        return self.exp2.eval()
 
 class MultiplicativeExpression(BaseExpression):
     """
@@ -1214,16 +1208,16 @@ class MultiplicativeExpression(BaseExpression):
     | multiplicativeExpression ( * | / | % ) unaryExpression
     """
     def eval(self):
-        if self.exp1!=None:
-            if self.exp2!=None:
-                if self.op == "*":
+        if self.exp1:
+            if self.exp2:
+                if self.op == '*':
                     return self.exp1.eval() * self.exp2.eval()
-                elif self.op == "/":
+                elif self.op == '/':
                     return self.exp1.eval() / self.exp2.eval()
-                elif self.op == "%":
+                elif self.op == '%':
                     return self.exp1.eval() % self.exp2.eval()
-            else:
-                self.exp1.eval()
+            return self.exp1.eval()
+        return self.exp2.eval()
 
 class UnaryExpression(BaseExpression):
     """
@@ -1231,26 +1225,30 @@ class UnaryExpression(BaseExpression):
     | unaryOperator powerExpression
     """
     def eval(self):
-        if self.exp1!=None:
-            if self.op == '~':
-                return self.exp1.eval() + 1
-            elif self.op == '!':
-                return not self.exp1.eval()
-            elif self.op == '-':
-                return self.exp1.eval() * -1
+        if self.exp1:
+            if self.exp1.eval() == '~':
+                return ~self.exp2.eval()
+            elif self.exp1.eval() == '-':
+                return -1 * self.exp2.eval()
+            elif self.exp1.eval() ==  '!':
+                return not self.exp2.eval()
+        return self.exp1.eval()
 
-class PowerExpression(BaseExpression):
+class PowerExpression:
     """
     powerExpression
     | expressionTerminator
     | expressionTerminator '**' powerExpression
     """
+    def __init__(self, term, expression=None):
+        self.term = term
+        self.expression = expression
+
     def eval(self):
-        if self.exp1!=None:
-            if self.exp2!=None:
-                return self.exp1.eval() ** self.exp2.eval()
-            else:
-                return self.exp1.eval()
+        if self.expression:
+            return self.term.eval() ** self.expression.eval()
+
+        return self.term.eval()
 
 class ExpressionTerminator:
     """
@@ -1269,33 +1267,55 @@ class ExpressionTerminator:
     | expressionTerminator [ expression ] 
     ;
     """
-    def __init__(self, value):
-        self.value = value
-        self._valueDecoder()
-
-    def _valueDecoder(self):
-        vtype = type(self.value)
-        if "antlr4.tree.Tree.TerminalNodeImpl" in str(vtype):
-            self.value = self.value.getText()
-            if self.value in ['pi','PI','π']:
-                self.value = 3.141519
-            elif self.value in ['tau', 'TAU', '𝜏']:
-                self.value = 3.141519 * 2.0
-            elif self.value in ['euler', 'EULER', 'ℇ']:
-                self.value = 2.71828
-            else:
-                if int(self.value) == float(self.value):
-                    self.value = int(self.value)
-                else:
-                    self.value = float(self.value)
+    def __init__(self, constant=None, integer=None, realn=None, imagn=None,
+    boolLit=None, ident=None, stringLit=None, builtIn=None, extern=None, timingId=None, expression=None, terminator=None):
+        self.constant = constant
+        self.integer = integer
+        self.realn = realn
+        self.imagn = imagn
+        self.boolLit = boolLit
+        self.ident = ident
+        self.stringLit = stringLit
+        self.builtIn = builtIn
+        self.extern = extern
+        self.timingId = timingId
+        self.expression = expression
+        self.terminator = terminator
 
     def eval(self):
-        if type(self.value) in [type(0), type(0.5), type("")]:
-            return self.value
-        elif type(self.value)==type(None):
-            return
-        else:
-            return self.value.eval()
+        x = {
+        }
+        if self.terminator:
+            x['type'] = 'terminator'
+            x['term'] = self.terminator
+            if self.expression:
+                x['expr'] = self.expression
+                return x
+            else:
+                return self.terminator.eval()
+        if self.constant:
+#            x['constant'] = self.constant.eval()
+            return self.constant.eval()
+        if self.integer:
+#            x['int'] = self.integer.eval()
+            return self.integer.eval()
+        if self.realn:
+#            x['realn'] = self.realn.eval()
+            return self.realn.eval()
+        if self.imagn:
+#            x['imagn'] = self.imagn.eval()
+            return self.imagn.eval()
+        if self.boolLit:
+#            x['boolLit'] = self.boolLit.eval()
+            return self.boolLit
+        if self.ident:
+#            x['ident'] = self.ident.eval()
+            return self.ident.eval()
+        if self.expression:
+#            x['expr'] = self.expression.eval()
+            return self.expression.eval()
+
+        return x            
 
 class BooleanLiteral(Variable, value='true', ttype=bool):
     """
@@ -1362,11 +1382,11 @@ class ExpressionList:
         self.expressions = expressions
 
     def eval(self):
-        exp = None
-        if self.expressions!=None:
+        exp = 0
+        if self.expressions:
             exp = []
             for each in self.expressions:
-                if each!=None:
+                if each:
                     exp.append(each.eval())
         return exp
 
@@ -1411,14 +1431,18 @@ class SetDeclaration:
         self.range = rangeDef
 
     def eval(self):
+        x = {
+            'type': 'range',
+            'range': None
+        }
         if self.id != None:
-            return self.id.eval()
+            x['range'] = self.id.eval()
         if self.exp != None:
-            return self.exp.eval()
+            x['range'] = self.exp.eval()
         if self.range != None:
-            return self.range.eval()
-        else:
-            return None
+            x['range'] = self.range.eval()
+        
+        return x
 
 class ProgramBlock:
     """
@@ -1528,8 +1552,10 @@ class ReturnStatement(Statement):
     def eval(self):
         x = {
             'type': 'return',
-            'stmt': self.retval.eval()
+            'ret': None
         }
+        if self.retval:
+            x['ret'] = self.retval.eval()
         return x
 
 class ControlDirective(Statement):
@@ -1561,7 +1587,17 @@ class ExternDeclaration:
         self.ret = retSig
 
     def eval(self):
-        pass
+        x = {
+            'type': 'extern',
+            'id': self.id.eval(),
+        }
+        if self.clist:
+            x['clist'] = []
+            for each in self.clist:
+                x['clist'].append(each.eval())
+        if self.ret != None:
+            x['retSig'] = self.ret.eval()
+        return x
 
 class ExternOrSubroutineCall:
     """
@@ -1573,7 +1609,15 @@ class ExternOrSubroutineCall:
         self.expList = expList
 
     def eval(self):
-        return self.expList.eval()
+        x = {
+            'type': 'externOrSubroutine',
+            'id': self.id.eval(),
+            'expList': []
+        }
+        for x in self.expList:
+            if x:
+                x['explist'].append(x.eval())
+        return x
 
 """
 Subroutines
@@ -1591,7 +1635,21 @@ class SubroutineDefinition:
         self.block=block
 
     def eval(self):
-        pass
+        x = {
+            'type': 'subroutineDef',
+            'args': None,
+            'retSig': None,
+            'block': None
+        }
+        if self.id != None:
+            x['id'] = self.id.eval()
+        if self.anyarg != None:
+            x['args'] = self.anyarg.eval()
+        if self.ret != None:
+            x['retSig'] = self.ret.eval()
+        if self.block != None:
+            x['block'] = self.block.eval()
+        return x
 
 class SubroutineBlock:
     """
@@ -1603,7 +1661,17 @@ class SubroutineBlock:
         self.ret = ret
 
     def eval(self):
-        pass
+        x = {
+            'type': 'subroutineBlock',
+        }
+        if self.statement != None:
+            if type(self.statement) == type([]):
+                x['stmt'] = [x.eval() for x in self.statement]
+            else:
+                x['stmt'] = self.statement.eval()
+        if self.ret != None:
+            x['ret'] = self.ret.eval()
+        return x
 
 """
 Directives
@@ -1661,7 +1729,15 @@ class TimingIdentifier:
         self.block = block
     
     def eval(self):
-        pass
+        x = {
+            'type': "timingIdentifier",
+        }
+        if self.id:
+            x['id'] = self.id.eval()
+        if self.lit:
+            x['lit'] = self.lit
+        if self.block:
+            x['block'] = self.block.eval()
 
 class TimingLiteral:
     """
@@ -1720,3 +1796,51 @@ class Identifier:
 
     def eval(self):
         return self.id
+
+class Constant:
+    def __init__(self, value):
+        self.value = value.getText()
+        self._valueDecoder()
+
+    def _valueDecoder(self):
+        if self.value in ['pi','PI','π']:
+            self.value = 22/7
+        elif self.value in ['tau', 'TAU', '𝜏']:
+            self.value = 3.141519 * 2.0
+        elif self.value in ['euler', 'EULER', 'ℇ']:
+            self.value = 2.71828
+        else:
+            if int(self.value) == float(self.value):
+                self.value = int(self.value)
+            else:
+                self.value = float(self.value)
+
+    def eval(self):
+        return self.value
+
+class Integer:
+    def __init__(self, value):
+        self.value = value
+
+    def eval(self):
+        if self.value:
+            return int(self.value.getText())
+        return 0
+
+class RealNumber:
+    def __init__(self, value):
+        self.value = value
+
+    def eval(self):
+        if self.value:
+            return float(self.value.getText())
+        return 0
+
+class ImagNumber:
+    def __init__(self, value):
+        self.value = value
+
+    def eval(self):
+        if self.value:
+            return float(self.value.getText().split("IMAG")[0])
+        return 0
