@@ -1,0 +1,741 @@
+Trying File ./examples/rus.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'input_qubit', 'exprList': []}]
+Operation: RESET
+Mods: []
+Expressions: []
+IDS: [{'id': 'input_qubit', 'exprList': []}]
+Operation: h
+Mods: []
+Expressions: [{'type': 'AdditiveExpression', 'exp1': 3.142857142857143, 'exp2': {'type': 'externOrSubroutineCall', 'id': 'arccos', 'expList': [0.6]}, 'op': '-'}]
+IDS: [{'id': 'input_qubit', 'exprList': []}]
+Operation: rz
+Mods: []
+Expressions: []
+IDS: [{'id': 'input_qubit', 'exprList': []}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'output_qubit', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'input_qubit', 'exprList': []}]
+Operation: MEASURE0
+[[{'id': 'input_qubit', 'exprList': []}]]
+Success!
+Trying File ./examples/t1.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+[]
+Success!
+Trying File ./examples/rb.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: RESET
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]
+Operation: cz
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: s
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]
+Operation: cz
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: s
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: z
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+Mods: None
+Expressions: None
+IDS: [{'id': 'c', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: MEASURE0
+[[{'id': 'q', 'exprList': []}]]
+Success!
+Trying File ./examples/qft.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: RESET
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: x
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [2]}]
+Operation: x
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: h
+Mods: []
+Expressions: [1.5714285714285714]
+IDS: [{'id': 'q', 'exprList': [1]}, {'id': 'q', 'exprList': [0]}]
+Operation: cphase
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [1]}]
+Operation: h
+Mods: []
+Expressions: [0.7857142857142857]
+IDS: [{'id': 'q', 'exprList': [2]}, {'id': 'q', 'exprList': [0]}]
+Operation: cphase
+Mods: []
+Expressions: [1.5714285714285714]
+IDS: [{'id': 'q', 'exprList': [2]}, {'id': 'q', 'exprList': [1]}]
+Operation: cphase
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [2]}]
+Operation: h
+Mods: []
+Expressions: [0.39285714285714285]
+IDS: [{'id': 'q', 'exprList': [3]}, {'id': 'q', 'exprList': [0]}]
+Operation: cphase
+Mods: []
+Expressions: [0.7857142857142857]
+IDS: [{'id': 'q', 'exprList': [3]}, {'id': 'q', 'exprList': [1]}]
+Operation: cphase
+Mods: []
+Expressions: [1.5714285714285714]
+IDS: [{'id': 'q', 'exprList': [3]}, {'id': 'q', 'exprList': [2]}]
+Operation: cphase
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [3]}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'c', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: MEASURE0
+[[{'id': 'q', 'exprList': []}]]
+Success!
+Trying File ./examples/dd.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Timing statement unsupported
+[]
+Success!
+Trying File ./examples/msd.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'workspace', 'exprList': []}]
+Operation: RESET
+Mods: None
+Expressions: None
+IDS: [{'id': 'buffer', 'exprList': []}]
+Operation: RESET
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: RESET
+Mods: []
+Expressions: [0]
+IDS: [{'id': 'workspace', 'exprList': []}, {'id': 'buffer', 'exprList': []}]
+Operation: distill_and_buffer
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: h
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]
+Operation: cx
+Mods: []
+Expressions: [0]
+IDS: [{'id': 'q', 'exprList': [0]}, {'id': 'buffer', 'exprList': []}]
+Operation: Ty
+Classical Assignment {'type': 'classicalAssignment', 'id': 'address', 'op': '+=', 'expr': 1}
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]
+Operation: cx
+Mods: []
+Expressions: [0]
+IDS: [{'id': 'q', 'exprList': [1]}, {'id': 'buffer', 'exprList': []}]
+Operation: Ty
+Classical Assignment {'type': 'classicalAssignment', 'id': 'address', 'op': '+=', 'expr': 1}
+[[{'id': 'workspace', 'exprList': []}], [{'id': 'buffer', 'exprList': []}], [{'id': 'q', 'exprList': []}]]
+Success!
+Trying File ./examples/rng.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'a', 'exprList': []}]
+Operation: RESET
+Mods: []
+Expressions: []
+IDS: [{'id': 'a', 'exprList': []}]
+Operation: h
+Mods: []
+Expressions: []
+IDS: [{'id': 'a', 'exprList': []}]
+Operation: x
+Mods: None
+Expressions: None
+IDS: []
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'a', 'exprList': []}]
+Operation: MEASURE0
+[[{'id': 'a', 'exprList': []}]]
+Success!
+Trying File ./examples/adder.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'cin', 'exprList': []}]
+Operation: RESET
+Mods: None
+Expressions: None
+IDS: [{'id': 'a', 'exprList': []}]
+Operation: RESET
+Mods: None
+Expressions: None
+IDS: [{'id': 'b', 'exprList': []}]
+Operation: RESET
+Mods: None
+Expressions: None
+IDS: [{'id': 'cout', 'exprList': []}]
+Operation: RESET
+Mods: []
+Expressions: []
+IDS: [{'id': 'cin', 'exprList': [0]}, {'id': 'b', 'exprList': [0]}, {'id': 'a', 'exprList': [0]}]
+Operation: majority
+Mods: []
+Expressions: []
+IDS: [{'id': 'a', 'exprList': [3]}, {'id': 'cout', 'exprList': [0]}]
+Operation: cx
+Mods: []
+Expressions: []
+IDS: [{'id': 'cin', 'exprList': [0]}, {'id': 'b', 'exprList': [0]}, {'id': 'a', 'exprList': [0]}]
+Operation: unmaj
+Mods: None
+Expressions: None
+IDS: [{'id': 'ans', 'range': {'type': 'rangeDef', 'exp1': 0, 'exp2': 3, 'exp3': None}, 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'b', 'range': {'type': 'rangeDef', 'exp1': 0, 'exp2': 3, 'exp3': None}, 'exprList': []}]
+Operation: MEASURE0
+Mods: None
+Expressions: None
+IDS: [{'id': 'ans', 'exprList': [4]}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'cout', 'exprList': [0]}]
+Operation: MEASURE0
+[[{'id': 'cin', 'exprList': []}], [{'id': 'a', 'exprList': []}], [{'id': 'b', 'exprList': []}], [{'id': 'cout', 'exprList': []}]]
+Success!
+Trying File ./examples/vqe.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Classical Assignment {'type': 'classicalAssignment', 'id': 'energy', 'op': '=', 'expr': {'type': 'externOrSubroutineCall', 'id': 'estimate_energy', 'expList': [0]}}
+[]
+Success!
+Trying File ./examples/varteleport.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Expression Statements are unsupported
+Mods: []
+Expressions: [0.7857142857142857]
+IDS: [{'id': 'input_qubit', 'exprList': []}]
+Operation: rz
+Alias statement unsupported
+Mods: []
+Expressions: []
+IDS: [{'id': 'io', 'exprList': []}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'output_qubit', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'io', 'exprList': []}]
+Operation: MEASURE0
+[]
+Success!
+Trying File ./examples/alignment.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]
+Operation: cx
+Timing statement unsupported
+Mods: []
+Expressions: [0.7857142857142857, 0, 1.5714285714285714]
+IDS: [{'id': 'q', 'exprList': [2]}]
+Operation: U
+Timing statement unsupported
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+[]
+Success!
+Trying File ./examples/pong.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Timing statement unsupported
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]
+Operation: BARRIER
+[]
+Success!
+Trying File ./examples/teleport.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: RESET
+Mods: []
+Expressions: [0, 0, 0]
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: U
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [1]}]
+Operation: h
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [1]}, {'id': 'q', 'exprList': [2]}]
+Operation: cx
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]
+Operation: cx
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'c0', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: MEASURE0
+Mods: None
+Expressions: None
+IDS: [{'id': 'c1', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': [1]}]
+Operation: MEASURE0
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [2]}]
+Operation: post
+Mods: None
+Expressions: None
+IDS: [{'id': 'c2', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': [2]}]
+Operation: MEASURE0
+[[{'id': 'q', 'exprList': []}]]
+Success!
+Trying File ./examples/qec.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: RESET
+Mods: None
+Expressions: None
+IDS: [{'id': 'a', 'exprList': []}]
+Operation: RESET
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: x
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+Classical Assignment {'type': 'classicalAssignment', 'id': 'syn', 'op': '=', 'expr': {'type': 'externOrSubroutineCall', 'id': 'syndrome', 'expList': [0, 0]}}
+Mods: None
+Expressions: None
+IDS: [{'id': 'c', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: MEASURE0
+[[{'id': 'q', 'exprList': []}], [{'id': 'a', 'exprList': []}]]
+Success!
+Trying File ./examples/scqec.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+[]
+Success!
+Trying File ./examples/qpt.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: RESET
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: pre
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: post
+Mods: None
+Expressions: None
+IDS: [{'id': 'c', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: MEASURE0
+[[{'id': 'q', 'exprList': []}]]
+Success!
+Trying File ./examples/gateteleport.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: []
+Expressions: [0.7857142857142857]
+IDS: [{'id': 'a', 'exprList': []}]
+Operation: rz
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': []}, {'id': 'a', 'exprList': []}]
+Operation: cx
+Classical Assignment {'type': 'classicalAssignment', 'id': 'r', 'op': '=', 'expr': {'type': 'externOrSubroutineCall', 'id': 'logical_meas', 'expList': [0]}}
+[]
+Success!
+Trying File ./examples/inverseqft2.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: RESET
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'c0', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: MEASURE0
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [1]}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'c1', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': [1]}]
+Operation: MEASURE0
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [2]}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'c2', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': [2]}]
+Operation: MEASURE0
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [3]}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'c3', 'exprList': []}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': [3]}]
+Operation: MEASURE0
+[[{'id': 'q', 'exprList': []}]]
+Success!
+Trying File ./examples/inverseqft1.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: RESET
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: BARRIER
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'c', 'exprList': [0]}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': [0]}]
+Operation: MEASURE0
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [1]}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'c', 'exprList': [1]}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': [1]}]
+Operation: MEASURE0
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [2]}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'c', 'exprList': [2]}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': [2]}]
+Operation: MEASURE0
+Mods: []
+Expressions: []
+IDS: [{'id': 'q', 'exprList': [3]}]
+Operation: h
+Mods: None
+Expressions: None
+IDS: [{'id': 'c', 'exprList': [3]}]
+Operation: MEASURE0.OUT
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': [3]}]
+Operation: MEASURE0
+[[{'id': 'q', 'exprList': []}]]
+Success!
+Trying File ./examples/defcal.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+[]
+Success!
+Trying File ./examples/ipe.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: None
+Expressions: None
+IDS: [{'id': 'q', 'exprList': []}]
+Operation: RESET
+Mods: None
+Expressions: None
+IDS: [{'id': 'r', 'exprList': []}]
+Operation: RESET
+Mods: []
+Expressions: []
+IDS: [{'id': 'r', 'exprList': []}]
+Operation: h
+[[{'id': 'q', 'exprList': []}], [{'id': 'r', 'exprList': []}]]
+Success!
+Trying File ./examples/cphase.qasm
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
+Parsing subroutines
+Parsing statements
+Mods: []
+Expressions: [1.5714285714285714]
+IDS: [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]
+Operation: cphase
+[]
+Success!
+Success Rate: 100%
+Failed Files: None!

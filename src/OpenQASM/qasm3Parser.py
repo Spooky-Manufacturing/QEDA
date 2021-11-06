@@ -1824,9 +1824,6 @@ class qasm3Parser ( Parser ):
             if hasattr( listener, "exitIdentifierList" ):
                 listener.exitIdentifierList(self)
 
-
-
-
     def identifierList(self):
 
         localctx = qasm3Parser.IdentifierListContext(self, self._ctx, self.state)

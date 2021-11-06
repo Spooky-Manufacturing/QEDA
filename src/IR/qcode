@@ -1,0 +1,20 @@
+# QCirc Specification
+
+The QCirc Specification defines an easy way of describing quantum and digital circuits in JSON format. This standard is the resulting output from parsing of the QEDA Intermediate Representation
+
+## Basics
+
+QCirc is a JSON formatted circuit representation resulting from parsing and optimization of the QCode Intermediate Representation
+
+```json
+"qubits" : [
+    "0": {
+    	"type": "quantum",
+    	"state": 1 or 0,
+    	"gates": [ X, CXC, CXT, ...],
+    },
+	"1": {},
+	...
+]
+```
+

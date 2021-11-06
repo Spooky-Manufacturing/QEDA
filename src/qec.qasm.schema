@@ -1,0 +1,1 @@
+{'c': {'0': ['MEASURE0.OUT'], '1': ['MEASURE0.OUT'], '2': ['MEASURE0.OUT']}, 'syn': {'0': [], '1': []}, 'q': {'0': ['RESET', 'x', 'BARRIER', 'MEASURE0'], '1': ['RESET', 'x', 'BARRIER', 'MEASURE0'], '2': ['RESET', 'x', 'BARRIER', 'MEASURE0']}, 'a': {'0': ['RESET'], '1': ['RESET']}}

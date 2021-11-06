@@ -1,107 +1,82 @@
-"""
-Synthesizes the code.
-"""
-from OpenQASM.QAST import Header
-from OpenQASM.synth.builtins import GATES
-from OpenQASM.synth.qgate import QGate
-from OpenQASM.synth.instruction import Instruction
-from OpenQASM.synth.builtins import Function, Loop, Variable
-from .kicad.schematic import Schematic
-from .kicad.pcb import PCB
-from .kicad.footprint import Footprint
-from .kicad.symbol import Symbol
+from math import ceil
+from pykicad.module import Module
+from OpenQASM.pcb import PCB
 
 class Synthesizer:
-    """Synthesizer
-
-    qcode - JSON formatted QCode IR
-    """
-    def __init__(self, header, globs, locs, debug=False):
-        self.header = header
-        self.globals = globs
-        self.locals = locs
-        self.gatedefs = []
-        self.vars = []
-        self.instructions = []
+    def __init__(self, file='./', circ=None):
+        self.file = file.split('/')[-1:][0]
         self.pcb = PCB()
-        self.schema = Schematic()
-        self.dbg = debug
-        
-        if(self.dbg):
-            self.build_all_test()
+        self.qcirc = {}
+        self.circ = circ
 
-    def build_all_test(self):
-        print("Starting synthesis")
-        #print(self.header, self.globals, self.locals)
-        # Parse the globals
-        self.global_parse()
-        # Parse the locals
-        self.local_parse()
+    def schema_capture(self):
+        print("SCHEMATIC CAPTURE")
+        print(self.file)
+        with open(self.file + '.schema', 'w+') as f:
+            f.write(str(self.circ))
 
+    def pcb_layout(self):
+        print("PCB LAYOUT")
+        self._autoplace_()
 
-
-    def global_parse(self):
-        """Parses self.globals into gate and variables lists"""
-        for each in self.globals:
-            if each != None and each['type'] == 'quantumGateDef':
-                if each['sig']['name'] in GATES:
-                    print("Using built-in gate {}".format(each['sig']['name']))
-
-                else:
-                    print("Defining QGate {}".format(each['sig']['name']))
-                    self.gatedefs.append(QGate(each['sig'], each['block']))
-        for each in self.gatedefs:
-            print(each.name)
-            print(each.ids)
-            print(each.params)
-            for stmt in each.statements:
-                print(stmt.instruction)
-
-    def local_parse(self):
-        """Parses self.locals into bits/qubits"""
-        print(len(self.locals))
-        for each in self.locals:
-            if each != None:
-                if each['type'] == 'classicalDeclaration':
-                    print('classical declaration')
-                elif each['type'] == 'quantumInstruction':
-                    print("quantum instruction")
-                    self.instructions.append(Instruction(each))
-                elif each['type'] == 'assignment':
-                    print("assignment")
-                elif each['type'] == 'loop':
-                    Loop
-                    print("loop")
-                elif each['type'] == 'timing':
-                    print("Timing")
-                elif each['type'] == 'expression':
-                    print("Expression")
-                elif each['type'] == 'alias':
-                    print("Alias")
-                else:
-                    print(each['type'])
-                    print(each)
-        for each in self.instructions:
-            print(each, each.type, each.exps, each.ids)
-
-
-    def build_all(self):
-        pass
-
-    def add_gate_schema(self):
-        pass
-
-    def add_gate_pcb(self):
-        pass
-
-    def build_schematic(self):
+    def _find_max_x(self, comp):
         """
-        Builds a schematic from self.qcode
+        Returns the maximal X size of a Component as an Integer
         """
-        pass
+        max_x = 0
+        geo = comp.geometry()
+        x = [each for each in geo]
+        for each in x:
+            if each.start is None and each.end is not None:
+                y = abs(0 - each.end[0])
+            elif each.end is None and each.start is not None:
+                y = abs(each.start)
+            elif each.start == each.end and each.end is None:
+                pass
+            else:
+                y = abs(each.start[0] - each.end[0])
+                if y > max_x:
+                    max_x = y
+        return ceil(max_x)
 
-    def build_pcb(self):
+    def _find_max_y(self, comp):
         """
-        Builds a pcb from self.qcode
+        Returns the maximal Y size of a Component as an Integer
         """
-        pass
+        max_y = 0
+        geo = comp.geometry()
+        x = [each for each in geo]
+        for each in x:
+            if each.start is None and each.end is not None:
+                y = abs(0 - each.end)
+            if each.end is None and each.start is not None:
+                y = abs(each.start)
+            elif each.start == each.end and each.end is None:
+                pass
+            else:
+                y = abs(each.start[1] - each.end[1])
+                if y > max_y:
+                    max_y = y
+        return ceil(max_y)
+
+    def _find_maxes(self, comp):
+        """
+        Returns the maximal X and Y values of a component
+        """
+        x = self._find_max_x(comp)
+        y = self._find_max_y(comp)
+        return int(x), int(y)
+
+    def _place_component(self, comp, x, y):
+        """Places the component at coordinates (x,y)"""
+        self.pcb._place_component(comp, x, y)
+    
+    def _autoplace_(self):
+        pos = {
+            'X':0,
+            'Y':0
+        }
+        cur_x = 0
+        cur_y = 0
+        for qubit, gates in self.circ.items():
+            print(qubit, gates)

@@ -109,19 +109,35 @@ u3
 classical declaration
 classical declaration
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'input_qubit', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'input_qubit', 'exprList': []}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'input_qubit', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'input_qubit', 'exprList': []}]}
 loop
 quantum instruction
-{'name': 'rz', 'mods': [], 'exps': [3.142857142857143], 'ids': [{'id': 'input_qubit', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'rz', 'mods': [], 'exps': [3.142857142857143], 'indexIdList': [{'id': 'input_qubit', 'exprList': []}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'input_qubit', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'input_qubit', 'exprList': []}]}
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b15e6048> quantumInstruction None ['input_qubit']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b15e6f28> quantumInstruction [] ['input_qubit']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b15e6cf8> quantumInstruction [3.142857142857143] ['input_qubit']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b15544e0> quantumInstruction [] ['input_qubit']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['input_qubit']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['input_qubit']
+Instruction Type quantumInstruction
+Instruction Name rz
+Exps [3.142857142857143]
+Mods []
+IDS ['input_qubit']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['input_qubit']
 Success!
 Trying File ./examples/t1.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -349,42 +365,90 @@ u3
 14
 classical declaration
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'cz', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+{'type': 'quantumGateCall', 'name': 'cz', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 's', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 's', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'name': 'cz', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+{'type': 'quantumGateCall', 'name': 'cz', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 's', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 's', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'name': 'z', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'z', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d64a8> quantumInstruction None ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d6a90> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d63c8> quantumInstruction None []
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d65c0> quantumInstruction [] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d6b00> quantumInstruction None []
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d6ef0> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d6908> quantumInstruction [] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d15f8> quantumInstruction None []
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d1160> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d1b70> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d1f28> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d16d8> quantumInstruction None []
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name cz
+Exps []
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name s
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name cz
+Exps []
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name s
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name z
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
 Success!
 Trying File ./examples/qft.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -496,48 +560,104 @@ u3
 16
 classical declaration
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'x', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'x', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'name': 'x', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [2]}]}
+{'type': 'quantumGateCall', 'name': 'x', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [2]}]}
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'name': 'cphase', 'mods': [], 'exps': [1.5714285714285714], 'ids': [{'id': 'q', 'exprList': [1]}, {'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'cphase', 'mods': [], 'exps': [1.5714285714285714], 'indexIdList': [{'id': 'q', 'exprList': [1]}, {'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [1]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [1]}]}
 quantum instruction
-{'name': 'cphase', 'mods': [], 'exps': [0.7857142857142857], 'ids': [{'id': 'q', 'exprList': [2]}, {'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'cphase', 'mods': [], 'exps': [0.7857142857142857], 'indexIdList': [{'id': 'q', 'exprList': [2]}, {'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'name': 'cphase', 'mods': [], 'exps': [1.5714285714285714], 'ids': [{'id': 'q', 'exprList': [2]}, {'id': 'q', 'exprList': [1]}]}
+{'type': 'quantumGateCall', 'name': 'cphase', 'mods': [], 'exps': [1.5714285714285714], 'indexIdList': [{'id': 'q', 'exprList': [2]}, {'id': 'q', 'exprList': [1]}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [2]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [2]}]}
 quantum instruction
-{'name': 'cphase', 'mods': [], 'exps': [0.39285714285714285], 'ids': [{'id': 'q', 'exprList': [3]}, {'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'cphase', 'mods': [], 'exps': [0.39285714285714285], 'indexIdList': [{'id': 'q', 'exprList': [3]}, {'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'name': 'cphase', 'mods': [], 'exps': [0.7857142857142857], 'ids': [{'id': 'q', 'exprList': [3]}, {'id': 'q', 'exprList': [1]}]}
+{'type': 'quantumGateCall', 'name': 'cphase', 'mods': [], 'exps': [0.7857142857142857], 'indexIdList': [{'id': 'q', 'exprList': [3]}, {'id': 'q', 'exprList': [1]}]}
 quantum instruction
-{'name': 'cphase', 'mods': [], 'exps': [1.5714285714285714], 'ids': [{'id': 'q', 'exprList': [3]}, {'id': 'q', 'exprList': [2]}]}
+{'type': 'quantumGateCall', 'name': 'cphase', 'mods': [], 'exps': [1.5714285714285714], 'indexIdList': [{'id': 'q', 'exprList': [3]}, {'id': 'q', 'exprList': [2]}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [3]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [3]}]}
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b15e60f0> quantumInstruction None ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b15e6160> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b15545f8> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b15545c0> quantumInstruction None []
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b153ec88> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b153e2b0> quantumInstruction [1.5714285714285714] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b153e978> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b153e160> quantumInstruction [0.7857142857142857] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b153e208> quantumInstruction [1.5714285714285714] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b153eb00> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b153ecf8> quantumInstruction [0.39285714285714285] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b153ef98> quantumInstruction [0.7857142857142857] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b153eeb8> quantumInstruction [1.5714285714285714] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b153ee48> quantumInstruction [] ['q']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name x
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name x
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name cphase
+Exps [1.5714285714285714]
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name cphase
+Exps [0.7857142857142857]
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+Instruction Name cphase
+Exps [1.5714285714285714]
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name cphase
+Exps [0.39285714285714285]
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+Instruction Name cphase
+Exps [0.7857142857142857]
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+Instruction Name cphase
+Exps [1.5714285714285714]
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
 Success!
 Trying File ./examples/dd.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -765,34 +885,70 @@ classical declaration
 classical declaration
 classical declaration
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'workspace', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'workspace', 'exprList': []}]}
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'buffer', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'buffer', 'exprList': []}]}
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'distill_and_buffer', 'mods': [], 'exps': [0], 'ids': [{'id': 'workspace', 'exprList': []}, {'id': 'buffer', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'distill_and_buffer', 'mods': [], 'exps': [0], 'indexIdList': [{'id': 'workspace', 'exprList': []}, {'id': 'buffer', 'exprList': []}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+{'type': 'quantumGateCall', 'name': 'cx', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
 quantum instruction
-{'name': 'Ty', 'mods': [], 'exps': [0], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'buffer', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'Ty', 'mods': [], 'exps': [0], 'indexIdList': [{'id': 'q', 'exprList': [0]}, {'id': 'buffer', 'exprList': []}]}
 assignment
 quantum instruction
-{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+{'type': 'quantumGateCall', 'name': 'cx', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
 quantum instruction
-{'name': 'Ty', 'mods': [], 'exps': [0], 'ids': [{'id': 'q', 'exprList': [1]}, {'id': 'buffer', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'Ty', 'mods': [], 'exps': [0], 'indexIdList': [{'id': 'q', 'exprList': [1]}, {'id': 'buffer', 'exprList': []}]}
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b12b0fd0> quantumInstruction None ['workspace']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b12b0a90> quantumInstruction None ['buffer']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b12b0358> quantumInstruction None ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b12b0b70> quantumInstruction [0] ['workspace', 'buffer']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b12b09b0> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b12b0438> quantumInstruction [] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b133f438> quantumInstruction [0] ['q', 'buffer']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b133fe80> quantumInstruction [] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b133f400> quantumInstruction [0] ['q', 'buffer']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['workspace']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['buffer']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name distill_and_buffer
+Exps [0]
+Mods []
+IDS ['workspace', 'buffer']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name cx
+Exps []
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+Instruction Name Ty
+Exps [0]
+Mods []
+IDS ['q', 'buffer']
+Instruction Type quantumInstruction
+Instruction Name cx
+Exps []
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+Instruction Name Ty
+Exps [0]
+Mods []
+IDS ['q', 'buffer']
 Success!
 Trying File ./examples/rng.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -903,15 +1059,27 @@ u3
 ['θ', 'φ', 'λ']
 4
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'a', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'a', 'exprList': []}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'a', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'a', 'exprList': []}]}
 quantum instruction
-{'name': 'x', 'mods': [], 'exps': [], 'ids': [{'id': 'a', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'x', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'a', 'exprList': []}]}
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b131ee10> quantumInstruction None ['a']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b131efd0> quantumInstruction [] ['a']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b131ee80> quantumInstruction [] ['a']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['a']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['a']
+Instruction Type quantumInstruction
+Instruction Name x
+Exps []
+Mods []
+IDS ['a']
 Success!
 Trying File ./examples/adder.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -1033,31 +1201,59 @@ classical declaration
 classical declaration
 classical declaration
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'cin', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'cin', 'exprList': []}]}
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'a', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'a', 'exprList': []}]}
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'b', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'b', 'exprList': []}]}
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'cout', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'cout', 'exprList': []}]}
 loop
 quantum instruction
-{'name': 'majority', 'mods': [], 'exps': [], 'ids': [{'id': 'cin', 'exprList': [0]}, {'id': 'b', 'exprList': [0]}, {'id': 'a', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'majority', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'cin', 'exprList': [0]}, {'id': 'b', 'exprList': [0]}, {'id': 'a', 'exprList': [0]}]}
 loop
 quantum instruction
-{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'a', 'exprList': [3]}, {'id': 'cout', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'cx', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'a', 'exprList': [3]}, {'id': 'cout', 'exprList': [0]}]}
 loop
 quantum instruction
-{'name': 'unmaj', 'mods': [], 'exps': [], 'ids': [{'id': 'cin', 'exprList': [0]}, {'id': 'b', 'exprList': [0]}, {'id': 'a', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'unmaj', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'cin', 'exprList': [0]}, {'id': 'b', 'exprList': [0]}, {'id': 'a', 'exprList': [0]}]}
 assignment
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d6470> quantumInstruction None ['cin']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14d6128> quantumInstruction None ['a']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b130f550> quantumInstruction None ['b']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b130fa58> quantumInstruction None ['cout']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b130fda0> quantumInstruction [] ['cin', 'b', 'a']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b130f438> quantumInstruction [] ['a', 'cout']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b130fcf8> quantumInstruction [] ['cin', 'b', 'a']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['cin']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['a']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['b']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['cout']
+Instruction Type quantumInstruction
+Instruction Name majority
+Exps []
+Mods []
+IDS ['cin', 'b', 'a']
+Instruction Type quantumInstruction
+Instruction Name cx
+Exps []
+Mods []
+IDS ['a', 'cout']
+Instruction Type quantumInstruction
+Instruction Name unmaj
+Exps []
+Mods []
+IDS ['cin', 'b', 'a']
 Success!
 Trying File ./examples/vqe.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -1290,14 +1486,22 @@ classical declaration
 classical declaration
 Expression
 quantum instruction
-{'name': 'rz', 'mods': [], 'exps': [0.7857142857142857], 'ids': [{'id': 'input_qubit', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'rz', 'mods': [], 'exps': [0.7857142857142857], 'indexIdList': [{'id': 'input_qubit', 'exprList': []}]}
 Alias
 loop
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'io', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'io', 'exprList': []}]}
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14cad30> quantumInstruction [0.7857142857142857] ['input_qubit']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1547588> quantumInstruction [] ['io']
+Instruction Type quantumInstruction
+Instruction Name rz
+Exps [0.7857142857142857]
+Mods []
+IDS ['input_qubit']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['io']
 Success!
 Trying File ./examples/alignment.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -1409,19 +1613,35 @@ u3
 7
 classical declaration
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+{'type': 'quantumGateCall', 'name': 'cx', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
 Timing
 quantum instruction
-{'name': 'U', 'mods': [], 'exps': [0.7857142857142857, 0, 1.5714285714285714], 'ids': [{'id': 'q', 'exprList': [2]}]}
+{'type': 'quantumGateCall', 'name': 'U', 'mods': [], 'exps': [0.7857142857142857, 0, 1.5714285714285714], 'indexIdList': [{'id': 'q', 'exprList': [2]}]}
 Timing
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1220208> quantumInstruction None []
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b12209e8> quantumInstruction [] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1220160> quantumInstruction [0.7857142857142857, 0, 1.5714285714285714] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1220e48> quantumInstruction None []
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name cx
+Exps []
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+Instruction Name U
+Exps [0.7857142857142857, 0, 1.5714285714285714]
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
 Success!
 Trying File ./examples/pong.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -1430,8 +1650,12 @@ Starting synthesis
 2
 Timing
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b108d438> quantumInstruction None []
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q', 'q']
 Success!
 Trying File ./examples/teleport.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -1549,32 +1773,64 @@ classical declaration
 classical declaration
 classical declaration
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'U', 'mods': [], 'exps': [0, 0, 0], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'U', 'mods': [], 'exps': [0, 0, 0], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [1]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [1]}]}
 quantum instruction
-{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [1]}, {'id': 'q', 'exprList': [2]}]}
+{'type': 'quantumGateCall', 'name': 'cx', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [1]}, {'id': 'q', 'exprList': [2]}]}
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+{'type': 'quantumGateCall', 'name': 'cx', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 assignment
 assignment
 quantum instruction
-{'name': 'post', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [2]}]}
+{'type': 'quantumGateCall', 'name': 'post', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [2]}]}
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b126be10> quantumInstruction None ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b126b160> quantumInstruction [0, 0, 0] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b126bd30> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b126b278> quantumInstruction [] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b126b2b0> quantumInstruction None []
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b126b4e0> quantumInstruction [] ['q', 'q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b108d0f0> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b108d4e0> quantumInstruction [] ['q']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name U
+Exps [0, 0, 0]
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name cx
+Exps []
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name cx
+Exps []
+Mods []
+IDS ['q', 'q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name post
+Exps []
+Mods []
+IDS ['q']
 Success!
 Trying File ./examples/qec.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -1687,19 +1943,35 @@ u3
 classical declaration
 classical declaration
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'a', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'a', 'exprList': []}]}
 quantum instruction
-{'name': 'x', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'x', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 assignment
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b15470f0> quantumInstruction None ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b15476d8> quantumInstruction None ['a']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b13834e0> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1383198> quantumInstruction None []
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['a']
+Instruction Type quantumInstruction
+Instruction Name x
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
 Success!
 Trying File ./examples/scqec.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -1937,24 +2209,48 @@ u3
 8
 classical declaration
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'pre', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'pre', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'post', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'post', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': []}]}
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1276a58> quantumInstruction None ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1276a20> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b12769b0> quantumInstruction None []
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b12766a0> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1276470> quantumInstruction None []
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1276f28> quantumInstruction [] ['q']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name pre
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name post
+Exps []
+Mods []
+IDS ['q']
 Success!
 Trying File ./examples/gateteleport.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -2067,12 +2363,20 @@ u3
 classical declaration
 classical declaration
 quantum instruction
-{'name': 'rz', 'mods': [], 'exps': [0.7857142857142857], 'ids': [{'id': 'a', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'rz', 'mods': [], 'exps': [0.7857142857142857], 'indexIdList': [{'id': 'a', 'exprList': []}]}
 quantum instruction
-{'name': 'cx', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': []}, {'id': 'a', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'cx', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': []}, {'id': 'a', 'exprList': []}]}
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b13e0128> quantumInstruction [0.7857142857142857] ['a']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b13e0748> quantumInstruction [] ['q', 'a']
+Instruction Type quantumInstruction
+Instruction Name rz
+Exps [0.7857142857142857]
+Mods []
+IDS ['a']
+Instruction Type quantumInstruction
+Instruction Name cx
+Exps []
+Mods []
+IDS ['q', 'a']
 Success!
 Trying File ./examples/inverseqft2.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -2187,30 +2491,58 @@ classical declaration
 classical declaration
 classical declaration
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 assignment
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [1]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [1]}]}
 assignment
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [2]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [2]}]}
 assignment
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [3]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [3]}]}
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b15e06d8> quantumInstruction None ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b14db2e8> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1220160> quantumInstruction None []
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b11068d0> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1106588> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1106e48> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b1106400> quantumInstruction [] ['q']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
 Success!
 Trying File ./examples/inverseqft1.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -2322,30 +2654,58 @@ u3
 23
 classical declaration
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'instruction': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
+{'type': 'barrier', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [0]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [0]}]}
 assignment
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [1]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [1]}]}
 assignment
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [2]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [2]}]}
 assignment
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'q', 'exprList': [3]}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'q', 'exprList': [3]}]}
 assignment
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d86a0> quantumInstruction None ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d8710> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d8780> quantumInstruction None []
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d8588> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d8ac8> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d86d8> quantumInstruction [] ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d8dd8> quantumInstruction [] ['q']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+barrier
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['q']
 Success!
 Trying File ./examples/defcal.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -2465,16 +2825,28 @@ classical declaration
 classical declaration
 classical declaration
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'q', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'q', 'exprList': []}]}
 quantum instruction
-{'instruction': 'RESET', 'ids': [{'id': 'r', 'exprList': []}]}
+{'type': 'RESET', 'indexIdList': [{'id': 'r', 'exprList': []}]}
 quantum instruction
-{'name': 'h', 'mods': [], 'exps': [], 'ids': [{'id': 'r', 'exprList': []}]}
+{'type': 'quantumGateCall', 'name': 'h', 'mods': [], 'exps': [], 'indexIdList': [{'id': 'r', 'exprList': []}]}
 classical declaration
 loop
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b13e0eb8> quantumInstruction None ['q']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b13e0940> quantumInstruction None ['r']
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b13e0f28> quantumInstruction [] ['r']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['q']
+Instruction Type quantumInstruction
+RESET
+Exps None
+Mods None
+IDS ['r']
+Instruction Type quantumInstruction
+Instruction Name h
+Exps []
+Mods []
+IDS ['r']
 Success!
 Trying File ./examples/cphase.qasm
 ANTLR runtime and generated code versions disagree: 4.9.2!=4.7.2
@@ -2486,8 +2858,12 @@ cphase
 ['θ']
 1
 quantum instruction
-{'name': 'cphase', 'mods': [], 'exps': [1.5714285714285714], 'ids': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
-<OpenQASM.synth.instruction.Instruction object at 0x7f88b10d8780> quantumInstruction [1.5714285714285714] ['q', 'q']
+{'type': 'quantumGateCall', 'name': 'cphase', 'mods': [], 'exps': [1.5714285714285714], 'indexIdList': [{'id': 'q', 'exprList': [0]}, {'id': 'q', 'exprList': [1]}]}
+Instruction Type quantumInstruction
+Instruction Name cphase
+Exps [1.5714285714285714]
+Mods []
+IDS ['q', 'q']
 Success!
 Success Rate: 100%
 Failed Files: None!

@@ -3,7 +3,7 @@ import warnings
 class Instruction:
     def __init__(self, instruction):
         self.instruction = instruction['instruction']
-        self.type = instruction['type']
+        self.ttype = instruction['type']
         self.exps = None
         self.mods = None
         if 'exps' in self.instruction:
@@ -14,9 +14,9 @@ class Instruction:
         self.get_ids()
 
     def get_ids(self):
-      if 'ids' in self.instruction:
+      if 'indexIdList' in self.instruction:
         print(self.instruction)
-        for each in self.instruction['ids']:
+        for each in self.instruction['indexIdList']:
           id = {
             'name':None,
             'value':None
@@ -33,8 +33,10 @@ class Instruction:
             warnings.warn("""An expression list was found for 
             gate definition {} which is not currently supported by
             QEDA. Please manually validate this circuit.""".format(self.name))
+      elif 'id' in self.instruction:
+          self.ids.append(self.instruction['id'])
       else:
-        print(self.instruction)
+        print("NO ID FOUND", self.instruction)
 """
 self.instruction = xx
 self.type = 'quantumInstruction'

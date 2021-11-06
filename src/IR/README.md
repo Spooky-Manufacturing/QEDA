@@ -57,7 +57,7 @@ QCode = {
 
 ```json
 {
-    "type": "expression",
+    "type": "expressionStatement",
     "expr": Expression
 }
 ```
@@ -66,7 +66,7 @@ QCode = {
 
 ```json
 {
-    "type": "assignment",
+    "type": "assignmentStatement",
     "assign":Assignment
 }
 ```
@@ -93,7 +93,7 @@ QCode = {
 
 ```json
 {
-    "type": "branching",
+    "type": "branchingStatement",
     "if": {
         "expr": Expression,
         "block": ProgramBlock
@@ -106,7 +106,7 @@ QCode = {
 
 ```json
 {
-    "type": "loop",
+    "type": "loopStatement",
     "sig": LoopSignature,
     "block": ProgramBlock
 }
@@ -116,7 +116,7 @@ QCode = {
 
 ```json
 {
-    "type": "end"
+    "type": "endStatement"
 }
 ```
 
@@ -124,7 +124,7 @@ QCode = {
 
 ```json
 {
-    "type": "alias",
+    "type": "aliasStatement",
     "id": Identifier,
     "indexId": IndexIdentifier
 }
@@ -134,7 +134,7 @@ QCode = {
 
 ```json
 {
-    "type": "quantum",
+    "type": "quantumStatement",
     "instruction": quantumInstruction | timingStatement
 }
 ```
@@ -143,7 +143,7 @@ QCode = {
 
 ```json
 {
-    "type": "return",
+    "type": "returnStatement",
     "returns": Expression | quantumMeasurement
 }
 ```
@@ -152,7 +152,7 @@ QCode = {
 
 ```json
 {
-    "type": "timing",
+    "type": "timingStatement",
     "stmt": TimingInstruction | TimingBox
 }
 ```
@@ -299,7 +299,7 @@ QCode = {
 
 ```json
 {
-    "type": "classic",
+    "type": "classicalDeclaration",
     "decl": (see below)
 }
 ```
@@ -318,7 +318,7 @@ QCode = {
 
 ```json
 {
-    "type": "noDesignator",
+    "type": "noDesignatorDeclaration",
     "id": "Identifier",
     "dtype": noDesignatorType,
     "expr": Expression
@@ -329,7 +329,7 @@ QCode = {
 
 ```json
 {
-	"type": "single",
+	"type": "singleDeclaration",
 	"id": "Identifier",
 	"designator": Designator
 	"expr": Expression
@@ -340,7 +340,7 @@ QCode = {
 
 ```json
 {
-    "type": "bit",
+    "type": "bitDeclaration",
     "id": "Identifier",
     "designator": Designator,
     "expr": Expression
@@ -351,7 +351,7 @@ QCode = {
 
 ```json
 {
-    "type": "register",
+    "type": "registerDeclaration",
     "id": "Identifier",
     "designator": Designator,
     "expr": Expression
@@ -362,7 +362,7 @@ QCode = {
 
 ```json
 {
-    "type": "complex",
+    "type": "complexDeclaration",
     "id": "Identifier",
     "nType": NumericType,
     "expr": Expression
@@ -373,7 +373,7 @@ QCode = {
 
 ```json
 {
-    "type": "constant",
+    "type": "constantDeclaration",
     "id": "Identifier",
     "expr": Expression
 }
@@ -383,7 +383,7 @@ QCode = {
 
 ```json
 {
-    "type": "quantum",
+    "type": "quantumDeclaration",
     "qtype": "qubit" or "qreg",
     "id": "Identifier",
     "designator": Designator 

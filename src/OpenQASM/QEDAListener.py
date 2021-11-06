@@ -34,6 +34,12 @@ class QEDAListener(Listener):
         else:
             self.file = os.getcwd() + '/' + ''.join([x+'/' for x in file.split('/')[:-1]])
         self.HEADER = None
+        self.BITS = []
+        self.CONSTANTS = []
+        self.QUBITS = []
+        self.DECLARATIONS = []
+        self.STMTS = []
+        self.FUNCTIONS = []
         self.GLOBALS = []
         self.LOCALS = []
         self.file = "/" + self.file.strip("/")
@@ -44,19 +50,43 @@ class QEDAListener(Listener):
         self.HEADER=self.enterHeader(ctx.header())
         i=0
         while True:
-            if ctx.statement(i) is not None:
-                x = self.enterStatement(ctx.statement(i))
-                if x!=None:
-                    self.LOCALS.append(x.eval())
-            else:
-                break
-            i+=1
-        i=0
-        while True:
             if ctx.globalStatement(i) is not None:
                 x = self.enterGlobalStatement(ctx.globalStatement(i))
                 if x!=None:
+                    val = x.eval()
+                    if val:
+                        if val['type'] in ('subroutineDefinition', 'quantumGateDefinition'):
+                            self.FUNCTIONS.append(val)
+                        elif val['type'] in ('quantumDeclaration'):
+                            self.QUBITS.append(val['decl'])
                     self.GLOBALS.append(x.eval())
+
+            if ctx.statement(i) is not None:
+                x = self.enterStatement(ctx.statement(i))
+                if x!=None:
+                    val = x.eval()
+                   #print(val)
+                    if val:
+                        if val['type'] == 'classicalDeclaration':
+                            # variable declaration
+                            if 'decl' in val and val['decl']:
+                                # Proper variable declared
+                                if val['decl']['type'] == 'bit':
+                                    # Bit declared
+                                    self.BITS.append(val['decl'])
+                                if val['decl']['type'] == 'constant':
+                                    # Qubit declared
+                                    self.CONSTANTS.append(val['decl'])
+                            self.DECLARATIONS.append(val)
+                        elif val['type'] in ('assignmentStatement',
+                        'quantumInstruction', 'externOrSubroutineCall',
+                        'timingStatement', 'aliasStatement', 'loopStatement',
+                        'expressionStatement'):
+                            print(val)
+                            self.STMTS.append(val)
+                        else:
+                            print("{} not found".format(val['type']))
+                    self.LOCALS.append(x.eval())
             else:
                 break
             i+=1
@@ -74,10 +104,15 @@ class QEDAListener(Listener):
     # Enter a parse tree produced by qasm3Parser#header.
     def enterInclude(self, ctx: qasm3Parser.IncludeContext):
         listener = INCLUDE(ctx.StringLiteral(), self.file)
-        for each in listener.GLOBALS:
-            self.GLOBALS.append(each)
-        for each in listener.LOCALS:
-            self.LOCALS.append(each)
+        #self.HEADER += listener.HEADER
+        self.BITS += listener.BITS
+        self.CONSTANTS += listener.CONSTANTS
+        self.QUBITS += listener.QUBITS
+        self.DECLARATIONS += listener.DECLARATIONS
+        self.STMTS += listener.STMTS
+        self.FUNCTIONS += listener.FUNCTIONS
+        self.GLOBALS += listener.GLOBALS
+        self.LOCALS += listener.LOCALS
 
         # Enter a parse tree produced by qasm3Parser#ioIdentifier.
     def enterIoIdentifier(self, ctx:qasm3Parser.IoIdentifierContext):
@@ -972,9 +1007,12 @@ class QEDAListener(Listener):
         exp = []
         i=0
         while True:
-            if ctx.expression(i):
-                exp.append(self.enterExpression(ctx.expression(i)))
-                i+=1
+            if ctx:
+                if ctx.expression(i):
+                    exp.append(self.enterExpression(ctx.expression(i)))
+                    i+=1
+                else:
+                    break
             else:
                 break
         return ExpressionList(exp)
@@ -1099,9 +1137,9 @@ class QEDAListener(Listener):
     def enterExternOrSubroutineCall(self, ctx:qasm3Parser.ExternOrSubroutineCallContext):
         id = self.enterIdentifier(ctx.Identifier())
         exp_list=None
-        if ctx.expressionList() is not None:
-            exp_list = self.enterExpressionList(ctx.expressionList())
-        return ExternOrSubroutineCall(id, exp_list)
+        exp_list = self.enterExpressionList(ctx.expressionList())
+        x = ExternOrSubroutineCall(id, exp_list)
+        return x
 
     # Enter a parse tree produced by qasm3Parser#subroutineDefinition
     def enterSubroutineDefinition(self, ctx:qasm3Parser.SubroutineDefinitionContext):
@@ -1193,6 +1231,7 @@ class QEDAListener(Listener):
     # Enter a parse tree produced by qasm3Parser#TimingStatement
     def enterTimingStatement(self, ctx:qasm3Parser.TimingStatementContext):
         stmt = None
+        print(ctx.getText())
         if ctx.timingInstruction() is not None:
             stmt = self.enterTimingInstruction(ctx.timingInstruction())
         elif ctx.timingBox() is not None:
