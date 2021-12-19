@@ -1,15 +1,9 @@
 import os
 from antlr4 import Lexer, CommonTokenStream, ParseTreeWalker, FileStream
-if __name__ is not None and "." in __name__:
-    from .qasm3Parser import qasm3Parser
-    from .qasm3Lexer import qasm3Lexer as Lexer
-    from .qasm3Listener import qasm3Listener as Listener
-else:
-    from qasm3Parser import qasm3Parser
-    from qasm3Lexer import qasm3Lexer as Lexer
-    from qasm3Listener import qasm3Listener as Listener
-
-from .QAST import *
+from OpenQASM.qasm3Parser import qasm3Parser
+from OpenQASM.qasm3Lexer import qasm3Lexer as Lexer
+from OpenQASM.qasm3Listener import qasm3Listener as Listener
+from OpenQASM.QAST import *
 
 
 def INCLUDE(file, path):

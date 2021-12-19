@@ -18,7 +18,7 @@ from docopt import docopt
 from antlr4 import *
 from OpenQASM.qasm3Lexer import qasm3Lexer
 from OpenQASM.qasm3Parser import qasm3Parser
-from OpenQASM.QEDAListener import QEDAListener
+from QEDAListener import QEDAListener
 
 class QEDA:
     def __init__(self, args):

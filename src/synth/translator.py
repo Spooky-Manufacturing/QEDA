@@ -57,12 +57,21 @@ class Translator:
             return True
         return
 
+    def _apply_to_id_index(self, id, index, op, mods=None, exps=None):
+        """Applies a given gate to an index of an id"""
+        id = id[0]
+        if type(mods) == type([]):
+            if len(mods) > 0:
+                raise Warning("Modifiers are not currently supported.")
+
+        if not self._in_circuit(id['id']):
+            self.CIRC[id['id']]={}
+        if str(index) not in self.CIRC[id['id']]:
+            self.CIRC[id['id']][str(index)] = []
+        self.CIRC[id['id']][str(index)].append(op)
+
     def _apply_to_ids(self, idList, op, mods=None, exps=None):
         """Applies a given gate to a list of ids"""
-        print("Mods: {}".format(mods))
-        print("Expressions: {}".format(exps))
-        print("IDS: {}".format(idList))
-        print("Operation: {}".format(op))
         if type(mods) == type([]):
             if len(mods) > 0:
                 raise Warning("Modifiers are not currently supported.")
@@ -111,16 +120,42 @@ class Translator:
         """Parses an assignment statement"""
         if 'type' in assign:
             if assign['type'] == 'quantumMeasurementAssignment':
+                # Get the input ID
+                inputs = assign['qmeas']['indexIdList']
+                outputs = assign['indexIdList']
+                if not outputs:
+                    outputs = []
+                # check if we have multiple ids
+                if len(inputs) > 1:
+                    pass
+                elif 'range' in inputs[0].keys():
+                    r = range(inputs[0]['range']['exp1'], inputs[0]['range']['exp2'], inputs[0]['range']['exp3'] or 1)
+                    # Apply measure to each key
+                    for out in outputs:
+                        for i in r:
+                            if str(i) in self.CIRC[out['id']]:
+                                self._apply_to_id_index([out], i, 'MEASURE_' + str(i) + '_OUT')
+                    for each in inputs:
+                        for i in r:
+                            if str(i) in self.CIRC[each['id']]:
+                                self._apply_to_id_index([each], i, 'MEASURE_' + str(i))
+                else:
+                    print(inputs)
+    """
                 # get the output IDS
                 ids = assign['indexIdList']
                 if not ids:
                     ids = []
-                self._apply_to_ids(ids, 'MEASURE'+str(n)+'.OUT')
+                for id in ids:
+                    self._apply_to_ids([id], 'MEASURE' + str(id) + '.OUT')
+#                self._apply_to_ids(ids, 'MEASURE'+str(n)+'.OUT')
                 # get the input IDs
                 ids = assign['qmeas']['indexIdList']
-                self._apply_to_ids(ids, 'MEASURE'+str(n))
+                for id in ids:
+                    self._apply_to_ids([id], 'MEASURE'+str(id))
             elif assign['type'] == 'classicalAssignment':
                 print("Classical Assignment {}".format(assign))
+    """
 
     def _parse_expression(self, expression):
         print("Expression statements are unsupported at this time. {}".format(expression))
@@ -153,10 +188,8 @@ class Translator:
                     for each in block:
                         self.parse_statements(each)
         elif stmt['type'] in 'expressionStatement':
-            print(stmt)
             self._parse_expression(stmt['expr'])
         elif stmt['type'] in 'aliasStatement':
-            print(stmt)
             self._parse_alias(stmt)
         elif stmt['type'] in 'timingStatement':
             self._parse_alias(stmt)
@@ -182,79 +215,3 @@ class Translator:
             #print(stmt)
             i+=1
             self._parse_statement(stmt, i)
-
-"""
-{'type': 'subroutineDefinition',
-'args': [
-        {'type': 'quantumDeclaration',
-        'qtype': 'qubit',
-        'id': 'd', 
-        'designator': 3
-        },
-        {'type': 'quantumDeclaration',
-        'qtype': 'qubit',
-        'id': 'a',
-        'designator': 2}],
-        'retSig': {
-            'type': 'classical', 
-            'ctype': 'bit', 
-            'designator': 2
-        }, 
-        'block': {
-            'type': 'subroutineBlock',
-            'stmt': [
-                {'type': 'classicalDeclaration', 
-                'decl': {
-                    'type': 'bit',
-                     'id': 'b', 
-                     'designator': 2}
-                },
-                {
-                    'type': 'quantumInstruction',
-                    'instruction': 
-                    {
-                        'type': 'quantumGateCall',
-                        'name': 'cx',
-                        'mods': [],
-                        'exps': [],
-                        'indexIdList': [
-                            {
-                                'id': 'd',
-                                'exprList': [0]
-                                },
-                                {
-                                    'id': 'a', 'exprList': [0]
-                                }
-                            ]
-                    }
-                },
-                    {
-                        'type': 'assignmentStatement',
-                        'assign': 
-                        {
-                            'type': 'quantumMeasurementAssignment',
-                            'indexIdList': 
-                            [
-                                {'id': 'b', 'exprList': []}
-                            ],
-                            'qmeas': {
-                                'type': 'MEASURE',
-                                'indexIdList': 
-                                [
-                                    {
-                                        'id': 'a',
-                                        'exprList': []
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                ],
-            'ret':
-            {
-                'type': 'returnStatement', 'ret': 0
-            }
-        },
-    'id': 'syndrome'
-}
-"""

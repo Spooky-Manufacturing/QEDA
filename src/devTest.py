@@ -13,9 +13,9 @@ import os
 from antlr4 import FileStream, CommonTokenStream, ParseTreeWalker
 from OpenQASM.qasm3Lexer import qasm3Lexer
 from OpenQASM.qasm3Parser import qasm3Parser
-from OpenQASM.QEDAListener import QEDAListener as Listener
-from OpenQASM.translator import Translator
-from OpenQASM.synthesizer import Synthesizer
+from QEDAListener import QEDAListener as Listener
+from synth.translator import Translator
+from synth.synthesizer import Synthesizer
 testSynth = False#True
 
 def main(argv):

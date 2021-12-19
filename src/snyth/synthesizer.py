@@ -1,18 +1,30 @@
 from math import ceil
+import configparser
+import pandas as pd
 from pykicad.module import Module
-from OpenQASM.pcb import PCB
+from synth.pcb import PCB
+import os
 
 class Synthesizer:
-    def __init__(self, file='./', circ=None):
+    def __init__(self, file='./', circ=None, config='config/pcb.conf'):
+        self.config = configparser.ConfigParser()
+        self.config.read(os.path.join(os.getcwd(),config))
         self.file = file.split('/')[-1:][0]
-        self.pcb = PCB()
+        self.pcb = PCB(self.config)
+        self.circ = pd.json_normalize(circ)
         self.qcirc = {}
-        self.circ = circ
+
+        for key in self.circ.keys():
+            self.qcirc[key] = self.circ[key]
+            self.qcirc[key].append(Module.from_file('Photon-Source.kicad_mod'))
+            for each in self.qcirc[key]:
+                print(each)
+                self.qcirc[key].append(Module.from_file(each[0] + each[1] + '.kicad_mod'))
 
     def schema_capture(self):
         print("SCHEMATIC CAPTURE")
         print(self.file)
-        with open(self.file + '.schema', 'w+') as f:
+        with open(self.file + '.json', 'w+') as f:
             f.write(str(self.circ))
 
     def pcb_layout(self):
@@ -72,11 +84,4 @@ class Synthesizer:
         self.pcb._place_component(comp, x, y)
     
     def _autoplace_(self):
-        pos = {
-            'X':0,
-            'Y':0
-        }
-        cur_x = 0
-        cur_y = 0
-        for qubit, gates in self.circ.items():
-            print(qubit, gates)
+        self.circ = self.qcirc

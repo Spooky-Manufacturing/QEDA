@@ -1,23 +1,23 @@
 
 from numpy import array
 from pykicad.pcb import Net, Via, Segment, Setup, Layer, NetClass, Pcb
-from pykicad.module import Module
 
 class PCB:
-    def __init__(self, title="Quantum PCB Output", comments=[]):
-
+    def __init__(self, config, title="Quantum PCB Output", comments=[]):
         vi_net, vo_net, gnd_net = Net('VI'), Net('VO'), Net('GND')
         self.nets = [vi_net, vo_net, gnd_net]
         self.modules = []
         self.vias = []
         self.zones = []
         self.segments = []
-        self.via_size = 0
-        self.drill_size = 0
-        self.clearance = 0
+        print(config.sections())
+        self.via_size = float(config['DEFAULT']['via_size'])
+        self.drill_size = float(config['DEFAULT']['drill_size'])
+        self.clearance = float(config['DEFAULT']['clearance'])
+        self.num_layers = int(config['DEFAULT']['layers'])
         self.layers = []
-        self.page_type = []
-        self.trace_width = 0
+        self.page_type = [int(x) for x in config['DEFAULT']['page_type'].split(',')]
+        self.trace_width = config['DEFAULT']['trace_width']
         self.coords = [(0,0), (10,0), (10,10), (0,10)]
         self.title = title
         self.comment1 = None
